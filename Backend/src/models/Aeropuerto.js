@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+<<<<<<< HEAD
 const Aeropuerto = mongoose.model(
     "Aeropuerto", 
     new mongoose.Schema({ 
@@ -21,3 +22,17 @@ const Aeropuerto = mongoose.model(
 );
 
 module.exports = Aeropuerto;
+=======
+const Aeropuertos = mongoose.model(
+    "Aeropuertos", 
+    new mongoose.Schema({
+        nombre:String,
+        pais:String,
+        ciudad:String,
+        latitud:Number,
+        longitud:Number 
+    })
+);
+
+module.exports = Aeropuertos;
+>>>>>>> fdb151b6683a48baf3d15a2e97d8f5f900af0848
