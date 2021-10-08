@@ -33,7 +33,8 @@ const Usuario = mongoose.model(
           },
           estado: {
             type: Number
-          }
+          },
+          direccion: {}
     })
 );
 

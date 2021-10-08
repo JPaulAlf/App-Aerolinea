@@ -26,7 +26,8 @@ const Reserva = mongoose.model(
           },
           num_asiento: {
             type: String,
-          }
+          },
+          asientos: []
     })
 );
 

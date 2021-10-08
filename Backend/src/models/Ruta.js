@@ -32,7 +32,8 @@ const Ruta = mongoose.model(
           },
           estado: {
             type: Number,
-          }
+          },
+          ruta: {}
     })
 );
 
