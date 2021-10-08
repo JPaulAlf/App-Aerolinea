@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Reserva = mongoose.model(
-    "Reserva", 
+const Vuelo = mongoose.model(
+    "Vuelo", 
     new mongoose.Schema({ 
         avion_id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,4 +20,4 @@ const Reserva = mongoose.model(
     })
 );
 
-module.exports = Reserva;
+module.exports = Vuelo;
