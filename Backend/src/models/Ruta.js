@@ -5,11 +5,11 @@ const Ruta = mongoose.model(
     new mongoose.Schema({ 
         Inicio: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Aeropuertos'
+            ref: 'Aeropuerto'
         },
         Destino:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Aeropuertos'
+            ref: 'Aeropuerto'
         },
         horario_id: [{
             type: mongoose.Schema.Types.ObjectId,
