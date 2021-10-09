@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare function ejecutarAnimacion():any;
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -10,6 +10,7 @@ export class InicioComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    ejecutarAnimacion();
   }
 
 }

@@ -43,7 +43,7 @@
 	var offcanvasMenu = function() {
 
 		$('#page').prepend('<div id="gtco-offcanvas" />');
-		$('#page').prepend('<a href="#" class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>');
+		$('#page').prepend('<a  class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>');
 		var clone1 = $('.menu-1 > ul').clone();
 		$('#gtco-offcanvas').append(clone1);
 		var clone2 = $('.menu-2 > ul').clone();
@@ -303,3 +303,49 @@
 
 
 }());
+
+function ejecutarAnimacion(){
+
+	var i = 0;
+
+	// $('.gtco-section').waypoint( function( direction ) {
+
+
+		$('.animate-box').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
+				
+				i++;
+
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
+
+					$('body .animate-box.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data('animate-effect');
+							if ( effect === 'fadeIn') {
+								el.addClass('fadeIn animated-fast');
+							} else if ( effect === 'fadeInLeft') {
+								el.addClass('fadeInLeft animated-fast');
+							} else if ( effect === 'fadeInRight') {
+								el.addClass('fadeInRight animated-fast');
+							} else {
+								el.addClass('fadeInUp animated-fast');
+							}
+
+							el.removeClass('item-animate');
+						},  k * 200, 'easeInOutExpo' );
+					});
+					
+				}, 100);
+				
+			}
+
+		} , { offset: '85%' } );
+	// }, { offset: '90%'} );
+
+
+
+
+}
