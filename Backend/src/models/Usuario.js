@@ -34,7 +34,9 @@ const Usuario = mongoose.model(
           estado: {
             type: Number
           },
-          direccion: {}
+          direccion: {
+            type: Object, //hacerlo igual que la tarea
+          }
     })
 );
 
