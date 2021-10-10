@@ -6,7 +6,7 @@ import { UserLayoutComponent } from './layouts/user-layout/user-layout.component
 
 const routes: Routes = [
   
-  //Rutas para usuario
+ // Rutas para usuario
   {path: '', component: UserLayoutComponent ,
     children:[
         {path:'',redirectTo:'/inicio',pathMatch:'full'},
@@ -15,13 +15,13 @@ const routes: Routes = [
       },
 
     //Rutas para administrador
-  {path: 'admin', component: AdminLayoutComponent ,
+  {path: '', component: AdminLayoutComponent ,
     children:[
-          {path:'admin',redirectTo:'/admin',pathMatch:'full'},
-          {path:'admin',loadChildren:()=>import('./admin/admin.module').then(a=>a.AdminModule)}
+          {path:'',redirectTo:'/adminDashboard',pathMatch:'full'},
+          {path:'admin',loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)}
         ]
       },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+      {path: '**', redirectTo: '', pathMatch: 'full'}
 
 
 ];

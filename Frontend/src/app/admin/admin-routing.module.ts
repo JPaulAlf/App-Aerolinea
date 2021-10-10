@@ -6,11 +6,11 @@ const routes: Routes = [
   {
     path: '', component: InicioComponent,
     children:[
-      {path: 'admin', component: InicioComponent },
+      {path: 'adminDashboard', component: InicioComponent },
     ]
   },
   //{path: 'admin', component: InicioComponent },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+ 
 
 ];
 @NgModule({

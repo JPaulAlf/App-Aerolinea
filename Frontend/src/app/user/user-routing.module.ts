@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {path: 'acerca-de', component: AcercaDeComponent },
   {path: 'contacto', component: ContactoComponent },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+
 ];
 
 
