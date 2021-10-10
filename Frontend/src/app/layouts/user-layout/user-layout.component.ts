@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+declare function navMovil():any;
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
@@ -10,6 +10,13 @@ export class UserLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+ 
+  }
+
+  ngAfterViewInit(): void{
+
+    navMovil();
+
   }
 
 }
