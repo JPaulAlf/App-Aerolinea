@@ -5,8 +5,9 @@
 	var mobileMenuOutsideClick = function() {
 
 		$(document).click(function (e) {
+			console.log(e.target.className)
 	    var container = $("#gtco-espontaneo, .js-gtco-nav-toggle");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+	    if (!container.is(e.target) && container.has(e.target).length === 0 || e.target.className == "option") {
 	    	$('.js-gtco-nav-toggle').addClass('gtco-nav-white');
 
 	    	if ( $('body').hasClass('espontaneo') ) {
@@ -19,6 +20,7 @@
 	    	
 	    }
 		});
+	
 
 	};
 
@@ -325,10 +327,28 @@ function counterActivate(){
 }
 
 function navMovil(){
-	$('#page').prepend('<div id="gtco-espontaneo" />');
-		$('#page').prepend('<a  class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>');
-		var clone1 = $('.menu-1 > ul').clone();
-		$('#gtco-espontaneo').append(clone1);
+	// $('#page').prepend('<div id="gtco-espontaneo" />');
+	// 	$('#page').prepend('<a  class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>');
+		
+
+
+	// 	$('#gtco-espontaneo').append("<ul><li><a  routerLink='/inicio' ng-reflect-router-link='/inicio' href='/inicio'>Flights</a></li><li><a routerLink='/admin' ng-reflect-router-link='/admin' href='/admin'>Countries</a></li><li><a routerLink='/acerca-de'>About us</a></li><li><a routerLink='/contacto' ng-reflect-router-link='/contacto' href='/contacto'>Contact</a></li></ul>")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		$('#gtco-espontaneo .has-dropdown').addClass('espontaneo-has-dropdown');
 		$('#gtco-espontaneo')
 			.find('li')
@@ -364,3 +384,4 @@ function navMovil(){
 
 
 }
+

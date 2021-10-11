@@ -1045,7 +1045,6 @@ form label {
   position: absolute;
   z-index: 1901;
   width: 270px;
-  background: black;
   top: 0;
   right: 0;
   top: 0;
@@ -1062,6 +1061,10 @@ form label {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
+
+
+
+
 @media screen and (max-width: 768px) {
   #gtco-espontaneo {
     display: block;
@@ -1898,6 +1901,17 @@ form label {
   .fh5co-faq-list li h2 {
     font-size: 26px;
   }
+}
+#gtco-espontaneo ::before {
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  filter: blur(10px);
+}
+
+#gtco-espontaneo {
+  background:  rgba(90, 90, 90, 0.616);
+}
+#gtco-espontaneo ::before {
+  background:  rgba(255, 255, 255, 0.466);
 }
 
 /*# sourceMappingURL=style.css.map */

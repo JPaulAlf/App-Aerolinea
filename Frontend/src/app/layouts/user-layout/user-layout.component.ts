@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 declare function navMovil():any;
 declare function counterActivate():any;
+declare function closeNav():any;
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
@@ -18,6 +19,10 @@ export class UserLayoutComponent implements OnInit {
 
     navMovil();
     counterActivate();
+  }
+
+  close(){
+    closeNav();
   }
 
 }
