@@ -28,11 +28,11 @@ body {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
-.offcanvas #page {
+.espontaneo #page {
   overflow: hidden;
   position: absolute;
 }
-.offcanvas #page:after {
+.espontaneo #page:after {
   -webkit-transition: 2s;
   -o-transition: 2s;
   transition: 2s;
@@ -1033,7 +1033,7 @@ form label {
   display: block;
 }
 
-#gtco-offcanvas {
+#gtco-espontaneo {
   position: absolute;
   z-index: 1901;
   width: 270px;
@@ -1055,41 +1055,41 @@ form label {
   transition: 0.5s;
 }
 @media screen and (max-width: 768px) {
-  #gtco-offcanvas {
+  #gtco-espontaneo {
     display: block;
   }
 }
-.offcanvas #gtco-offcanvas {
+.espontaneo #gtco-espontaneo {
   -moz-transform: translateX(0px);
   -webkit-transform: translateX(0px);
   -ms-transform: translateX(0px);
   -o-transform: translateX(0px);
   transform: translateX(0px);
 }
-#gtco-offcanvas a {
+#gtco-espontaneo a {
   color: rgba(255, 255, 255, 0.5);
 }
-#gtco-offcanvas a:hover {
+#gtco-espontaneo a:hover {
   color: rgba(255, 255, 255, 0.8);
 }
-#gtco-offcanvas ul {
+#gtco-espontaneo ul {
   padding: 0;
   margin: 0;
 }
-#gtco-offcanvas ul li {
+#gtco-espontaneo ul li {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-#gtco-offcanvas ul li > ul {
+#gtco-espontaneo ul li > ul {
   padding-left: 20px;
   display: none;
 }
-#gtco-offcanvas ul li.offcanvas-has-dropdown > a {
+#gtco-espontaneo ul li.espontaneo-has-dropdown > a {
   display: block;
   position: relative;
 }
-#gtco-offcanvas ul li.offcanvas-has-dropdown > a:after {
+#gtco-espontaneo ul li.espontaneo-has-dropdown > a:after {
   position: absolute;
   right: 0px;
   font-family: 'icomoon';
@@ -1109,7 +1109,7 @@ form label {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
-#gtco-offcanvas ul li.offcanvas-has-dropdown.active a:after {
+#gtco-espontaneo ul li.espontaneo-has-dropdown.active a:after {
   -webkit-transform: rotate(-180deg);
   -moz-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
