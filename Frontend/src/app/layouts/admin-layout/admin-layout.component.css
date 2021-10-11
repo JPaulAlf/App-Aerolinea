@@ -1,8 +1,8 @@
 
-a {
+.nav-pills a {
     color:RGB(9, 198, 171)
 }
 
-a:hover{
+.nav-pills a:hover{
     color:white !important;
 }
