@@ -138,12 +138,13 @@ body {
 	}
 }
 a {
-	color: $brand-primary;
+	
+	color: $brand-primary !important;
 	@include transition(.5s);
 	&:hover, &:active, &:focus {
 		color: $brand-primary;
 		outline: none;
-		text-decoration: none;
+		text-decoration: none !important;
 	}
 }
 p {

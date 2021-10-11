@@ -268,17 +268,17 @@
 
 function ejecutarAnimacion(){
 
-	var i = 0;
+	var 	i = 0;
 
 	// $('.gtco-section').waypoint( function( direction ) {
 
-
 		$('.animate-box').waypoint( function( direction ) {
+			
 
 			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
 				
 				i++;
-
+				
 				$(this.element).addClass('item-animate');
 				setTimeout(function(){
 
@@ -301,13 +301,11 @@ function ejecutarAnimacion(){
 					});
 					
 				}, 100);
-				
+				if (i == 11) { // depende del orden de cuando el objeto js-counter se ejecute
+					counterActivate();
+				}
 			}
-			$('.js-counter').countTo({
-				formatter: function (value, options) {
-			 return value.toFixed(options.decimals);
-		   },
-		   });
+			
 		} , { offset: '85%' } );
 	// }, { offset: '90%'} );
 
@@ -316,14 +314,21 @@ function ejecutarAnimacion(){
    
 }
 
+function counterActivate(){
+	$('.js-counter').countTo({
+		formatter: function (value, options) {
+			console.log('entra')
+	 return value.toFixed(options.decimals);
+	
+   },
+   });
+}
+
 function navMovil(){
 	$('#page').prepend('<div id="gtco-espontaneo" />');
 		$('#page').prepend('<a  class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>');
 		var clone1 = $('.menu-1 > ul').clone();
 		$('#gtco-espontaneo').append(clone1);
-		var clone2 = $('.menu-2 > ul').clone();
-		$('#gtco-espontaneo').append(clone2);
-
 		$('#gtco-espontaneo .has-dropdown').addClass('espontaneo-has-dropdown');
 		$('#gtco-espontaneo')
 			.find('li')

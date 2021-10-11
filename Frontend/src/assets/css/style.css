@@ -118,8 +118,8 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #09C6AB;
 }
 .gtco-nav a {
-  padding: 5px 10px;
-  color: #fff;
+  padding: 5px 10px!important;
+  color: #fff!important;
 }
 @media screen and (max-width: 768px) {
   .gtco-nav .menu-1, .gtco-nav .menu-2 {
@@ -136,10 +136,17 @@ h1, h2, h3, h4, h5, h6, figure {
   list-style: none;
   display: inline;
 }
+a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none!important;
+}
 .gtco-nav ul li a {
+  
   font-size: 16px;
   padding: 30px 10px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7)!important;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -210,7 +217,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #fff;
 }
 .gtco-nav ul li.btn-cta a {
-  color: #09C6AB;
+  color: #09C6AB!;
 }
 .gtco-nav ul li.btn-cta a span {
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -229,8 +236,8 @@ h1, h2, h3, h4, h5, h6, figure {
   border-radius: 7px;
 }
 .gtco-nav ul li.btn-cta a:hover span {
-  background: #fff;
-  color: #09C6AB;
+  background: #fff!important;
+  color: #09C6AB!important;
 }
 .gtco-nav ul li.active > a {
   color: #fff !important;
@@ -918,6 +925,7 @@ form label {
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+  margin-top: 14px;
 }
 #gtco-subscribe .form-control:focus {
   background: transparent;
@@ -953,7 +961,7 @@ form label {
   margin-bottom: 10px;
 }
 #gtco-subscribe .form-inline .form-group .form-control {
-  width: 100%;
+  width: 100%!important;
 }
 #gtco-subscribe .gtco-heading {
   margin-bottom: 30px;
@@ -1459,11 +1467,11 @@ form label {
 }
 
 .row-mt-15em {
-  margin-top: 15em;
+  margin-top: 15em !important;
 }
 @media screen and (max-width: 768px) {
   .row-mt-15em {
-    margin-top: 7em;
+    margin-top: 7em !important;
   }
 }
 
@@ -1722,17 +1730,21 @@ form label {
   text-decoration: none !important;
 }
 .fh5co-card-item .fh5co-text h2 {
+  text-decoration: none !important;
   font-size: 20px;
   font-weight: 400;
   margin: 0 0 10px 0;
   color: #09C6AB;
+  
 }
 .fh5co-card-item .fh5co-text span {
+  text-decoration: none !important;
   color: #b3b3b3;
   font-size: 16px;
   font-weight: 400;
 }
 .fh5co-card-item .fh5co-text p {
+  text-decoration: none !important;
   color: #000;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;

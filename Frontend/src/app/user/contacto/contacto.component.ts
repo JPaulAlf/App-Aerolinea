@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 declare function ejecutarAnimacion():any;
+
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',
@@ -7,10 +8,10 @@ declare function ejecutarAnimacion():any;
 })
 export class ContactoComponent implements OnInit {
 
-  constructor() { }
+  constructor() {  }
 
   ngOnInit(): void {
     ejecutarAnimacion();
   }
-
+  
 }
