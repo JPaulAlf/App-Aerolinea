@@ -5,7 +5,7 @@
 	var mobileMenuOutsideClick = function() {
 
 		$(document).click(function (e) {
-			console.log(e.target.className)
+			
 	    var container = $("#gtco-espontaneo, .js-gtco-nav-toggle");
 	    if (!container.is(e.target) && container.has(e.target).length === 0 || e.target.className == "option") {
 	    	$('.js-gtco-nav-toggle').addClass('gtco-nav-white');
@@ -319,7 +319,7 @@ function ejecutarAnimacion(){
 function counterActivate(){
 	$('.js-counter').countTo({
 		formatter: function (value, options) {
-			console.log('entra')
+			
 	 return value.toFixed(options.decimals);
 	
    },
