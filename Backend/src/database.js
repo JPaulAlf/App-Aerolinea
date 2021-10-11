@@ -5,7 +5,7 @@ const conectarDB = async () => {
 
     try {
         
-        await mongoose.connect('mongodb+srv://user:123456@sunriseairlines.jwyyj.mongodb.net/SunriseAirlines', {
+        await mongoose.connect('mongodb+srv://cliente:User123456@sunriseairlines.jwyyj.mongodb.net/SunriseAirlines?authSource=admin&replicaSet=atlas-7h28dd-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true', {
 
             useNewUrlParser: true,
             useUnifiedTopology: true,
