@@ -11,44 +11,64 @@
                     <li class="nav-item">
                         <a routerLink='/admin' ng-reflect-router-link='/admin' href='/admin'
                             class="nav-link align-middle px-0">
-                            <i class="fs-4 fas fa-tachometer-alt"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            <i class="fs-4 fas fa-tachometer-alt"></i> <span
+                                class="ms-1 d-none d-sm-inline">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-3 fas fa-search-location"></i> <span class="ms-1 d-none d-sm-inline">Vuelo</span></a>
+                            <i class="fs-3 fas fa-search-location"></i> <span
+                                class="ms-1 d-none d-sm-inline">Vuelo</span></a>
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-3 far fa-calendar-alt"></i> <span class="ms-1 d-none d-sm-inline">Horario</span></a>
+                            <i class="fs-3 far fa-calendar-alt"></i> <span
+                                class="ms-1 d-none d-sm-inline">Horario</span></a>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 fas fa-plane-departure"></i> <span class="ms-1 d-none d-sm-inline">Avion</span></a>
+                            <i class="fs-4 fas fa-plane-departure"></i> <span
+                                class="ms-1 d-none d-sm-inline">Avion</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Crear</span> </a>
+                                <a routerLink='admin/avion/crear-avion' ng-reflect-router-link='admin/avion/crear-avion'
+                                href='admin/avion/crear-avion' class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Crear</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Editar</span> </a>
+                                <a routerLink='admin/avion/editar-avion' ng-reflect-router-link='admin/avion/editar-avion'
+                                href='admin/avion/editar-avion' class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Editar</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Ver</span> </a>
+                                <a routerLink='admin/avion/ver-avion' ng-reflect-router-link='admin/avion/ver-avion'
+                                href='admin/avion/ver-avion' class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Ver</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 fas fa-broadcast-tower"></i> <span class="ms-1 d-none d-sm-inline">Aeropuerto</span> </a>
+                            <i class="fs-4 fas fa-broadcast-tower"></i> <span
+                                class="ms-1 d-none d-sm-inline">Aeropuerto</span> </a>
                         <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Crear</span> </a>
+                                <a href="#" class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Crear</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Editar</span> </a>
+                                <a href="#" class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Editar</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Ver</span> </a>
+                                <a href="#" class="nav-link px-0">
+                                    <span class="d-none d-sm-inline">Ver</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -66,7 +86,8 @@
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-3 fas fa-info-circle"></i> <span class="ms-1 d-none d-sm-inline">Informacion</span> </a>
+                            <i class="fs-3 fas fa-info-circle"></i> <span
+                                class="ms-1 d-none d-sm-inline">Informacion</span> </a>
                     </li>
                 </ul>
                 <hr>
