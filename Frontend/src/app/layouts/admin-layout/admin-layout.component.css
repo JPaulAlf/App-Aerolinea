@@ -4,9 +4,16 @@
 }
 
 .nav-pills a:hover{
-    color:white !important;
+    color:white ;
 }
 #fixed{
     position:fixed;
    z-index: 10000;
 }
+
+.sub-link{
+    color:white ;
+}
+
+
+
