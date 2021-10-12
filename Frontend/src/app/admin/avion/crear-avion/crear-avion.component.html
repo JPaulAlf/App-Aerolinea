@@ -1,1 +1,172 @@
-<p>crear-avion works!</p>
+<ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
+
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="Informacion-tab" data-bs-toggle="tab" data-bs-target="#Informacion"
+            type="button" role="tab" aria-controls="Informacion" aria-selected="true">Información General</button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Caracteristicas-tab" data-bs-toggle="tab" data-bs-target="#Caracteristicas"
+            type="button" role="tab" aria-controls="Caracteristicas" aria-selected="false">Caracteristicas</button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Crear-tab" data-bs-toggle="tab" data-bs-target="#Crear" type="button" role="tab"
+            aria-controls="Crear" aria-selected="false">Crear</button>
+    </li>
+
+</ul>
+
+<div class="row">
+    <form enctype="multipart/form-data">
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Información General
+                </h1>
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Fabricante</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Modelo</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Año de construcción</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Cantidad de pasajeros</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+
+            </div> <!-- fin del TAB 1 -->
+
+            <div class="tab-pane fade " id="Caracteristicas" role="tabpanel" aria-labelledby="Caracteristicas-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Caracteristicas
+                </h1>
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Cantidad de filas</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Asientos por fila</label>
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="card mb-3" style="max-width: 100%; border:0px">
+                    <div class="row no-gutters">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-xs-2 mb-4">
+                            <img id="imagenCapturada" class="img-thumbnail img-fluid"
+                                src="/assets/images/imagen-no-disponible.png" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Favor seleccionar una imagen para el avion</h5>
+                                <p class="card-text">Con el boton colocado debajo, puede seleccionar una imagen de su
+                                    ordenador</p>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input id="inputImagen" type="file" class="custom-file-input" name="ImageFile"
+                                            accept="image/*" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+
+            </div> <!-- fin del TAB 2 -->
+
+            <div class="tab-pane fade " id="Crear" role="tabpanel" aria-labelledby="Crear-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Crear
+                </h1>
+                <hr class="my-4">
+                <br />
+                <p class="lead" style=" text-align: center; margin-top:20px">
+                    ¡ATENCION! Se guardara el AVION especificado en la Base de Datos
+                </p>
+
+                <input type="submit" value="Registrar Avion" class="btn btn-primary"
+                    style=" text-align: center; margin-left: 50%; transform: translateX(-50%); margin-top:60px" />
+                <br />
+
+            </div> <!-- fin del TAB 3 -->
+
+        </div> <!-- fin del tb content-->
+    </form> <!-- fin del form-->
+</div> <!-- fin del row principal-->
+
+
+
+
+<script type="text/javascript">
+    // PARECE NO FUNCIONAR EN ANGULAR 
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
+            var reader = new FileReader(); //Leemos el contenido
+
+            reader.onload = function (e) { //Al cargar el contenido lo pasamos como atributo de la imagen de arriba
+                $('#imagenCapturada').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#inputImagen").change(function () { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
+        readURL(this);
+    });
+
+
+
+</script>
