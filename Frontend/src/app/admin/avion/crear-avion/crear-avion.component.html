@@ -99,7 +99,10 @@
                 <div class="card mb-3" style="max-width: 100%; border:0px">
                     <div class="row no-gutters">
                         <div class="col-xl-3 col-lg-3 col-md-4 col-xs-2 mb-4">
-                            <img id="imagenCapturada" class="img-thumbnail img-fluid"
+                            <div *ngIf="previsualizacion!='' ">
+                                <img  class="img-thumbnail img-fluid"  [src]="previsualizacion" />
+                            </div>
+                            <img *ngIf="previsualizacion =='' " id="imagenCapturada" class="img-thumbnail img-fluid"
                                 src="/assets/images/imagen-no-disponible.png" />
                         </div>
                         <div class="col-md-8">
@@ -110,8 +113,7 @@
                                 <br />
                                 <div class="form-group">
                                     <div class="col-md-10">
-                                        <input id="inputImagen" type="file" class="custom-file-input" name="ImageFile"
-                                            accept="image/*" required />
+                                        <input (change) ="obtenerImagen($event)" type="file" class="custom-file-input"/>
                                     </div>
                                 </div>
                             </div>
