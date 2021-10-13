@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 
 declare function ejecutarAnimacion(): any;
-declare function menuMovil(): any;
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -32,10 +32,10 @@ export class InicioComponent implements OnInit {
           label: "Last year's income",
           data: dataDB,
           backgroundColor: [
-            'rgba(105, 0, 132, .2)',
+            'rgba(9, 197, 171, .2)',
           ],
           borderColor: [
-            'rgba(200, 99, 132, .7)',
+            'rgba(33, 37, 41, .7)',
           ],
           borderWidth: 2
         }
@@ -44,6 +44,18 @@ export class InicioComponent implements OnInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Valores expresados en miles de dólares',
+                fontColor: '#C7C7CC',
+                fontSize: 11
+              }
+            }
+          ]
+        }
       }
     });
 
