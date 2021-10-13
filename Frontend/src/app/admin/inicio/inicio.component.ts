@@ -22,27 +22,31 @@ export class InicioComponent implements OnInit {
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
+    var dataDB=[150, 150, 300, 475, 700, 689, 720, 150, 900, 300, 475, 340];
 
     new Chart(this.ctx, {
       type: 'line',
-        data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-          datasets: [{
-            label: "Last year's income",
-            data: [150000, 100000, 300000, 475000, 90000, 689000, 720000, 150000, 100000, 300000, 475000, 90000, 689000, 720000],
-            backgroundColor: [
-              'rgba(105, 0, 132, .2)',
-            ],
-            borderColor: [
-              'rgba(200, 99, 132, .7)',
-            ],
-            borderWidth: 2
-          }
-          ]
-        },
-        options: {
-          responsive: true
+      data: {
+        labels: ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."],
+        datasets: [{
+          label: "Last year's income",
+          data: dataDB,
+          backgroundColor: [
+            'rgba(105, 0, 132, .2)',
+          ],
+          borderColor: [
+            'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
         }
-      });
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
+    });
+
+ 
   }
 }
