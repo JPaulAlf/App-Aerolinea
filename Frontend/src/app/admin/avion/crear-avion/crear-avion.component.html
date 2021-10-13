@@ -1,16 +1,20 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
+    <!-- SELECTOR DEL TAB-->
 
     <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 1 -->
         <button class="nav-link active" id="Informacion-tab" data-bs-toggle="tab" data-bs-target="#Informacion"
             type="button" role="tab" aria-controls="Informacion" aria-selected="true">Información General</button>
     </li>
 
     <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 2 -->
         <button class="nav-link" id="Caracteristicas-tab" data-bs-toggle="tab" data-bs-target="#Caracteristicas"
             type="button" role="tab" aria-controls="Caracteristicas" aria-selected="false">Caracteristicas</button>
     </li>
 
     <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 3 -->
         <button class="nav-link" id="Crear-tab" data-bs-toggle="tab" data-bs-target="#Crear" type="button" role="tab"
             aria-controls="Crear" aria-selected="false">Crear</button>
     </li>
@@ -28,46 +32,46 @@
                 <hr class="my-4">
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Fabricante</label>
-                            <input type="text" id="fabri" class="form-control" required/>
+                            <input type="text" id="fabri" class="form-control" required />
                             <div class="invalid-feedback">
                                 Falta fabricante!
-                             </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Modelo</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" required/>
+                                <input type="text" class="form-control" required />
                             </div>
                             <div class="invalid-feedback">
                                 Se requiere modelo!
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <br />
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Año de construcción</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" required/>
+                                <input type="text" class="form-control" required />
                                 <div class="invalid-feedback">
                                     Falta año de contrucción
-                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Cantidad de pasajeros</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" required/>
+                                <input type="text" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -88,7 +92,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Cantidad de filas</label>
-                                <input type="number" class="form-control" required/>
+                                <input type="number" class="form-control" required />
 
                             </div>
                         </div>
@@ -97,7 +101,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Asientos por fila</label>
-                                <input type="number" class="form-control" required/>
+                                <input type="number" class="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -108,7 +112,7 @@
                     <div class="row no-gutters">
                         <div class="col-xl-3 col-lg-3 col-md-4 col-xs-2 mb-4">
                             <div *ngIf="previsualizacion!='' ">
-                                <img  class="img-thumbnail img-fluid"  [src]="previsualizacion" />
+                                <img class="img-thumbnail img-fluid" [src]="previsualizacion" />
                             </div>
                             <img *ngIf="previsualizacion =='' " id="imagenCapturada" class="img-thumbnail img-fluid"
                                 src="/assets/images/imagen-no-disponible.png" />
@@ -121,8 +125,9 @@
                                 <br />
                                 <div class="form-group">
                                     <div class="mb-4">
-                                        <input (change) ="obtenerImagen($event)" class="form-control form-control-lg" id="formFileSm" type="file" required/>
-                                      </div>
+                                        <input (change)="obtenerImagen($event)" class="form-control form-control-lg"
+                                            id="formFileSm" type="file" required />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,22 +165,22 @@
 <script type="text/javascript">
     // PARECE NO FUNCIONAR EN ANGULAR 
     (() => {
-  'use strict';
+        'use strict';
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation');
-console.log("funciona");
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms).forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
-  });
-})();
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+        console.log("funciona");
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 
     function readURL(input) {
         if (input.files && input.files[0]) { //Revisamos que el input tenga contenido

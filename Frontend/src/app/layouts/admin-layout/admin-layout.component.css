@@ -1,8 +1,6 @@
-
 .nav-pills a {
     color:RGB(9, 198, 171)
 }
-
 .nav-pills a:hover{
     color:white ;
 }
@@ -12,15 +10,21 @@
 }
 
 
-
-
-
-ul  li .sub-link {
-
+#submenu1 li a{
     color:white ;
 }
-
-ul  li .sub-link :hover{
-
+#submenu1 li a:hover{
+    color:rgb(255, 0, 0) ;
+}
+#submenu2 li a{
+    color:white ;
+}
+#submenu2 li a:hover{
+    color:rgb(255, 0, 0) ;
+}
+#submenu3 li a{
+    color:white ;
+}
+#submenu3 li a:hover{
     color:rgb(255, 0, 0) ;
 }
