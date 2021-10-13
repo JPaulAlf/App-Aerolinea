@@ -17,8 +17,8 @@
 
 </ul>
 
-<div class="row">
-    <form enctype="multipart/form-data">
+<div class="">
+    <form enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -30,18 +30,22 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Fabricante</label>
-                            <div class="col-lg-12">
-                                <input type="text" class="form-control">
-                            </div>
+                            <label for="fabri" class="form-label">Fabricante</label>
+                            <input type="text" id="fabri" class="form-control" required/>
+                            <div class="invalid-feedback">
+                                Falta fabricante!
+                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Modelo</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" required/>
                             </div>
+                            <div class="invalid-feedback">
+                                Se requiere modelo!
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +56,10 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Año de construcción</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" required/>
+                                <div class="invalid-feedback">
+                                    Falta año de contrucción
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +67,7 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Cantidad de pasajeros</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" required/>
                             </div>
                         </div>
                     </div>
@@ -77,19 +84,20 @@
                 <hr class="my-4">
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Cantidad de filas</label>
-                            <div class="col-lg-12">
-                                <input type="text" class="form-control">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Cantidad de filas</label>
+                                <input type="number" class="form-control" required/>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-lg-6">
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Asientos por fila</label>
-                            <div class="col-lg-12">
-                                <input type="text" class="form-control">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Asientos por fila</label>
+                                <input type="number" class="form-control" required/>
                             </div>
                         </div>
                     </div>
@@ -112,9 +120,9 @@
                                     ordenador</p>
                                 <br />
                                 <div class="form-group">
-                                    <div class="col-md-10">
-                                        <input (change) ="obtenerImagen($event)" type="file" class="custom-file-input"/>
-                                    </div>
+                                    <div class="mb-4">
+                                        <input (change) ="obtenerImagen($event)" class="form-control form-control-lg" id="formFileSm" type="file" required/>
+                                      </div>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +159,23 @@
 
 <script type="text/javascript">
     // PARECE NO FUNCIONAR EN ANGULAR 
+    (() => {
+  'use strict';
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+console.log("funciona");
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
 
     function readURL(input) {
         if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
@@ -168,6 +192,8 @@
     $("#inputImagen").change(function () { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
         readURL(this);
     });
+
+
 
 
 

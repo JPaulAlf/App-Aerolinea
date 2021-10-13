@@ -235,9 +235,9 @@
 	};
 
 
-	var dateForm = function() {
-		$('#date-start').datepicker();
-	};
+	// var dateForm = function() {
+	// 	$('#date-start').datepicker();
+	// };
 
 	var parallax = function() {
 		$(window).stellar({
@@ -261,7 +261,7 @@
 		goToTop();
 		loaderPage();
 		counterWayPoint();
-		dateForm();
+		// dateForm();
 		parallax();
 	});
 
