@@ -30,9 +30,6 @@ const routes: Routes = [
       { path: '/admin-dashboard', component: InicioComponent },
     ]
   },
-  { path: 'avion/crear-avion', component: CrearAvionComponent },
-  { path: 'avion/editar-avion', component: EditarAvionComponent },
-  { path: 'avion/ver-avion', component: VerAvionComponent },
 
   //direcciones en ingles, para que en el NAVEGADOR salgan acorde al sitio para
 
