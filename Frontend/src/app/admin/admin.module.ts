@@ -9,6 +9,22 @@ import { CrearAvionComponent } from './avion/crear-avion/crear-avion.component';
 import { EditarAvionComponent } from './avion/editar-avion/editar-avion.component';
 import { VerAvionComponent } from './avion/ver-avion/ver-avion.component';
 
+import { CrearAeropuertoComponent } from './aeropuerto/crear-aeropuerto/crear-aeropuerto.component';
+import { EditarAeropuertoComponent } from './aeropuerto/editar-aeropuerto/editar-aeropuerto.component';
+import { VerAeropuertoComponent } from './aeropuerto/ver-aeropuerto/ver-aeropuerto.component';
+
+import { CrearClienteComponent } from './cliente/crear-cliente/crear-cliente.component';
+import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+import { VerClienteComponent } from './cliente/ver-cliente/ver-cliente.component';
+
+import { CrearVueloComponent } from './vuelo/crear-vuelo/crear-vuelo.component';
+import { EditarVueloComponent } from './vuelo/editar-vuelo/editar-vuelo.component';
+import { VerVueloComponent } from './vuelo/ver-vuelo/ver-vuelo.component';
+
+import { VerHorarioComponent } from './horario/ver-horario/ver-horario.component';
+import { CrearHorarioComponent } from './horario/crear-horario/crear-horario.component';
+import { EditarHorarioComponent } from './horario/editar-horario/editar-horario.component';
+
 
 
 @NgModule({
@@ -17,6 +33,18 @@ import { VerAvionComponent } from './avion/ver-avion/ver-avion.component';
     CrearAvionComponent,
     EditarAvionComponent,
     VerAvionComponent,
+    CrearAeropuertoComponent,
+    EditarAeropuertoComponent,
+    VerAeropuertoComponent,
+    CrearClienteComponent,
+    EditarClienteComponent,
+    VerClienteComponent,
+    CrearVueloComponent,
+    EditarVueloComponent,
+    VerVueloComponent,
+    VerHorarioComponent,
+    CrearHorarioComponent,
+    EditarHorarioComponent,
   ],
   imports: [
     CommonModule,

@@ -4,25 +4,25 @@
     <li class="nav-item" role="presentation">
         <!-- ESTE ES EL TAB 1 -->
         <button class="nav-link active" id="Informacion-tab" data-bs-toggle="tab" data-bs-target="#Informacion"
-            type="button" role="tab" aria-controls="Informacion" aria-selected="true">Información General</button>
+            type="button" role="tab" aria-controls="Informacion" aria-selected="true">Step-1</button>
     </li>
 
     <li class="nav-item" role="presentation">
         <!-- ESTE ES EL TAB 2 -->
         <button class="nav-link" id="Caracteristicas-tab" data-bs-toggle="tab" data-bs-target="#Caracteristicas"
-            type="button" role="tab" aria-controls="Caracteristicas" aria-selected="false">Caracteristicas</button>
+            type="button" role="tab" aria-controls="Caracteristicas" aria-selected="false">Step-2</button>
     </li>
 
     <li class="nav-item" role="presentation">
         <!-- ESTE ES EL TAB 3 -->
         <button class="nav-link" id="Crear-tab" data-bs-toggle="tab" data-bs-target="#Crear" type="button" role="tab"
-            aria-controls="Crear" aria-selected="false">Crear</button>
+            aria-controls="Crear" aria-selected="false">End</button>
     </li>
 
 </ul>
 
 <div class="">
-    <form enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+    <form enctype="multipart/form-data" class="row g-3 needs-validation was-validated" novalidate>
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -32,7 +32,7 @@
                 <hr class="my-4">
 
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Fabricante</label>
                             <input type="text" id="fabri" class="form-control" required />
@@ -41,37 +41,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Modelo</label>
                             <div class="col-lg-12">
                                 <input type="text" class="form-control" required />
-                            </div>
-                            <div class="invalid-feedback">
-                                Se requiere modelo!
+                                <div class="invalid-feedback">
+                                    Se requiere modelo!
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
 
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Año de construcción</label>
                             <div class="col-lg-12">
                                 <input type="text" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Falta año de contrucción
+                                    Falta año de contrucción!
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Cantidad de pasajeros</label>
                             <div class="col-lg-12">
                                 <input type="text" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    Se requiere la cantidad de pasajeros!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,25 +90,29 @@
                 <hr class="my-4">
 
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Cantidad de filas</label>
                                 <input type="number" class="form-control" required />
-
+                                <div class="invalid-feedback">
+                                    Se requiere la cantidad de filas del avion!
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Asientos por fila</label>
                                 <input type="number" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    Se requiere la cantidad de asientos por fila del avion!
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
 
                 <div class="card mb-3" style="max-width: 100%; border:0px">
                     <div class="row no-gutters">
@@ -124,7 +130,7 @@
                                     ordenador</p>
                                 <br />
                                 <div class="form-group">
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <input (change)="obtenerImagen($event)" class="form-control form-control-lg"
                                             id="formFileSm" type="file" required />
                                     </div>
@@ -163,8 +169,9 @@
 
 
 <script type="text/javascript">
-    // PARECE NO FUNCIONAR EN ANGULAR 
-    (() => {
+    //Alv-> PARECE NO FUNCIONAR EN ANGULAR 12/10/2021
+    //JP-> Aun no funciona. Fecha 13/10/2021
+    function esElSubmit() {
         'use strict';
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -180,7 +187,7 @@
                 form.classList.add('was-validated');
             }, false);
         });
-    })();
+    }
 
     function readURL(input) {
         if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
