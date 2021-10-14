@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { InicioComponent } from '../admin/inicio/inicio.component';
@@ -48,7 +48,8 @@ import { EditarHorarioComponent } from './horario/editar-horario/editar-horario.
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule, 
+    NgxPaginationModule
   ]
 })
 export class AdminModule { }

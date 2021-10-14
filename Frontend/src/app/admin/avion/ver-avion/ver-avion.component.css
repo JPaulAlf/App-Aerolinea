@@ -1,0 +1,17 @@
+.fas{
+    cursor: pointer;
+    margin-left: 7px;
+}
+
+tr th{
+    text-align: center;
+}
+
+.card {
+    background-color: #1E2428;
+    
+}
+.card ,.card-body, .titulo, table, td, th{
+    color: white!important;
+}
+
