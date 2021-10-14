@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { InicioComponent } from '../admin/inicio/inicio.component';
@@ -20,7 +20,8 @@ import { VerAvionComponent } from './avion/ver-avion/ver-avion.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule, 
+    NgxPaginationModule
   ]
 })
 export class AdminModule { }
