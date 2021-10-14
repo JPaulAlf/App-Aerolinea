@@ -49,7 +49,7 @@ export class InicioComponent implements OnInit {
             {
               scaleLabel: {
                 display: true,
-                labelString: 'Valores expresados en miles de dólares',
+                labelString: 'Values in thousands of dollars',
                 fontColor: '#C7C7CC',
                 fontSize: 11
               }

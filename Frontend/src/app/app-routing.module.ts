@@ -9,7 +9,7 @@ const routes: Routes = [
  // Rutas para usuario
   {path: '', component: UserLayoutComponent ,
     children:[
-        {path:'',redirectTo:'/inicio',pathMatch:'full'},
+        {path:'',redirectTo:'/home',pathMatch:'full'},
         {path:'',loadChildren:()=>import('./user/user.module').then(m=>m.UserModule)},
         ]
       },
@@ -17,7 +17,7 @@ const routes: Routes = [
     //Rutas para administrador
   {path: '', component: AdminLayoutComponent ,
     children:[
-          {path:'',redirectTo:'/adminDashboard',pathMatch:'full'},
+          {path:'',redirectTo:'/admin-dashboard',pathMatch:'full'},
           {path:'admin',loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)}
         ]
       },

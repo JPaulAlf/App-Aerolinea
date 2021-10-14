@@ -9,11 +9,11 @@ const routes: Routes = [
   {
     path: '', component: InicioComponent,
     children:[
-      {path: 'inicio', component: InicioComponent },
+      {path: 'home', component: InicioComponent },
     ],
   },
-  {path: 'acerca-de', component: AcercaDeComponent },
-  {path: 'contacto', component: ContactoComponent },
+  {path: 'about-us', component: AcercaDeComponent },
+  {path: 'contact', component: ContactoComponent },
 
 ];
 
