@@ -35,7 +35,8 @@ const Usuario = mongoose.model(
             type: Number
           },
           direccion: {
-            type: Object, //hacerlo igual que la tarea
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Direccion'
           }
     })
 );

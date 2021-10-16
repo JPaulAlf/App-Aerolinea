@@ -30,10 +30,16 @@ const Ruta = mongoose.model(
           duracion: {
             type: Number,
           },
+          precio_trayecto: {
+            type: Number
+          },
+          descuento:{
+            type: Number
+          }, 
           estado: {
             type: Number,
-          },
-          ruta: {}
+          }
+          
     })
 );
 
