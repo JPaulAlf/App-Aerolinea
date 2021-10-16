@@ -7,9 +7,9 @@ import { CrearVueloComponent } from './vuelo/crear-vuelo/crear-vuelo.component';
 import { EditarVueloComponent } from './vuelo/editar-vuelo/editar-vuelo.component';
 import { VerVueloComponent } from './vuelo/ver-vuelo/ver-vuelo.component';
 
-import { VerHorarioComponent } from './horario/ver-horario/ver-horario.component';
-import { CrearHorarioComponent } from './horario/crear-horario/crear-horario.component';
-import { EditarHorarioComponent } from './horario/editar-horario/editar-horario.component';
+import { CrearRutaComponent } from './rutas/crear-ruta/crear-ruta.component';
+import { EditarRutaComponent } from './rutas/editar-ruta/editar-ruta.component';
+import { VerRutaComponent } from './rutas/ver-ruta/ver-ruta.component';
 
 import { CrearAvionComponent } from '../admin/avion/crear-avion/crear-avion.component';
 import { EditarAvionComponent } from '../admin/avion/editar-avion/editar-avion.component';
@@ -37,9 +37,9 @@ const routes: Routes = [
   { path: 'flight/edit-flight', component: EditarVueloComponent },
   { path: 'flight/overview-flight', component: VerVueloComponent },
 
-  { path: 'schedule/add-schedule', component: CrearHorarioComponent },
-  { path: 'schedule/edit-schedule', component: EditarHorarioComponent },
-  { path: 'schedule/overview-schedule', component: VerHorarioComponent },
+  { path: 'route/add-route', component: CrearRutaComponent },
+  { path: 'route/edit-route', component: EditarRutaComponent },
+  { path: 'route/overview-route', component: VerRutaComponent },
 
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
   { path: 'airplane/edit-airplane', component: EditarAvionComponent },

@@ -4,16 +4,11 @@ const Horario = mongoose.model(
     "Horario", 
     new mongoose.Schema({ 
         fecha: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Horario',
+          type: Date,
           },
           hora_sal: {
             type: String,
-          },
-          precio_hora: {
-            type: Number,
-   
-          },
+          }
     })
 );
 

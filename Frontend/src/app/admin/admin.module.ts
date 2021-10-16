@@ -21,9 +21,9 @@ import { CrearVueloComponent } from './vuelo/crear-vuelo/crear-vuelo.component';
 import { EditarVueloComponent } from './vuelo/editar-vuelo/editar-vuelo.component';
 import { VerVueloComponent } from './vuelo/ver-vuelo/ver-vuelo.component';
 
-import { VerHorarioComponent } from './horario/ver-horario/ver-horario.component';
-import { CrearHorarioComponent } from './horario/crear-horario/crear-horario.component';
-import { EditarHorarioComponent } from './horario/editar-horario/editar-horario.component';
+import { CrearRutaComponent } from './rutas/crear-ruta/crear-ruta.component';
+import { EditarRutaComponent } from './rutas/editar-ruta/editar-ruta.component';
+import { VerRutaComponent } from './rutas/ver-ruta/ver-ruta.component';
 
 
 
@@ -42,9 +42,9 @@ import { EditarHorarioComponent } from './horario/editar-horario/editar-horario.
     CrearVueloComponent,
     EditarVueloComponent,
     VerVueloComponent,
-    VerHorarioComponent,
-    CrearHorarioComponent,
-    EditarHorarioComponent,
+    CrearRutaComponent,
+    EditarRutaComponent,
+    VerRutaComponent,
   ],
   imports: [
     CommonModule,
