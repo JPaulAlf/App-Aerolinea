@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar-aeropuerto.component.css']
 })
 export class EditarAeropuertoComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {
