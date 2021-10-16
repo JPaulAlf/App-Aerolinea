@@ -21,9 +21,9 @@ import { CrearVueloComponent } from './vuelo/crear-vuelo/crear-vuelo.component';
 import { EditarVueloComponent } from './vuelo/editar-vuelo/editar-vuelo.component';
 import { VerVueloComponent } from './vuelo/ver-vuelo/ver-vuelo.component';
 
-import { CrearRutaComponent } from './rutas/crear-ruta/crear-ruta.component';
-import { EditarRutaComponent } from './rutas/editar-ruta/editar-ruta.component';
-import { VerRutaComponent } from './rutas/ver-ruta/ver-ruta.component';
+import { CrearRutaComponent } from './ruta/crear-ruta/crear-ruta.component';
+import { EditarRutaComponent } from './ruta/editar-ruta/editar-ruta.component';
+import { VerRutaComponent } from './ruta/ver-ruta/ver-ruta.component';
 
 
 
