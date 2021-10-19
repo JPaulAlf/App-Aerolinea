@@ -25,3 +25,9 @@
       border-width: 2px!important;
   }
   
+
+  .full {
+    width: 100%;
+    height: 75vh;
+  }
+  
