@@ -385,3 +385,93 @@ function navMovil(){
 
 }
 
+
+
+function enviar() {
+    //validación name
+    var name = document.getElementById('name');
+
+    if (name.value.trim() == "") {
+        name.focus();
+        alert('Type your name');
+        return;
+    }
+    //validación email
+    var email = document.getElementById('email');
+
+    if (email.value.trim() == "") {
+        email.focus();
+        alert('Type your email');
+        return;
+    }
+    var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if (!emailRegex.test(email.value)) {
+        email.focus();
+        alert("The email address is invalid");
+        return;
+    }
+    
+
+	var subject = document.getElementById('subject');
+
+    if (subject.value.trim() == "") {
+        subject.focus();
+        alert('Type your subject');
+        return;
+    }
+
+    var message = document.getElementById('message');
+
+    if (message.value.trim() == "") {
+        message.focus();
+        alert('Type your message');
+        return;
+    }
+    
+
+    
+    var miHtml = "<div style = 'background-color: #fff; text-align: center;'>"+
+    
+    "<h1 style= 'color: #09C5AB;'>The User " + name.value + "</h1> "+
+	"<h1 style= 'color: #09C5AB;'>With email: " + email.value + "</h1> "+
+    "<h3 style= 'color: #212529;'>Send a message:</h3> "+
+    " <p style= 'color: #000; margin-bottom: 20px;'>"+ message.value + "</p>"+
+    " </div> ";
+
+
+    Email.send({
+        SecureToken: "e55464c7-f373-4102-8108-1267b9e34c45",
+
+
+        To: "sunriseairlinescontact@gmail.com",
+        From: "soundevutn@gmail.com",
+        Subject: subject.value,
+        Body: miHtml,
+
+    })
+
+        .then(message => alert("Su mensaje se ha enviado"));
+ 
+    name.value="";
+    email.value="";
+    subject.value="";
+	message.value="";
+   
+ 
+
+
+
+
+
+    //6E53889308B0C7B201FE2DB64332F8FFDBCE
+
+
+
+
+
+
+
+}
+
+
+

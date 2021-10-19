@@ -14,4 +14,11 @@ export class ContactoComponent implements OnInit {
     ejecutarAnimacion();
   }
   
+ public enviarCorreo(): void {
+  let tokenMail: string = "0aa67570-b8b5-4857-80f7-f9251194f278";
+  
+
+ }
+
+
 }
