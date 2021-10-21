@@ -1,5 +1,5 @@
 const express = require('express');
-const conectarDB = require('./src/database');
+const conectarDB = require('./database');
 const app = express();
 const cors = require("cors");
 
@@ -10,7 +10,7 @@ conectarDB();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api', require('./src/routes/users.routes'));
+app.use('/api', require('./routes/usuario'));
 
 
 app.listen(process.env.PORT || 4000,() => {

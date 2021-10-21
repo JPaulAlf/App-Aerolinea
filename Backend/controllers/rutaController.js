@@ -1,4 +1,4 @@
-const AuthorModel = require("../models/Author");
+const AuthorModel = require("../models/Ruta");
 
 module.exports.get = async (req, res, next) => {
   const author = await AuthorModel.find().exec();

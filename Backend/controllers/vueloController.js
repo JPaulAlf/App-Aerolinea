@@ -1,4 +1,4 @@
-const PostModel = require("../models/Post");
+const PostModel = require("../models/Vuelo");
 
 
 module.exports.get = async (req, res, next) => {

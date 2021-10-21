@@ -1,4 +1,4 @@
-const UserModel = require("../models/User");
+const UserModel = require("../models/Usuario");
 const jwt = require('jsonwebtoken');
 
 //Se obtiene las variables de entorno
