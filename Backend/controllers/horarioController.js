@@ -1,8 +1,8 @@
-const PostModel = require("../models/Vuelo");
+const PostModel = require("../models/Horario");
 
 
 module.exports.get = async (req, res, next) => {
-    const posts = await PostModel.find().populate("Vuelo", "avion_id ruta_id hora_sal hora_lleg").exec();
+    const posts = await PostModel.find().populate("Horario", "fecha hora_sal").exec();
     res.json(posts);
 };
 
@@ -13,8 +13,8 @@ module.exports.getById = async (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-  const {avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
-  const post = new PostModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal,hora_lleg: hora_lleg  });
+  const {fecha, hora_sal } = req.body;
+  const post = new PostModel({ fecha:fecha, hora_sal:hora_sal });
   post.save();
   res.json(post);
 };
@@ -23,17 +23,17 @@ module.exports.delete = async (req, res, next) => {
   const post = await PostModel.findByIdAndRemove(req.params.id);
   // si post es null significa que no existe el registro
   if (post) {
-    res.json({ result: "Flight deleted", post });
+    res.json({ result: "Schedule deleted", post });
   } else {
     res.json({ result: "Invalid Id", post });
   }
 };
 
 module.exports.update = async (req, res, next) => {
-  const {avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
-  const post = await PostModel.findOneAndUpdate(
+    const {fecha, hora_sal } = req.body;
+    const post = await PostModel.findOneAndUpdate(
     { _id: req.params.id },
-    { avion_id, ruta_id, hora_sal, hora_lleg }, 
+    { fecha, hora_sal }, 
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   res.json(post);
