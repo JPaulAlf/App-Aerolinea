@@ -17,6 +17,7 @@ const Vuelo = mongoose.model(
           hora_lleg: {
             type: String,
           },
+          asientos: []
     })
 );
 
