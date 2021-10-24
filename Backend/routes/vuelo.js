@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const postController = require("../controllers/postController");
+const vueloController = require("../controllers/vueloController");
 
 //Autenticación para el uso del API
 const auth = require("../middleware/auth");
 const { permit } = require("../middleware/authorization");
 
 //Definición de rutas para cada uno de los verbos para los post
-router.get("/", auth, permit("admin"), postController.get);
+router.get("/flight/overview-flight", vueloController.get);
 
-router.get("/:id", auth , postController.getById);
+router.get("/flight/edit-flight/:id", auth, vueloController.getById);
 
-router.post("/", postController.create);
+router.post("/flight/add-flight", auth, permit("admin"), vueloController.create);
 
-router.delete("/:id", postController.delete);
+router.delete("/flight/edit-flight/:id", auth, permit("admin"), vueloController.delete);
 
-router.put("/:id", postController.update);
+router.put("/flight/edit-flight/:id", auth, permit("admin"), vueloController.update);
 
 module.exports = router;

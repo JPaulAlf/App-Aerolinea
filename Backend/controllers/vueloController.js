@@ -1,40 +1,39 @@
-const PostModel = require("../models/Vuelo");
-
+const VueloModel = require("../models/Vuelo");
 
 module.exports.get = async (req, res, next) => {
-    const posts = await PostModel.find().populate("Vuelo", "avion_id ruta_id hora_sal hora_lleg").exec();
-    res.json(posts);
+  const vuelos = await VueloModel.find().populate("Vuelo", "avion_id ruta_id hora_sal hora_lleg").exec();
+  res.json(vuelos);
 };
 
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
-  const post = await PostModel.findOne({ _id: id }).exec();
-  res.json(post);
+  const vuelo = await VueloModel.findOne({ _id: id }).exec();
+  res.json(vuelo);
 };
 
 module.exports.create = (req, res, next) => {
-  const {avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
-  const post = new PostModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal,hora_lleg: hora_lleg  });
-  post.save();
-  res.json(post);
+  const { avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
+  const vuelo = new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg });
+  vuelo.save();
+  res.json(vuelo);
 };
 
 module.exports.delete = async (req, res, next) => {
-  const post = await PostModel.findByIdAndRemove(req.params.id);
-  // si post es null significa que no existe el registro
-  if (post) {
-    res.json({ result: "Flight deleted", post });
+  const vuelo = await VueloModel.findByIdAndRemove(req.params.id);
+  // si vuelo es null significa que no existe el registro
+  if (vuelo) {
+    res.json({ result: "Flight deleted", vuelo });
   } else {
-    res.json({ result: "Invalid Id", post });
+    res.json({ result: "Invalid Id", vuelo });
   }
 };
 
 module.exports.update = async (req, res, next) => {
-  const {avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
-  const post = await PostModel.findOneAndUpdate(
+  const { avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
+  const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { avion_id, ruta_id, hora_sal, hora_lleg }, 
+    { avion_id, ruta_id, hora_sal, hora_lleg },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
-  res.json(post);
+  res.json(vuelo);
 };
