@@ -7,7 +7,8 @@ const Aeropuerto = mongoose.model(
         pais:String,
         ciudad:String,
         latitud:Number,
-        longitud:Number 
+        longitud:Number,
+        descripcion:String
     })
 );
 
