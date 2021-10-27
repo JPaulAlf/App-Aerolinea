@@ -1,1 +1,289 @@
-<p>crear-vuelo works!</p>
+<ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
+    <!-- SELECTOR DEL TAB-->
+
+    <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 1 -->
+        <button class="nav-link active" id="Informacion-tab" data-bs-toggle="tab" data-bs-target="#Informacion"
+            type="button" role="tab" aria-controls="Informacion" aria-selected="true">Step-1</button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 2 -->
+        <button class="nav-link" id="Caracteristicas-tab" data-bs-toggle="tab" data-bs-target="#Caracteristicas"
+            type="button" role="tab" aria-controls="Caracteristicas" aria-selected="false">Step-2</button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <!-- ESTE ES EL TAB 3 -->
+        <button class="nav-link" id="Crear-tab" data-bs-toggle="tab" data-bs-target="#Crear" type="button" role="tab"
+            aria-controls="Crear" aria-selected="false">End</button>
+    </li>
+
+</ul>
+
+<div class="">
+    <form enctype="multipart/form-data" class="row g-3 needs-validation was-validated" novalidate>
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Airplane
+                </h1>
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <label for="fabri" class="form-label">Type of airplane</label>
+                            <select class="form-select" aria-label="Default select example" required>
+                                <option selected value="">None selected</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select one type, to see the airplanes below
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Airplane Selected</label>
+                                <input type="text" class="form-control" placeholder=" Airplane not selected!"
+                                    readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label for="fabri" class="form-label mt-2">Airplanes available for the type selected</label>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 ">
+                        <div style="overflow:auto;">
+                            <table class="table table-striped ">
+                                <!--routerlink, used to render another component-->
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center" scope="col">Model</th>
+                                        <th style="text-align:center" scope="col">Passengers</th>
+                                        <th style="text-align:center" scope="col">Select</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td style="text-align:center">model 1</td>
+                                        <td style="text-align:center">60</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">model 1</td>
+                                        <td style="text-align:center">60</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">model 1</td>
+                                        <td style="text-align:center">60</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">model 1</td>
+                                        <td style="text-align:center">60</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- fin del TAB 1 -->
+
+            <div class="tab-pane fade " id="Caracteristicas" role="tabpanel" aria-labelledby="Caracteristicas-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Route
+                </h1>
+                <hr class="my-4">
+
+                <div class="col-sm-12 col-lg-12 mb-3">
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="basic-url" class="form-label">Route Selected</label>
+                            <input type="text" class="form-control" placeholder=" Route not selected!" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-12 mb-3">
+                    <div class="form-group">
+                        <label for="fabri" class="form-label">Schedules for the route</label>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option selected value="">None selected</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select one route, to see the schedules available.
+                        </div>
+                    </div>
+                </div>
+            
+
+                <label for="fabri" class="form-label mt-2">Routes available for the flight</label>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 ">
+                        <!--offset leaves two columns to the left-->
+                        <div style="overflow:auto;">
+                            <table class="table table-striped ">
+                                <!--routerlink, used to render another component-->
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center" scope="col">From</th>
+                                        <th style="text-align:center" scope="col">To</th>
+                                        <th style="text-align:center" scope="col">Select</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td style="text-align:center">New York, USA</td>
+                                        <td style="text-align:center">San jose, CRC</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">Los Angeles, USA</td>
+                                        <td style="text-align:center">Miami, USA</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">New York, USA</td>
+                                        <td style="text-align:center">San jose, CRC</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:center">Los Angeles, USA</td>
+                                        <td style="text-align:center">Miami, USA</td>
+                                        <td style="text-align:center">
+                                            <a href="#">
+                                                <i class="fs-5 fas fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- fin del TAB 2 -->
+
+            <div class="tab-pane fade " id="Crear" role="tabpanel" aria-labelledby="Crear-tab">
+                <h1 class="display-6" style="margin-top:25px; text-align:center">
+                    Crear
+                </h1>
+                <hr class="my-4">
+                <br />
+                <p class="lead" style=" text-align: center; margin-top:20px">
+                    ATTENTION! The specified FLIGHT will be saved in the Database.
+                </p>
+
+                <input type="submit" value="Registrar Avion" class="btn btn-primary"
+                    style=" text-align: center; margin-left: 50%; transform: translateX(-50%); margin-top:60px" />
+                <br />
+
+            </div> <!-- fin del TAB 3 -->
+
+        </div> <!-- fin del tb content-->
+    </form> <!-- fin del form-->
+</div> <!-- fin del row principal-->
+
+
+
+
+<script type="text/javascript">
+    //Alv-> PARECE NO FUNCIONAR EN ANGULAR 12/10/2021
+    //JP-> Aun no funciona. Fecha 13/10/2021
+    function esElSubmit() {
+        'use strict';
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+        console.log("funciona");
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }
+
+
+
+
+
+
+
+</script>

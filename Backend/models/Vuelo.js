@@ -11,8 +11,9 @@ const Vuelo = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Ruta',
           },
-          hora_sal: {
-            type: String,
+          horario_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Horario',
           },
           hora_lleg: {
             type: String,

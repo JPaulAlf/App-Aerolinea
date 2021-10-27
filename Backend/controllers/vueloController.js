@@ -2,18 +2,18 @@ const VueloModel = require("../models/Vuelo");
 const AvionModel = require("../models/Avion");
 
 module.exports.get = async (req, res, next) => {
-  const vuelos = await VueloModel.find().populate("avion_id ruta_id").exec();
+  const vuelos = await VueloModel.find().populate("avion_id ruta_id horario_id").exec();
   res.json(vuelos);
 };
 
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
-  const vuelo = await VueloModel.findOne({ _id: id }).populate("avion_id ruta_id").exec();
+  const vuelo = await VueloModel.findOne({ _id: id }).populate("avion_id ruta_id horario_id").exec();
   res.json(vuelo);
 };
 
 module.exports.create = async (req, res, next) => {
-  const { avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
+  const { avion_id, ruta_id, horario_id, hora_lleg } = req.body;
 
   const avion = await AvionModel.findById(avion_id).exec();
   const cantFilas = avion.cant_filas;
@@ -30,7 +30,7 @@ module.exports.create = async (req, res, next) => {
     }
   }
 
-  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
+  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, horario_id: horario_id, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
   vuelo.save();
   res.json(vuelo);
 };
@@ -46,7 +46,7 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { avion_id, ruta_id, hora_sal, hora_lleg, num_fila, num_asiento } = req.body;
+  const { avion_id, ruta_id, horario_id, hora_lleg, num_fila, num_asiento } = req.body;
 
   const vuelo_Original = await VueloModel.findById(req.params.id).exec();
   const asientos = vuelo_Original.asientos;
@@ -58,7 +58,7 @@ module.exports.update = async (req, res, next) => {
 
   const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { avion_id, ruta_id, hora_sal, hora_lleg, asientos },
+    { avion_id, ruta_id, horario_id, hora_lleg, asientos },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   res.json(vuelo);
