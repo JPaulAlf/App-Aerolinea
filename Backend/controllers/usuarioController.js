@@ -8,15 +8,15 @@ const config = process.env;
 
 // creación de nuevos usuarios
 module.exports.signup = async (req, res, next) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        res.json({ success: false, msg: 'Please pass username and password.' });
+    const { usuario, pwd } = req.body;
+    if (!usuario || !pwd) {
+        res.json({ success: false, msg: 'Please pass usuario and pwd.' });
     } else {
-        var newUser = new UsuarioModel({ username: username, password: password });
+        var newUser = new UsuarioModel({ usuario: usuario, pwd: pwd });
         // save the user
         newUser.save(function (err) {
             if (err) {
-                return res.json({ success: false, msg: 'Username already exists.' });
+                return res.json({ success: false, msg: 'User already exists.' });
             }
             res.json({ success: true, msg: 'Successful created new user.' });
         });
@@ -26,18 +26,18 @@ module.exports.signup = async (req, res, next) => {
 // logueo de usuarios
 module.exports.signin = async (req, res, next) => {
 
-    const { username, password } = req.body;
+    const { usuario, pwd } = req.body;
 
-    const user = await UsuarioModel.findOne({ username: username }).exec();
+    const user = await UsuarioModel.findOne({ usuario: usuario }).exec();
 
     if (!user) {
         res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
     } else {
         //Si el usuario existe verifica si las contraseñas
-        user.comparePassword(password, user.password, function (err, isMatch) {
+        user.comparepwd(pwd, user.pwd, function (err, isMatch) {
             if (isMatch && !err) {
                 // Si el usuario es correcto y la contraseña coindice se procede a crear el token
-                const token = jwt.sign({ "username": username}, 
+                const token = jwt.sign({ "usuario": usuario}, 
                                          config.SECRETWORDJWT, 
                                          { expiresIn: "2h"}
                                        );
@@ -46,7 +46,7 @@ module.exports.signin = async (req, res, next) => {
 
             } else {
                 //si la contraseña no coincide se procede a indicar el error
-                res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                res.status(401).send({ success: false, msg: 'Authentication failed. Wrong pwd.' });
             }
         });
     }
@@ -89,9 +89,9 @@ module.exports.create = async (req, res, next) => {
    usuario = await UsuarioModel.findByIdAndRemove(req.params.id);
     // si Usuario es null significa que no existe el registro
     if (usuario) {
-      res.json({ result: `Usuario borrado correctamente`, post: usuario });
+      res.json({ result: `User deleted successfully`, post: usuario });
     } else {
-      res.json({ result: "Id de Usuario Invalido Invalid", post: usuario });
+      res.json({ result: "User's id Invalid", post: usuario });
     }
 
     
