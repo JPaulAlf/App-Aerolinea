@@ -8,7 +8,7 @@ module.exports.get = async (req, res, next) => {
   module.exports.getById = async (req, res, next) => {
     const id = req.params.id;
     const avion = await AvionModel.findById(id).exec();
-    res.json(Avion);
+    res.json(avion);
   };
   
   module.exports.create = (req, res, next) => {
