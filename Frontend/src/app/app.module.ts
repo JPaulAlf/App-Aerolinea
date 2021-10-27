@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    UserLayoutComponent
+    UserLayoutComponent,
+    ClientLayoutComponent
   ],
   imports: [
     BrowserModule,
