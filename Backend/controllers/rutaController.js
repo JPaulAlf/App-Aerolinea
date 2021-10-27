@@ -13,7 +13,7 @@ module.exports.getById = async (req, res, next) => {
   res.json(ruta);
 };
 
-module.exports.create = (req, res, next) => {
+module.exports.create = async (req, res, next) =>  {
   var {inicio, destino, horarios, lon_in, lat_in, lon_fin, lat_fin, duracion, precio_trayecto, descuento, estado} = req.body;
 
 
@@ -21,9 +21,9 @@ module.exports.create = (req, res, next) => {
 
 var horarios_id=[];
 
-horarios.forEach(element => {
+await horarios.forEach(element => {
   const { fecha, hora_sal } = element;
-  const horario = await new HorarioModel({ 
+  const horario =  new HorarioModel({ 
     fecha, hora_sal });
   horario.save();
     horarios_id.push(horario._id);
@@ -47,8 +47,8 @@ module.exports.delete = async (req, res, next) => {
 
 var ruta = await RutaModel.findById(req.params.id);
 
-ruta.horarios.forEach(element => {
-  await RutaModel.findByIdAndRemove(element._id);
+await ruta.horarios.forEach(element => {
+   RutaModel.findByIdAndRemove(element._id);
   
 });
    ruta = await RutaModel.findByIdAndRemove(req.params.id);
@@ -68,9 +68,9 @@ module.exports.update = async (req, res, next) => {
 
 
 
-    horarios.forEach(element =>{
+  await   horarios.forEach(element =>{
      const {fecha, hora_sal} = element;
-  const horario = await HorarioModel.findOneAndUpdate(
+  const horario =  HorarioModel.findOneAndUpdate(
         { _id: element._id },
         {fecha, hora_sal}, 
         { new: true } // retornar el registro que hemos modificado con los nuevos valores

@@ -1,4 +1,4 @@
-const AeropuertoModel = require("../models/aeropuerto");
+const AeropuertoModel = require("../models/Aeropuerto");
 
 module.exports.get = async (req, res, next) => {
     const aeropuertos = await AeropuertoModel.find().exec();
