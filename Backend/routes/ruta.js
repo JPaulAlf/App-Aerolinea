@@ -1,17 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const AuthorModel = require("../models/Author");
-const controller = require("../controllers/authorController");
+const auth = require("../middleware/auth");
+const { permit } = require("../middleware/authorization");
+const rutaController = require("../controllers/rutaController");
 
-router.get("/", controller.get);
 
-router.get("/:id", controller.getById);
 
-router.post("/", controller.create);
+router.get("/", rutaController.get);
 
-router.delete("/:id", controller.delete);
+router.get("/:id", rutaController.getById);
+
+router.post("/create/", rutaController.create);
+
+router.delete("/delete/:id", rutaController.delete);
 
 // actualizar registro
-router.put("/:id", controller.update);
+router.put("update/:id", rutaController.update);
 
 module.exports = router;

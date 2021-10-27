@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const Ruta = mongoose.model(
     "Ruta", 
     new mongoose.Schema({ 
-        Inicio: {
+        inicio: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Aeropuerto'
         },
-        Destino:{
+        destino:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Aeropuerto'
         },
-        horario_id: [{
+        horarios: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Horario',
           }],

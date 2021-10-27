@@ -10,7 +10,8 @@ conectarDB();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api', require('./routes/usuario'));
+app.use('/api/usuario', require('./routes/usuario'));
+app.use('/api/vuelo', require('./routes/vuelo'));
 
 
 app.listen(process.env.PORT || 4000,() => {

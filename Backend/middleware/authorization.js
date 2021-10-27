@@ -4,7 +4,7 @@ const permit = (...permittedRoles) => {
   return (request, response, next) => {
     const { user } = request;
     // valida si el usuario ha sido autenticado, y si tiene el rol necesario
-    if (user && permittedRoles.includes(user.role)) {
+    if (user && permittedRoles.includes(user.rol)) {
       next();
     } else {
       // retorna forbidden si el usuario no tiene acceso

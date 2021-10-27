@@ -11,10 +11,10 @@ router.get("/flight/overview-flight", vueloController.get);
 
 router.get("/flight/edit-flight/:id", auth, vueloController.getById);
 
-router.post("/flight/add-flight", auth, permit("admin"), vueloController.create);
+router.post("/flight/add-flight", auth, permit(1), vueloController.create);
 
-router.delete("/flight/edit-flight/:id", auth, permit("admin"), vueloController.delete);
+router.delete("/flight/edit-flight/:id", auth, permit(1), vueloController.delete);
 
-router.put("/flight/edit-flight/:id", auth, permit("admin"), vueloController.update);
+router.put("/flight/edit-flight/:id", auth, permit(1), vueloController.update);
 
 module.exports = router;
