@@ -20,19 +20,17 @@ module.exports.create = async (req, res, next) => {
   const cantAsFil = avion.cant_af;
   let arrAsientos_Con_Filas = [];
   for (let i = 1; i <= cantFilas; i++) {
-    let fila = [];
     for (let j = 1; j <= cantAsFil; j++) {
       let asiento = {
         "fil": i,
         "num": j,
-        "est": 0
+        "est": false
       }
-      fila.push(asiento);
+      arrAsientos_Con_Filas.push(asiento);
     }
-    arrAsientos_Con_Filas.push(fila);
   }
 
-  const vuelo = new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
+  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
   vuelo.save();
   res.json(vuelo);
 };
@@ -48,10 +46,19 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
+  const { avion_id, ruta_id, hora_sal, hora_lleg, num_fila, num_asiento } = req.body;
+
+  const vuelo_Original = await VueloModel.findById(req.params.id).exec();
+  const asientos = vuelo_Original.asientos;
+  for (let i = 0; i < asientos.length; i++) {
+    if (asientos[i].fil === num_fila && asientos[i].num === num_asiento) {
+      asientos[i].est = true;
+    }
+  }
+
   const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { avion_id, ruta_id, hora_sal, hora_lleg },
+    { avion_id, ruta_id, hora_sal, hora_lleg, asientos },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   res.json(vuelo);
