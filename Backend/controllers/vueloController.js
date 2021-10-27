@@ -48,10 +48,10 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { avion_id, ruta_id, hora_sal, hora_lleg } = req.body;
+  const { avion_id, ruta_id, hora_sal, hora_lleg, asientos } = req.body;
   const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { avion_id, ruta_id, hora_sal, hora_lleg },
+    { avion_id, ruta_id, hora_sal, hora_lleg, asientos },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   res.json(vuelo);
