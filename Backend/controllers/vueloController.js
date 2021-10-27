@@ -7,7 +7,7 @@ module.exports.get = async (req, res, next) => {
 
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
-  const vuelo = await VueloModel.findOne({ _id: id }).exec();
+  const vuelo = await VueloModel.findOne({ _id: id }).populate("Vuelo", "avion_id ruta_id hora_sal hora_lleg").exec();
   res.json(vuelo);
 };
 
