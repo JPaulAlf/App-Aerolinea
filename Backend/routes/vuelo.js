@@ -7,14 +7,14 @@ const auth = require("../middleware/auth");
 const { permit } = require("../middleware/authorization");
 
 //Definición de rutas para cada uno de los verbos para los post
-router.get("/overview-flight", vueloController.get);
+router.get("/get-flight", vueloController.get);
 
-router.get("/edit-flight/:id", auth, vueloController.getById);
+router.get("/getBy-flight/:id", auth, vueloController.getById);
 
-router.post("/add-flight", auth, permit(1), vueloController.create);
+router.post("/add-flight",auth, permit(1),  vueloController.create);
 
-router.delete("/edit-flight/:id", auth, permit(1), vueloController.delete);
+router.delete("/delete-flight/:id",auth, permit(1), vueloController.delete);
 
-router.put("/edit-flight/:id", auth, permit(1), vueloController.update);
+router.put("/update-flight/:id",auth, permit(1), vueloController.update);
 
 module.exports = router;
