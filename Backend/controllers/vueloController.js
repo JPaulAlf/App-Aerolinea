@@ -32,7 +32,7 @@ module.exports.create = async (req, res, next) => {
     arrAsientos_Con_Filas.push(fila);
   }
 
-  const vuelo = new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
+  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, hora_sal: hora_sal, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
   vuelo.save();
   res.json(vuelo);
 };

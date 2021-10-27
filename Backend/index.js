@@ -10,11 +10,11 @@ conectarDB();
 app.use(express.json());
 app.use(cors());
 
+app.use('/api/aeropuerto', require('./routes/aeropuerto'));
+app.use('/api/avion', require('./routes/avion'));
+app.use('/api/ruta', require('./routes/ruta'));
 app.use('/api/usuario', require('./routes/usuario'));
 app.use('/api/vuelo', require('./routes/vuelo'));
-app.use('/api/ruta', require('./routes/ruta'));
-app.use('/api/avioncito', require('./routes/avion'));
-app.use('/api/aeropuerto', require('./routes/aeropuerto'));
 
 app.listen(process.env.PORT || 4000,() => {
 
