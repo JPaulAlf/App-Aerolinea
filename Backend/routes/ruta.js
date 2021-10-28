@@ -15,6 +15,6 @@ router.post("/create/", rutaController.create);
 router.delete("/delete/:id", rutaController.delete);
 
 // actualizar registro
-router.put("update/:id", rutaController.update);
+router.put("/update/:id", rutaController.update);
 
 module.exports = router;

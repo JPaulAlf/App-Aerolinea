@@ -15,6 +15,6 @@ router.post("/create/", avionController.create);
 router.delete("/delete/:id", avionController.delete);
 
 
-router.put("update/:id", avionController.update);
+router.put("/update/:id", avionController.update);
 
 module.exports = router;
