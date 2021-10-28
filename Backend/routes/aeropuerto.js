@@ -8,7 +8,7 @@ const aeropuertoController = require("../controllers/aeropuertoController");
 
 router.get("/get", aeropuertoController.get);
 
-router.get("/:id", aeropuertoController.getById);
+router.get("get/:id", aeropuertoController.getById);
 
 router.post("/create/", aeropuertoController.create);
 
