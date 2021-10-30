@@ -5,7 +5,7 @@ const Vuelo = mongoose.model(
     new mongoose.Schema({ 
         avion_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Avion',
+            ref: 'Aviones',
           },
           ruta_id: {
             type: mongoose.Schema.Types.ObjectId,
