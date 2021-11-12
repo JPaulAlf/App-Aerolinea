@@ -122,14 +122,7 @@ module.exports.create = async (req, res, next) => {
   };
 
   module.exports.updateState = async (req, res, next) => {
-
-   
-
     const {estado } = req.body;
-  
-    
-      
-
     const user = await UsuarioModel.findOneAndUpdate(
       { _id: req.params.id },
       {estado}, // ==> {title: title, body: body}

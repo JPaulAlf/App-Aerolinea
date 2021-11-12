@@ -79,3 +79,14 @@ module.exports.update = async (req, res, next) => {
     console.log(req.body.horarios_id)
     res.json(ruta);
 };
+
+
+module.exports.updateState = async (req, res, next) => {
+  const {estado } = req.body;
+  const user = await RutaModel.findOneAndUpdate(
+    { _id: req.params.id },
+    {estado}, // ==> {title: title, body: body}
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(user);
+};
