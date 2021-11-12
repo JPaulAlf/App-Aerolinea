@@ -49,53 +49,53 @@ module.exports.delete = async (req, res, next) => {
   }
 };
 
-module.exports.checkIn = async (req, res, next) => {
-  const { vuelo_id, detalle, asiento } = req.body; //  Fila-Asiento ej: 1-6
-  const reserva = await ReservaModel.findOneAndUpdate(
-    { _id: req.params.id },
-    { proceso: 2, detalle: detalle, num_asiento: asiento },
-    { new: true } // retornar el registro que hemos modificado con los nuevos valores
-  );
-  var fila, asien;
+// module.exports.checkIn = async (req, res, next) => {
+//   const { vuelo_id, detalle, asiento } = req.body; //  Fila-Asiento ej: 1-6
+//   const reserva = await ReservaModel.findOneAndUpdate(
+//     { _id: req.params.id },
+//     { proceso: 2, detalle: detalle, num_asiento: asiento },
+//     { new: true } // retornar el registro que hemos modificado con los nuevos valores
+//   );
+//   var fila, asien;
 
-  const array = asiento.split("-");
-  fila = array[0];
-  asien = array[1];
+//   const array = asiento.split("-");
+//   fila = array[0];
+//   asien = array[1];
 
-  const vuelo_Original = await VueloModel.findById(vuelo_id).exec();
-  const asientos = vuelo_Original.asientos;
-  for (let i = 0; i < asientos.length; i++) {
-    if (asientos[i].fil === fila && asientos[i].num === asien) {
-      asientos[i].est = true;
-    }
-  }
+//   const vuelo_Original = await VueloModel.findById(vuelo_id).exec();
+//   const asientos = vuelo_Original.asientos;
+//   for (let i = 0; i < asientos.length; i++) {
+//     if (asientos[i].fil === fila && asientos[i].num === asien) {
+//       asientos[i].est = true;
+//     }
+//   }
 
-  const vuelo = await VueloModel.findOneAndUpdate(
-    { _id: vuelo_id },
-    {
-      asientos: asientos,
-    },
-    { new: true } // retornar el registro que hemos modificado con los nuevos valores
-  );
+//   const vuelo = await VueloModel.findOneAndUpdate(
+//     { _id: vuelo_id },
+//     {
+//       asientos: asientos,
+//     },
+//     { new: true } // retornar el registro que hemos modificado con los nuevos valores
+//   );
 
-  res.json(vuelo);
+//   res.json(vuelo);
 
-  res.json(reserva);
-};
+//   res.json(reserva);
+// };
 
-module.exports.finalizar = async (req, res, next) => {
-const {
-    vuelo_id
-  } = req.body;
+// module.exports.finalizar = async (req, res, next) => {
+// const {
+//     vuelo_id
+//   } = req.body;
 
 
-  const reserva = await ReservaModel.updateMany(
-    { vuelo_id: {$eq : vuelo_id}},
-     {$set: { "proceso" : 3 } }
-    );
+//   const reserva = await ReservaModel.updateMany(
+//     { vuelo_id: {$eq : vuelo_id}},
+//      {$set: { "proceso" : 3 } }
+//     );
 
-  res.json(reserva);
-};
+//   res.json(reserva);
+// };
 
 
 module.exports.update = async (req, res, next) => {
