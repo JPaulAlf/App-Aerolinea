@@ -7,6 +7,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
+//referencias nuevas:
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +22,13 @@ import { ClientLayoutComponent } from './layouts/client-layout/client-layout.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-   
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
 
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
