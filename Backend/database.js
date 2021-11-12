@@ -1,5 +1,6 @@
 //mongodb+srv://user:123456@cruddb.hfs55.mongodb.net/db_sunrise_airlines?retryWrites=true&w=majority
 const mongoose = require('mongoose');
+const chalk = require("chalk");
 
 const conectarDB = async () => {
 
@@ -12,8 +13,7 @@ const conectarDB = async () => {
 
 
         });
-        console.log('DB connected');
-
+        console.log(`${chalk.green("✓")} DB connected`);
 
     } catch (error) {
         console.error(error);

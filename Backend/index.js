@@ -1,6 +1,7 @@
 const express = require('express');
 const conectarDB = require('./database');
 const app = express();
+const chalk = require("chalk");
 const cors = require("cors");
 
 //connect to DB 
@@ -17,9 +18,12 @@ app.use('/api/usuario', require('./routes/usuario'));
 app.use('/api/vuelo', require('./routes/vuelo'));
 app.use('/api/reserva', require('./routes/reserva'));
 
-app.listen(process.env.PORT || 4000,() => {
-
-
-    console.log('The server is listening')
-
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+    console.log(
+        `${chalk.green("✓")} App is running at ${chalk.bgGreen(
+            `http://localhost:${port}`
+        )}`
+    );
+    console.log("  Press CTRL-C to stop\n");
 });
