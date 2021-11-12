@@ -21,6 +21,7 @@ router.post('/create-client/', userController.create);
 router.get('/get/', userController.get);
 router.put('/update-profile/:id', userController.update);
 router.put('/update-client/:id', userController.update);
+router.put('/update-client-state/:id', userController.updateState);
 router.get('/get/:id', userController.getById);
 router.delete('/delete-profile/:id', userController.delete);
 router.delete('/delete-client/:id', userController.delete);

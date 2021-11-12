@@ -120,3 +120,20 @@ module.exports.create = async (req, res, next) => {
     );
     res.json(user);
   };
+
+  module.exports.updateState = async (req, res, next) => {
+
+   
+
+    const {estado } = req.body;
+  
+    
+      
+
+    const user = await UsuarioModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {estado}, // ==> {title: title, body: body}
+      { new: true } // retornar el registro que hemos modificado con los nuevos valores
+    );
+    res.json(user);
+  };
