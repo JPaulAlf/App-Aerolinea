@@ -12,11 +12,11 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+export class VueloService {
   constructor(private http: HttpClient) {}
 
   get(): Observable<any> {
-    return this.http.get(`${BLOG_API_ENDPOINT}/get-flight`, httpOptions);
+    return this.http.get(`${BLOG_API_ENDPOINT}/get-flight/`, httpOptions);
   }
 
   getById(id: string): Observable<any> {
@@ -24,7 +24,7 @@ export class PostService {
   }
 
   create(vuelo: any): Observable<any> {
-    return this.http.post(`${BLOG_API_ENDPOINT}/add-flight`, vuelo);
+    return this.http.post(`${BLOG_API_ENDPOINT}/add-flight/`, vuelo);
   }
 
   delete(id: string): Observable<any> {

@@ -1,9 +1,22 @@
 const VueloModel = require("../models/Vuelo");
 const AvionModel = require("../models/Avion");
+const AeropuertoModel = require("../models/Aeropuerto");
 
 module.exports.get = async (req, res, next) => {
   const vuelos = await VueloModel.find().populate("avion_id ruta_id horario_id").exec();
-  res.json(vuelos);
+
+  const vuelosAuxiliar=[];
+  for (const vuelo of vuelos) {
+    const inicio = await AeropuertoModel.findById(vuelo.ruta_id.inicio).exec();
+    const destino = await AeropuertoModel.findById(vuelo.ruta_id.destino).exec();
+
+    vuelo.ruta_id.inicio = inicio;
+    vuelo.ruta_id.destino = destino;
+
+    vuelosAuxiliar.push(vuelo);
+  }
+
+  res.json(vuelosAuxiliar);
 };
 
 module.exports.getById = async (req, res, next) => {
@@ -32,7 +45,7 @@ module.exports.create = async (req, res, next) => {
     }
   }
 
-  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, horario_id: horario_id, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas, estado:estado });
+  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, horario_id: horario_id, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas, estado: estado });
   vuelo.save();
   res.json(vuelo);
 };
@@ -52,8 +65,8 @@ module.exports.updateState = async (req, res, next) => {
 
   const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { estado},
-    { new: true } 
+    { estado },
+    { new: true }
   );
   res.json(vuelo);
 };
@@ -71,8 +84,8 @@ module.exports.updateSeat = async (req, res, next) => {
 
   const vuelo = await VueloModel.findOneAndUpdate(
     { _id: req.params.id },
-    { asientos},
-    { new: true } 
+    { asientos },
+    { new: true }
   );
   res.json(vuelo);
 };

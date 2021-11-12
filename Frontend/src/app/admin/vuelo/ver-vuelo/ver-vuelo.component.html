@@ -1,1 +1,47 @@
-<p>ver-vuelo works!</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xl-12 ">
+            <!--offset leaves two columns to the left-->
+            <div class="card">
+                <div style="overflow:auto;" class="card-body text-left">
+                    <h1 class="display-6" style="margin-top:25px; text-align:center">
+                        Flights Overview
+                    </h1>
+                    <table class="table table-striped mt-5">
+                        <!--routerlink, used to render another component-->
+                        <thead>
+                            <tr>
+                                <th style="text-align:center" scope="col">Airplane</th>
+                                <th style="text-align:center" scope="col">From</th>
+                                <th style="text-align:center" scope="col">To</th>
+                                <th style="text-align:center" scope="col">Schedule</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let vuelo of vuelos">
+                                <td style="text-align:center">{{vuelo.horario_id.fecha}}</td>
+                                <td style="text-align:center">{{vuelo.ruta_id.inicio.nombre}}</td>
+                                <td style="text-align:center">{{vuelo.ruta_id.destino.nombre}}</td>
+                                <td style="text-align:center">
+                                    <a href="#">
+                                        <i class="fs-5 fas fa-edit text-primary"></i>
+                                    </a>
+                                    <a (click)="delete(vuelo._id)">
+                                        <i class="fs-5 fas fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
