@@ -17,6 +17,8 @@ router.delete("/delete-flight/:id",auth, permit(1), vueloController.delete);
 
 router.put("/update-flight-state/:id", vueloController.updateState);
 
+router.put("/update-flight-seat/:id", vueloController.updateSeat);
+
 router.put("/update-flight/:id",auth, permit(1), vueloController.update);
 
 

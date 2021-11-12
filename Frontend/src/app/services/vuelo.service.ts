@@ -35,4 +35,12 @@ export class PostService {
     return this.http.put(`${BLOG_API_ENDPOINT}/update-flight/${id}`,vuelo);
   }
 
+  editState(id: string, vuelo: any): Observable<any> {
+    return this.http.put(`${BLOG_API_ENDPOINT}/update-flight-state/${id}`,vuelo);
+  }
+
+  editSeat(id: string, vuelo: any): Observable<any> {
+    return this.http.put(`${BLOG_API_ENDPOINT}/update-flight-seat/${id}`,vuelo);
+  }
+
 }

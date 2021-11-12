@@ -58,6 +58,24 @@ module.exports.updateState = async (req, res, next) => {
   res.json(vuelo);
 };
 
+module.exports.updateSeat = async (req, res, next) => {
+  const { num_fila, num_asiento } = req.body;
+
+  const vuelo_Original = await VueloModel.findById(req.params.id).exec();
+  const asientos = vuelo_Original.asientos;
+  for (let i = 0; i < asientos.length; i++) {
+    if (asientos[i].fil === num_fila && asientos[i].num === num_asiento) {
+      asientos[i].est = true;
+    }
+  }
+
+  const vuelo = await VueloModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { asientos},
+    { new: true } 
+  );
+  res.json(vuelo);
+};
 
 module.exports.update = async (req, res, next) => {
   const { avion_id, ruta_id, horario_id, hora_lleg, num_fila, num_asiento } = req.body;
