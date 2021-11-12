@@ -11,10 +11,13 @@ router.get("/get-flight", vueloController.get);
 
 router.get("/getBy-flight/:id", auth, vueloController.getById);
 
-router.post("/add-flight",auth, permit(1),  vueloController.create);
+router.post("/add-flight",  vueloController.create);
 
 router.delete("/delete-flight/:id",auth, permit(1), vueloController.delete);
 
+router.put("/update-flight-state/:id", vueloController.updateState);
+
 router.put("/update-flight/:id",auth, permit(1), vueloController.update);
+
 
 module.exports = router;

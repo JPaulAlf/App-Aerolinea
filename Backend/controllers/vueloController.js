@@ -15,6 +15,8 @@ module.exports.getById = async (req, res, next) => {
 module.exports.create = async (req, res, next) => {
   const { avion_id, ruta_id, horario_id, hora_lleg } = req.body;
 
+  const estado = 1;
+
   const avion = await AvionModel.findById(avion_id).exec();
   const cantFilas = avion.cant_filas;
   const cantAsFil = avion.cant_af;
@@ -30,7 +32,7 @@ module.exports.create = async (req, res, next) => {
     }
   }
 
-  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, horario_id: horario_id, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas });
+  const vuelo = await new VueloModel({ avion_id: avion_id, ruta_id: ruta_id, horario_id: horario_id, hora_lleg: hora_lleg, asientos: arrAsientos_Con_Filas, estado:estado });
   vuelo.save();
   res.json(vuelo);
 };
@@ -44,6 +46,18 @@ module.exports.delete = async (req, res, next) => {
     res.json({ result: "Invalid Id", vuelo });
   }
 };
+
+module.exports.updateState = async (req, res, next) => {
+  const { estado } = req.body;
+
+  const vuelo = await VueloModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { estado},
+    { new: true } 
+  );
+  res.json(vuelo);
+};
+
 
 module.exports.update = async (req, res, next) => {
   const { avion_id, ruta_id, horario_id, hora_lleg, num_fila, num_asiento } = req.body;
