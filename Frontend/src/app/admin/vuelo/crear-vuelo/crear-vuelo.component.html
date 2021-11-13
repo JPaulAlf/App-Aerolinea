@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Airplane Selected</label>
-                                <input type="text" class="form-control" placeholder=" Airplane not selected!"
+                                <input type="text" class="form-control" placeholder={{avionSeleccionado}}
                                     readonly />
                             </div>
                         </div>
@@ -72,55 +72,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <tr *ngFor="let avionItem of aviones">
+                                        <td style="text-align:center">{{avionItem.modelo}}</td>
+                                        <td style="text-align:center">{{avionItem.cant_pasa}}</td>
+                                        <td style="text-align:center">
+                                            <a (click)="selectAvion(avionItem._id)">
+                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td style="text-align:center">model 1</td>
                                         <td style="text-align:center">60</td>
                                         <td style="text-align:center">
-                                            <a href="#">
+                                            <a >
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">model 1</td>
-                                        <td style="text-align:center">60</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">model 1</td>
-                                        <td style="text-align:center">60</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">model 1</td>
-                                        <td style="text-align:center">60</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
                                 </tbody>
                             </table>
 
@@ -141,7 +112,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Route Selected</label>
-                                <input type="text" class="form-control" placeholder=" Route not selected!" readonly />
+                                <input type="text" class="form-control" placeholder={{rutaSeleccionado}} readonly />
                             </div>
                         </div>
                     </div>
@@ -149,7 +120,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Schedule Selected</label>
-                                <input type="text" class="form-control" placeholder=" Schedule not selected!"
+                                <input type="text" class="form-control" placeholder={{horarioSeleccionado}}
                                     readonly />
                             </div>
                         </div>
@@ -173,49 +144,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <td style="text-align:center">New York, USA</td>
-                                        <td style="text-align:center">San jose, CRC</td>
+                                    <tr *ngFor="let rutaItem of rutas">
+                                        <td style="text-align:center">{{rutaItem.inicio.nombre}}</td>
+                                        <td style="text-align:center">{{rutaItem.destino.nombre}}</td>
                                         <td style="text-align:center">
-                                            <a href="#">
+                                            <a (click)="selectRuta(rutaItem._id)">
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">Los Angeles, USA</td>
-                                        <td style="text-align:center">Miami, USA</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
 
                                     <tr>
                                         <td style="text-align:center">New York, USA</td>
                                         <td style="text-align:center">San jose, CRC</td>
                                         <td style="text-align:center">
-                                            <a href="#">
+                                            <a >
                                                 <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">Los Angeles, USA</td>
-                                        <td style="text-align:center">Miami, USA</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fas fa-check-circle"></i>
                                             </a>
                                         </td>
                                         <td></td>
@@ -246,39 +190,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td style="text-align:center">20/03/21</td>
-                                        <td style="text-align:center">14:20:56</td>
+                                    <tr *ngFor="let horarioItem of horarios">
+                                        <td style="text-align:center">{{horarioItem.fecha}}</td>
+                                        <td style="text-align:center">{{horarioItem.hora_sal}}</td>
                                         <td style="text-align:center">
-                                            <a href="#">
+                                            <a (click)="selectHorario(horarioItem._id)">
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align:center">20/03/21</td>
-                                        <td style="text-align:center">14:20:56</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center">20/03/21</td>
-                                        <td style="text-align:center">14:20:56</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+
                                     <tr>
                                         <td style="text-align:center">20/03/21</td>
                                         <td style="text-align:center">14:20:56</td>
