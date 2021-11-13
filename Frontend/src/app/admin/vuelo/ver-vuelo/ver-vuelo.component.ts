@@ -7,13 +7,45 @@ import { VueloService } from '../../../services/vuelo.service';
   styleUrls: ['./ver-vuelo.component.css'],
 })
 export class VerVueloComponent implements OnInit {
-  constructor(private vueloService: VueloService) {}
+  constructor(private vueloService: VueloService) { }
   vuelos: any = [];
 
   ngOnInit(): void {
     this.vueloService.get().subscribe((vuelo) => {
-      this.vuelos = vuelo;
+      for (const item of vuelo) {
+        var date = new Date(item.horario_id.fecha);
+        item.horario_id.fecha = date.toLocaleString();
+      }
+      var vuelosAuxiliares = [];
+      for (const item of vuelo) {
+        if (item.estado == 1) {
+          vuelosAuxiliares.push(item);
+        }
+      }
+
+      this.vuelos = vuelosAuxiliares;
     });
+  }
+
+  updateState(id: string): void {
+    if (confirm('Are you sure about delete this flight?')) {
+      var desactivo = {"estado":0};
+      this.vueloService.editState(id, desactivo).subscribe((res: any) => {
+        this.vueloService.get().subscribe((vuelo) => {
+          for (const item of vuelo) {
+            var date = new Date(item.horario_id.fecha);
+            item.horario_id.fecha = date.toLocaleString();
+          }
+          var vuelosAuxiliares = [];
+          for (const item of vuelo) {
+            if (item.estado == 1) {
+              vuelosAuxiliares.push(item);
+            }
+          }
+          this.vuelos = vuelosAuxiliares;
+        });
+      });
+    }
   }
 
   delete(id: string): void {
@@ -23,4 +55,5 @@ export class VerVueloComponent implements OnInit {
       });
     }
   }
+
 }
