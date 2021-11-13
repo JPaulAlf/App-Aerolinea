@@ -11,10 +11,10 @@
                         <!--routerlink, used to render another component-->
                         <thead>
                             <tr>
-                                <th style="text-align:center" scope="col">Airplane</th>
+                                <th style="text-align:center" scope="col">Schedule</th>
                                 <th style="text-align:center" scope="col">From</th>
                                 <th style="text-align:center" scope="col">To</th>
-                                <th style="text-align:center" scope="col">Schedule</th>
+                                <th style="text-align:center" scope="col">Remove</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
@@ -26,9 +26,6 @@
                                 <td style="text-align:center">{{vuelo.ruta_id.inicio.nombre}}</td>
                                 <td style="text-align:center">{{vuelo.ruta_id.destino.nombre}}</td>
                                 <td style="text-align:center">
-                                    <a href="#">
-                                        <i class="fs-5 fas fa-edit text-primary"></i>
-                                    </a>
                                     <a (click)="updateState(vuelo._id)">
                                         <i class="fs-5 fas fa-trash text-danger"></i>
                                     </a>

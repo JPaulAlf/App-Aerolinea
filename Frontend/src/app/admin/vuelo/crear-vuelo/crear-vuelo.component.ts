@@ -9,6 +9,10 @@ export class CrearVueloComponent implements OnInit {
 
   constructor() { }
 
+  listaAviones_Marca(String marca){
+    
+  }
+
   ngOnInit(): void {
   }
 
