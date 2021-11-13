@@ -83,6 +83,9 @@ export class CrearVueloComponent implements OnInit {
   //variables a la DB
   selectAvion(id: string) {
     this._idAvion = id;
+    this.avionService.getById(id).subscribe((avion) => {
+      this.avionSeleccionado= avion.marca+" "+avion.modelo;
+    });
   }
 
   selectRuta(id: string) {
