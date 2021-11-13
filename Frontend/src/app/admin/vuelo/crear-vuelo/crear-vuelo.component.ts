@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable, Component, OnInit } from '@angular/core';
 import { VueloService } from '../../../services/vuelo.service';
 import { RutaService } from 'src/app/services/ruta.service';
 import { AvionService } from 'src/app/services/avion.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-crear-vuelo',
   templateUrl: './crear-vuelo.component.html',
@@ -84,7 +88,7 @@ export class CrearVueloComponent implements OnInit {
   selectAvion(id: string) {
     this._idAvion = id;
     this.avionService.getById(id).subscribe((avion) => {
-      this.avionSeleccionado= avion.marca+" "+avion.modelo;
+      this.avionSeleccionado = avion.marca + ' ' + avion.modelo;
     });
   }
 
@@ -111,4 +115,32 @@ export class CrearVueloComponent implements OnInit {
       }
     });
   }
+
+  ////////////////////// SELECT ITEM //////////////////////////////
+  mySelect = '1';
+  selectedValue: any;
+  MarcasAviones = [
+    {
+      id: 1,
+      name: 'Airbus',
+    },
+    {
+      id: 2,
+      name: 'Boeing',
+    },
+  ];
+  getDropDownText(id: any, object: any) {
+    const selObj = _.filter(object, function (o) {
+      return _.includes(id, o.id);
+    });
+    return selObj;
+  }
+  selectChange(event:any) {
+    this.mySelect=event.target.value;
+    this.selectedValue = this.getDropDownText(this.mySelect, this.MarcasAviones)[0].name;
+    this.listaAviones_Marca(this.selectedValue);
+  }
+
+
+
 }

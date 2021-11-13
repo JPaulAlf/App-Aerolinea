@@ -35,10 +35,12 @@
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Brand of airplane</label>
-                            <select class="form-select" aria-label="Default select example" required>
-                                <option selected value="">None selected</option>
-                                <option value="1">Airbus</option>
-                                <option value="2">Boeing</option>
+                            <select name="my-select"  (change)="selectChange($event)"
+                                class="form-select" aria-label="Default select example" required>
+                                <option selected disabled value="">None selected</option>
+                                <option [value]="item.id" *ngFor="let item of MarcasAviones">
+                                    {{item.name}}
+                                </option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select one brand, to see the airplanes below
@@ -76,15 +78,6 @@
                                         <td style="text-align:center">{{avionItem.cant_pasa}}</td>
                                         <td style="text-align:center">
                                             <a (click)="selectAvion(avionItem._id)">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center">model 1</td>
-                                        <td style="text-align:center">60</td>
-                                        <td style="text-align:center">
-                                            <a>
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
