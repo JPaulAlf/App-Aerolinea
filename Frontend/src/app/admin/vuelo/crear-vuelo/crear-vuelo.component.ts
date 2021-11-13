@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VueloService } from '../../../services/vuelo.service';
 import { RutaService } from 'src/app/services/ruta.service';
+import { AvionService } from 'src/app/services/avion.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CrearVueloComponent implements OnInit {
   constructor(
     private vueloService: VueloService,
-    private rutaService: RutaService
+    private rutaService: RutaService,
+    private avionService: AvionService
   ) {}
 
   //Arreglos que llenan las tablas, segun la seleccion
@@ -36,11 +38,31 @@ export class CrearVueloComponent implements OnInit {
   }
 
   //Boton de creacion final del VUELO
-  submitForm() {}
+  submitForm() {
+    if (
+      this.avionSeleccionado != 'Airplane not selected!' &&
+      this.rutaSeleccionado != 'Route not selected!' &&
+      this.horarioSeleccionado != 'Schedule not selected!'
+    ) {
+      //Aca va el metodo de guardar en la base de datos
+    } else {
+      alert('Please check if you selected all the information needed!');
+    }
+  }
 
   //Contenido de las tablas segun seleccion
   // Llaman al GET y se filtran aca con un IF
-  listaAviones_Marca(marca: string) {}
+  listaAviones_Marca(marca: string) {
+    var avionMarca: any = [];
+    this.avionService.get().subscribe((avion) => {
+      for (const item of avion) {
+        if (item.marca == marca) {
+          avionMarca.push(item);
+        }
+      }
+      this.aviones = avionMarca;
+    });
+  }
   listaRutas() {
     this.rutaService.get().subscribe((ruta) => {
       this.rutas = ruta;
