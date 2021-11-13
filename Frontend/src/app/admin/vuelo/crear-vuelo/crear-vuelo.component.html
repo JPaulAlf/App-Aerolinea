@@ -49,8 +49,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Airplane Selected</label>
-                                <input type="text" class="form-control" placeholder={{avionSeleccionado}}
-                                    readonly />
+                                <input type="text" class="form-control" placeholder={{avionSeleccionado}} readonly />
                             </div>
                         </div>
                     </div>
@@ -85,7 +84,7 @@
                                         <td style="text-align:center">model 1</td>
                                         <td style="text-align:center">60</td>
                                         <td style="text-align:center">
-                                            <a >
+                                            <a>
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
@@ -120,8 +119,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Schedule Selected</label>
-                                <input type="text" class="form-control" placeholder={{horarioSeleccionado}}
-                                    readonly />
+                                <input type="text" class="form-control" placeholder={{horarioSeleccionado}} readonly />
                             </div>
                         </div>
                     </div>
@@ -148,24 +146,14 @@
                                         <td style="text-align:center">{{rutaItem.inicio.nombre}}</td>
                                         <td style="text-align:center">{{rutaItem.destino.nombre}}</td>
                                         <td style="text-align:center">
-                                            <a (click)="selectRuta(rutaItem._id)">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">New York, USA</td>
-                                        <td style="text-align:center">San jose, CRC</td>
-                                        <td style="text-align:center">
-                                            <a >
-                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            <a>
+                                                <i (click)="selectRuta(rutaItem._id)"
+                                                    class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-
                                 </tbody>
                             </table>
 
@@ -194,45 +182,20 @@
                                         <td style="text-align:center">{{horarioItem.fecha}}</td>
                                         <td style="text-align:center">{{horarioItem.hora_sal}}</td>
                                         <td style="text-align:center">
-                                            <a (click)="selectHorario(horarioItem._id)">
-                                                <i class="fs-5 fas fa-check-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="text-align:center">20/03/21</td>
-                                        <td style="text-align:center">14:20:56</td>
-                                        <td style="text-align:center">
-                                            <a href="#">
-                                                <i class="fs-5 fas fa-check-circle"></i>
+                                            <a>
+                                                <i (click)="selectHorario(horarioItem._id)"
+                                                    class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="col-sm-12 col-lg-12 mb-3">
-                    <div class="form-group">
-                        <label for="fabri" class="form-label">Schedules for the route</label>
-                        <select class="form-select" aria-label="Default select example" required>
-                            <option selected value="">None selected</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select one route, to see the schedules available.
-                        </div>
-                    </div>
-                </div> -->
 
             </div> <!-- fin del TAB 2 -->
 

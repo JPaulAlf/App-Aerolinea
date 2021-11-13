@@ -25,4 +25,9 @@
       border-width: 2px!important;
   }
 
-  
+  i{
+    color:green;
+  }
+  i:hover{
+    cursor: pointer;
+  }
