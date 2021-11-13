@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VueloService } from '../../../services/vuelo.service';
 
 @Component({
   selector: 'app-crear-vuelo',
@@ -9,8 +10,9 @@ export class CrearVueloComponent implements OnInit {
 
   constructor() { }
 
-  listaAviones_Marca(String marca){
-    
+
+  listaAviones_Marca (marca:any){
+
   }
 
   ngOnInit(): void {
