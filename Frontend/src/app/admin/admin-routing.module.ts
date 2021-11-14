@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'flight/overview-flight', component: VerVueloComponent },
 
   { path: 'route/add-route', component: CrearRutaComponent },
-  { path: 'route/edit-route', component: EditarRutaComponent },
+  { path: 'route/edit-route/:id', component: EditarRutaComponent },
   { path: 'route/overview-route', component: VerRutaComponent },
 
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'airport/overview-airport', component: VerAeropuertoComponent },
 
   { path: 'customer/add-customer', component: CrearClienteComponent },
-  { path: 'customer/edit-customer', component: EditarClienteComponent },
+  { path: 'customer/edit-customer/:id', component: EditarClienteComponent },
   { path: 'customer/overview-customer', component: VerClienteComponent },
 ];
 @NgModule({
