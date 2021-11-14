@@ -15,7 +15,8 @@ export class VerVueloComponent implements OnInit {
     this.vueloService.get().subscribe((vuelo) => {
       for (const item of vuelo) {
         var date = new Date(item.horario_id.fecha);
-        item.horario_id.fecha = date.toLocaleString();
+        //Se da formato a la fecha y se le concatena la hora de salida, para llamar solo 1 campo en el HTML
+        item.horario_id.fecha = date.toLocaleDateString() +" "+item.horario_id.hora_sal;
       }
       var vuelosAuxiliares = [];
       for (const item of vuelo) {

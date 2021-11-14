@@ -5,6 +5,7 @@ import { AvionService } from 'src/app/services/avion.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,27 @@ export class CrearVueloComponent implements OnInit {
       this.rutaSeleccionado != 'Route not selected!' &&
       this.horarioSeleccionado != 'Schedule not selected!'
     ) {
+      var horaLleg: any = '';
+      this.rutaService.getById(this._idRuta).subscribe((ruta) => {
+        var duracion: any = '';
+        var horaSal: any = '';
+        duracion = ruta.duracion;
+        for (const item of ruta.horarios) {
+          if (item._id == this._idHorario) {
+            //obtener la hora de salida.
+            horaSal = item.hora_sal;
+          }
+        }
+        //LLega vacio cuando sale del ciclo
+        this.toastr.warning('Tiempo duracion', 'Attention>>>'+horaSal);
+        horaSal="22:15" //Para hacer pruebas
+        var h = Math.floor(duracion / 60);
+        var m = duracion % 60;
+        horaSal=horaSal+":00"
+        var tiempo= moment(horaSal,"HH:mm:ss").add(h, "hours").add(m,"minutes").format("HH:mm:ss")
+        this.toastr.warning('Resultado con tiempo extra', 'Attention>>>'+tiempo);
+      });
+
       //Aca va el metodo de guardar en la base de datos
       var valores = {
         "avion_id": this._idAvion,
@@ -57,6 +79,7 @@ export class CrearVueloComponent implements OnInit {
         "horario_id": this._idHorario,
         "hora_lleg": 20,
       };
+
       this.vueloService.create(valores).subscribe((data) => {
         this.avionSeleccionado = 'Airplane not selected!';
         this.rutaSeleccionado = 'Route not selected!';
@@ -66,10 +89,7 @@ export class CrearVueloComponent implements OnInit {
         this._idAvion = '';
         this._idRuta = '';
         this._idHorario = '';
-        this.toastr.success(
-          'The flight was successfully saved',
-          'Attention'
-        );
+        this.toastr.success('The flight was successfully saved', 'Attention');
       });
     } else {
       this.toastr.error(

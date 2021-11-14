@@ -20,6 +20,7 @@
     "@angular/router": "~12.2.0",
     "@googlemaps/js-api-loader": "^1.12.6",
     "chart.js": "^2.9.4",
+    "moment": "^2.29.1",
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.2.0",
     "rxjs": "~6.6.0",
