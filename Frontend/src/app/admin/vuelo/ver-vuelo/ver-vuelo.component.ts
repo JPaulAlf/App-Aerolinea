@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VueloService } from '../../../services/vuelo.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ver-vuelo',
@@ -7,7 +8,7 @@ import { VueloService } from '../../../services/vuelo.service';
   styleUrls: ['./ver-vuelo.component.css'],
 })
 export class VerVueloComponent implements OnInit {
-  constructor(private vueloService: VueloService) {}
+  constructor(private vueloService: VueloService,private toastr:ToastrService) {}
   vuelos: any = [];
 
   listarVuelos() {
@@ -36,6 +37,7 @@ export class VerVueloComponent implements OnInit {
       var desactivo = { "estado": 0 };
       this.vueloService.editState(id, desactivo).subscribe((res: any) => {
         this.listarVuelos();
+        this.toastr.error('The state of the flight was changed','Flight deleted');
       });
     }
   }
