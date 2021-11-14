@@ -49,6 +49,13 @@ export class CrearVueloComponent implements OnInit {
       this.horarioSeleccionado != 'Schedule not selected!'
     ) {
       //Aca va el metodo de guardar en la base de datos
+      var valores= { 
+        "avion_id":this._idAvion, 
+        "ruta_id":this._idRuta, 
+        "horario_id":this._idHorario, 
+        "hora_lleg":20
+      }
+      this.vueloService.create(valores);
     } else {
       alert('Please check if you selected all the information needed!');
     }
@@ -111,6 +118,8 @@ export class CrearVueloComponent implements OnInit {
       for (const item of ruta.horarios) {
         if (item._id == id) {
           this.horarioSeleccionado = item.fecha + ' at ' + item.hora_sal;
+          //obtener la hora de salida.
+          
         }
       }
     });
@@ -121,24 +130,17 @@ export class CrearVueloComponent implements OnInit {
   selectedValue: any;
   MarcasAviones = [
     {
-      id: 1,
+      id: 'Airbus',
       name: 'Airbus',
     },
     {
-      id: 2,
+      id: 'Boeing',
       name: 'Boeing',
     },
   ];
-  getDropDownText(id: any, object: any) {
-    const selObj = _.filter(object, function (o) {
-      return _.includes(id, o.id);
-    });
-    return selObj;
-  }
+  
   selectChange(event:any) {
-    this.mySelect=event.target.value;
-    this.selectedValue = this.getDropDownText(this.mySelect, this.MarcasAviones)[0].name;
-    this.listaAviones_Marca(this.selectedValue);
+    this.listaAviones_Marca(event.target.value);
   }
 
 
