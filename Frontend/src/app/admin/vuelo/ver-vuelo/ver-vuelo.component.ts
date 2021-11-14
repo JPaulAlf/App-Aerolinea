@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class VerVueloComponent implements OnInit {
   constructor(private vueloService: VueloService,private toastr:ToastrService) {}
   vuelos: any = [];
+  p: any = 1;
 
   listarVuelos() {
     this.vueloService.get().subscribe((vuelo) => {

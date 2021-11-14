@@ -23,6 +23,11 @@ export class CrearVueloComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+//Variables para el paginador
+  p_Avion: any = 1;
+  p_Ruta: any = 1;
+  p_Horario: any = 1;
+
   //Arreglos que llenan las tablas, segun la seleccion
   //del usuario
   aviones: any = [];

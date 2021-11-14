@@ -21,7 +21,7 @@
                         </thead>
                         <tbody>
 
-                            <tr *ngFor="let vuelo of vuelos">
+                            <tr *ngFor="let vuelo of vuelos| paginate: { itemsPerPage: 5, currentPage: p }">
                                 <td style="text-align:center">{{vuelo.horario_id.fecha}}</td>
                                 <td style="text-align:center">{{vuelo.ruta_id.inicio.nombre}}</td>
                                 <td style="text-align:center">{{vuelo.ruta_id.destino.nombre}}</td>
@@ -36,7 +36,7 @@
 
                         </tbody>
                     </table>
-
+                    <pagination-controls class= "col-auto text-center" (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>

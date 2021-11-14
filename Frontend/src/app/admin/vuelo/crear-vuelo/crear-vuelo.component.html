@@ -73,7 +73,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let avionItem of aviones">
+                                    <tr *ngFor="let avionItem of aviones| paginate: { itemsPerPage: 5, currentPage: p_Avion }">
                                         <td style="text-align:center">{{avionItem.modelo}}</td>
                                         <td style="text-align:center">{{avionItem.cant_pasa}}</td>
                                         <td style="text-align:center">
@@ -86,7 +86,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+                            <pagination-controls class= "col-auto text-center" (pageChange)="p_Avion = $event"></pagination-controls>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let rutaItem of rutas">
+                                    <tr *ngFor="let rutaItem of rutas| paginate: { itemsPerPage: 5, currentPage: p_Ruta }">
                                         <td style="text-align:center">{{rutaItem.inicio.nombre}}</td>
                                         <td style="text-align:center">{{rutaItem.destino.nombre}}</td>
                                         <td style="text-align:center">
@@ -149,7 +149,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+                            <pagination-controls class= "col-auto text-center" (pageChange)="p_Ruta = $event"></pagination-controls>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let horarioItem of horarios">
+                                    <tr *ngFor="let horarioItem of horarios| paginate: { itemsPerPage: 5, currentPage: p_Horario }">
                                         <td style="text-align:center">{{horarioItem.fecha}}</td>
                                         <td style="text-align:center">{{horarioItem.hora_sal}}</td>
                                         <td style="text-align:center">
@@ -185,7 +185,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+                            <pagination-controls class= "col-auto text-center" (pageChange)="p_Horario = $event"></pagination-controls>
                         </div>
                     </div>
                 </div>
