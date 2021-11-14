@@ -48,9 +48,9 @@ import { VerRutaComponent } from './ruta/ver-ruta/ver-ruta.component';
     VerRutaComponent,
   ],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     AdminRoutingModule, 
-    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule
   ]

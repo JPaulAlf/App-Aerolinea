@@ -16,6 +16,7 @@ import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toas
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toas
     FormsModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot()
+    
 
   ],
   providers: [authInterceptorProviders],

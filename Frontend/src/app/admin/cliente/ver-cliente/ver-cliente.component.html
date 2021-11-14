@@ -22,8 +22,8 @@
               </thead>
               <tbody>
                 
-                <tr *ngFor="let usuario of usuarios">
-                  <td style="text-align:center">{{usuario._id}}</td>
+                <tr *ngFor="let usuario of collection| paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td style="text-align:center">{{usuario.correo}}</td>
                   <td style="text-align:center">{{usuario.nombre}}</td>
                   <td style="text-align:center">{{usuario.apellidos}}</td>
                   <td style="text-align:center">{{usuario.estado}}</td>
@@ -46,9 +46,11 @@
   
               </tbody>
             </table>
-            <h5 style="text-align:center; margin-top: 10px;" *ngIf="usuarios.length == 0">We don't have users to show</h5>
+           
+            <h5 style="text-align:center; margin-top: 10px;" *ngIf="collection.length == 0">We don't have users to show</h5>
           </div>
         </div>
+        <pagination-controls class= "col-auto text-center" (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class VerClienteComponent implements OnInit {
   usuarios: any = [];
+  p: any = 1;
+  collection: any[] = this.usuarios;  
   constructor(private _usuarioService: UsuarioService, private toastr:ToastrService,private router: Router
     ) {
 
@@ -20,6 +22,7 @@ export class VerClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerUsuarios(); 
+   
   }
   obtenerUsuarios() {
 
@@ -27,6 +30,7 @@ export class VerClienteComponent implements OnInit {
 
       console.log(data);
       this.usuarios = data;
+      this.collection = this.usuarios;
     }, err => {
 
       console.log(err);
