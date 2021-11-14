@@ -19,6 +19,11 @@ module.exports.get = async (req, res, next) => {
   res.json(vuelosAuxiliar);
 };
 
+module.exports.getSencillo = async (req, res, next) => {
+  const vuelos = await VueloModel.find().populate("avion_id ruta_id horario_id").exec();
+  res.json(vuelos);
+};
+
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
   const vuelo = await VueloModel.findOne({ _id: id }).populate("avion_id ruta_id horario_id").exec();

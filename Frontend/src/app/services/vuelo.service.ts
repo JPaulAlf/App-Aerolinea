@@ -19,6 +19,10 @@ export class VueloService {
     return this.http.get(`${BLOG_API_ENDPOINT}/get-flight/`, httpOptions);
   }
 
+  getSencillo(): Observable<any> {
+    return this.http.get(`${BLOG_API_ENDPOINT}/get-flight-aux/`, httpOptions);
+  }
+
   getById(id: string): Observable<any> {
     return this.http.get(`${BLOG_API_ENDPOINT}/getBy-flight/${id}`);
   }
