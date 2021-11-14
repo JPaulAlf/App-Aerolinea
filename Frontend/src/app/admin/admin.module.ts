@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AdminRoutingModule } from './admin-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InicioComponent } from '../admin/inicio/inicio.component';
 
@@ -49,7 +50,9 @@ import { VerRutaComponent } from './ruta/ver-ruta/ver-ruta.component';
   imports: [
     CommonModule,
     AdminRoutingModule, 
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
