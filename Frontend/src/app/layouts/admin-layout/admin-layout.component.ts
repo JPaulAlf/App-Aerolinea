@@ -11,5 +11,5 @@ export class AdminLayoutComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }

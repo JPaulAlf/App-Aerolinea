@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'airport/overview-airport', component: VerAeropuertoComponent },
 
   { path: 'customer/add-customer', component: CrearClienteComponent },
-  { path: 'customer/edit-customer/:id', component: EditarClienteComponent },
+  { path: 'customer/edit/:id', component: EditarClienteComponent },
   { path: 'customer/overview-customer', component: VerClienteComponent },
 ];
 @NgModule({

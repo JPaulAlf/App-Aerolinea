@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../../../services/usuario.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ver-cliente',
   templateUrl: './ver-cliente.component.html',
@@ -9,7 +9,8 @@ import { UsuarioService } from '../../../services/usuario.service';
 })
 export class VerClienteComponent implements OnInit {
   usuarios: any = [];
-  constructor(private _usuarioService: UsuarioService, private toastr:ToastrService) {
+  constructor(private _usuarioService: UsuarioService, private toastr:ToastrService,private router: Router
+    ) {
 
 
 
@@ -56,5 +57,8 @@ export class VerClienteComponent implements OnInit {
       console.log(err);
 
     });
+  }
+  editarUsuario(id:any){
+    this.router.navigate(['/customer/edit/'+id]);
   }
 }

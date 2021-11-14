@@ -23,18 +23,18 @@
               <tbody>
                 
                 <tr *ngFor="let usuario of usuarios">
-                  <td style="text-align:center">{{usuario.correo}}</td>
+                  <td style="text-align:center">{{usuario._id}}</td>
                   <td style="text-align:center">{{usuario.nombre}}</td>
                   <td style="text-align:center">{{usuario.apellidos}}</td>
                   <td style="text-align:center">{{usuario.estado}}</td>
                 
                  <td style="text-align:center">
-                    <a >
-                      <i [routerLink]="['customer/edit-customer',usuario._id]" class="fs-5 fas fa-edit text-primary" ></i>
-                    </a>
-                    <a>
+                   
+                      <i [routerLink]="['../../customer/edit',usuario._id]"class="fs-5 fas fa-edit text-primary" ></i>
+                   
+                  
                       <i (click)="eliminarUsuario(usuario._id, usuario)"class="fs-5 fas fa-trash text-danger"></i>
-                    </a>
+                   
                   </td>
                   <td></td>
                   <td></td>

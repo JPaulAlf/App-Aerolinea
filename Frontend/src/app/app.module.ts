@@ -12,8 +12,8 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -24,13 +24,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ClientLayoutComponent
   ],
   imports: [
+    
     BrowserModule,
-    BrowserAnimationsModule,
+    
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    ToastNoAnimationModule.forRoot()
 
   ],
   providers: [authInterceptorProviders],
