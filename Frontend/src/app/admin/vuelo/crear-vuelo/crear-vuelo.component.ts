@@ -2,6 +2,7 @@ import { Injectable, Component, OnInit } from '@angular/core';
 import { VueloService } from '../../../services/vuelo.service';
 import { RutaService } from 'src/app/services/ruta.service';
 import { AvionService } from 'src/app/services/avion.service';
+import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -17,7 +18,8 @@ export class CrearVueloComponent implements OnInit {
   constructor(
     private vueloService: VueloService,
     private rutaService: RutaService,
-    private avionService: AvionService
+    private avionService: AvionService,
+    private toastr: ToastrService
   ) {}
 
   //Arreglos que llenan las tablas, segun la seleccion
@@ -49,15 +51,31 @@ export class CrearVueloComponent implements OnInit {
       this.horarioSeleccionado != 'Schedule not selected!'
     ) {
       //Aca va el metodo de guardar en la base de datos
-      var valores= { 
-        "avion_id":this._idAvion, 
-        "ruta_id":this._idRuta, 
-        "horario_id":this._idHorario, 
-        "hora_lleg":20
-      }
-      this.vueloService.create(valores);
+      var valores = {
+        "avion_id": this._idAvion,
+        "ruta_id": this._idRuta,
+        "horario_id": this._idHorario,
+        "hora_lleg": 20,
+      };
+      this.vueloService.create(valores).subscribe((data) => {
+        this.avionSeleccionado = 'Airplane not selected!';
+        this.rutaSeleccionado = 'Route not selected!';
+        this.horarioSeleccionado = 'Schedule not selected!';
+        this.aviones = [];
+        this.horarios = [];
+        this._idAvion = '';
+        this._idRuta = '';
+        this._idHorario = '';
+        this.toastr.success(
+          'The flight was successfully saved',
+          'Attention'
+        );
+      });
     } else {
-      alert('Please check if you selected all the information needed!');
+      this.toastr.error(
+        'Please check if you selected all the information needed!',
+        'Attention'
+      );
     }
   }
 
@@ -119,7 +137,6 @@ export class CrearVueloComponent implements OnInit {
         if (item._id == id) {
           this.horarioSeleccionado = item.fecha + ' at ' + item.hora_sal;
           //obtener la hora de salida.
-          
         }
       }
     });
@@ -138,11 +155,8 @@ export class CrearVueloComponent implements OnInit {
       name: 'Boeing',
     },
   ];
-  
-  selectChange(event:any) {
+
+  selectChange(event: any) {
     this.listaAviones_Marca(event.target.value);
   }
-
-
-
 }

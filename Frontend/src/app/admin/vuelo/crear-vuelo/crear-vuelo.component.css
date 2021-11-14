@@ -32,7 +32,7 @@
     cursor: pointer;
   }
 
-input:read-only {
+#textoSelect:read-only {
   background-color: white;
   border-color: #09C5AB !important;
   font-weight: 500 !important;
