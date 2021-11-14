@@ -30,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    ToastrModule,
+    ToastrModule.forRoot(),
 
   ],
   providers: [authInterceptorProviders],
