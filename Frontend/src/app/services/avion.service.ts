@@ -24,6 +24,7 @@ export class AvionService {
   }
 
   create(avion: any): Observable<any> {
+    avion.cant_pasa=parseInt(avion.cant_af)*parseInt(avion.cant_filas);
     return this.http.post(`${BLOG_API_ENDPOINT}/create/`, avion);
   }
 
@@ -32,6 +33,7 @@ export class AvionService {
   } 
 
   update(id: string, avion: any): Observable<any> {
+    avion.cant_pasa=parseInt(avion.cant_af)*parseInt(avion.cant_filas);
     return this.http.put(`${BLOG_API_ENDPOINT}/update/${id}`,avion);
   }
 }
