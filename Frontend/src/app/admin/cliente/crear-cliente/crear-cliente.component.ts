@@ -121,6 +121,7 @@ if (this.lat == "" && this.lng == "") {
     latitud: this.lat,
     longitud: this.lng
   }
+  console.log(direccion.latitud)
   this.usuarioForm.get('direccion')?.setValue(direccion);
   this.usuarioForm.get('pwd')?.setValue(this.usuarioForm.get('contrasenna1')?.value);
   this.usuarioForm.get('estado')?.setValue("1");

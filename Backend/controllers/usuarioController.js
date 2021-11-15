@@ -73,6 +73,7 @@ module.exports.create = async (req, res, next) => {
     var {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen} = req.body;
 
     const { sennas, latitud, longitud } = direccion
+    console.log(direccion.latitud+" , "+direccion.longitud);
     const direccionUser = await new DireccionModel({ sennas: sennas, latitud: latitud, longitud: longitud });
     direccionUser.save();
 

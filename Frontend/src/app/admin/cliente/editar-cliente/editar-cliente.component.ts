@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Loader } from '@googlemaps/js-api-loader';
 import { styles } from './mapstyles';
 import { ActivatedRoute, Router } from '@angular/router';
+import { waitForAsync } from '@angular/core/testing';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class EditarClienteComponent implements OnInit {
   private map!: google.maps.Map
-  id: string | null;
+  id!: string | null;
   lat: string = '';
   lng: string = '';
   public archivos: any = [];
@@ -52,18 +53,24 @@ export class EditarClienteComponent implements OnInit {
 
   ngOnInit(): void {
     
+  
+   
+  }
+  
+  mapa(){
     let loader = new Loader({
       apiKey: 'AIzaSyBrSzQLopheNl98oKL3xPgWCdQMK03ZPgA'
     })
+    
     loader.load().then(() => {
 
-      console.log('loaded gmaps')
+      
       var informacion = new google.maps.InfoWindow({
 
       });
-
+      
       var location = { lat: +this.lat, lng: +this.lng };
-
+      
       this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
         center: location,
         zoom: 6,
@@ -78,7 +85,7 @@ export class EditarClienteComponent implements OnInit {
         marker.setPosition(location)
         this.lat = location.lat.toString();
         this.lng = location.lng.toString();
-        console.log(this.lng)
+       
         var textoMensaje = '<h4>You are here!</h4>' +
           '<p><b>LNG: </b>' + location.lng + '</p>' +
           '<p><b>LAT: </b>' + location.lat + '</p>';
@@ -99,9 +106,10 @@ export class EditarClienteComponent implements OnInit {
 
         this.map.setCenter(location)
         marker.setPosition(location)
+        
         this.lat = location.lat.toString();
         this.lng = location.lng.toString();
-        console.log(this.lng)
+        
         var textoMensaje = '<h4>You are here!</h4>' +
           '<p><b>LNG: </b>' + location.lng + '</p>' +
           '<p><b>LAT: </b>' + location.lat + '</p>';
@@ -119,8 +127,6 @@ export class EditarClienteComponent implements OnInit {
 
     });
   }
-  
-
 enviar() {
 if (this.previsualizacion=="") {
   this.toastr.error('Please choose an image for the customer','Error');
@@ -142,16 +148,20 @@ if (this.lat == "" && this.lng == "") {
   const direccion = {
     sennas:this.usuarioForm.get('sennas')?.value,
     latitud: this.lat,
-    longitud:this. lng
+    longitud:this.lng
   }
   this.usuarioForm.get('direccion')?.setValue(direccion)
   if (this.usuarioForm.valid) {
     //se setea el objeto dirección
     const usuario = this.usuarioForm.value
+    if(this.id !== null) {
+      this._usuarioService.editClient(this.id,usuario).subscribe((data) => {
+        this.toastr.success('User updated','Success');
+     });
+    }else{
+      this.toastr.error('User not exist','Error');
+    }
     
-    this._usuarioService.create(usuario).subscribe((data) => {
-      this.toastr.success('User creaded','Success');
-   });
   }else{
     this.toastr.error('Form invalid','Error');
 
@@ -167,7 +177,7 @@ if (this.lat == "" && this.lng == "") {
     const imagen = event.target.files[0];
     this.extraerBase64(imagen).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-      console.log(imagen.base);
+     
     }); 
     this.archivos.push(imagen);
   }
@@ -193,8 +203,12 @@ if (this.lat == "" && this.lng == "") {
   obtenerUsuario(){
     if(this.id !== null) {
      
-      this._usuarioService.getById(this.id).subscribe(data => {
-       
+      this._usuarioService.getById(this.id).subscribe( data => {
+        this.lat =   data.direccion.latitud;
+        this.lng = data.direccion.longitud;
+        this.previsualizacion = data.imagen;
+        
+        
        var fecha = new Date(data.fech_nacimiento).toLocaleDateString().split('/');
        var formatDate = fecha[2]+"-"+(fecha[1].length==2?"":"0")+fecha[1]+"-"+(fecha[0].length==2?"":"0")+fecha[0]
         this.usuarioForm.setValue({
@@ -212,10 +226,9 @@ if (this.lat == "" && this.lng == "") {
           sennas:data.direccion.sennas,
           direccion: data.direccion
         });
-        this.previsualizacion = data.imagen;
-        this.lat = data.direccion.latitud;
-        this.lng = data.direccion.longitud;
-        console.log(data.pwd)
+        
+    
+      this.mapa();
       })
     }
   }
