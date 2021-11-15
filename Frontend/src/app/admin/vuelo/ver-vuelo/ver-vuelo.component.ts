@@ -25,8 +25,7 @@ export class VerVueloComponent implements OnInit {
           vuelosAuxiliares.push(item);
         }
       }
-
-      this.vuelos = vuelosAuxiliares;
+      this.vuelos = vuelosAuxiliares.reverse();
     });
   }
 
