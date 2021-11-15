@@ -1,56 +1,71 @@
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xl-12 ">
-        <!--offset leaves two columns to the left-->
-        <div class="card">
-          <div style="overflow:auto;" class="card-body text-left">
-            <h1 class="display-6" style="margin-top:25px; text-align:center">
-              Customers Overview
-            </h1>
-            <table class="table table-striped mt-5">
+<!-- Content Column -->
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+  <!-- Project Card Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h1 class="display-6" style=" text-align:center">
+              Flights Overview
+          </h1>
+      </div>
+      <div class="card-body overflow-auto">
+          <table class="table table-striped">
               <!--routerlink, used to render another component-->
               <thead>
-                <tr>
-                  <th style="text-align:center" scope="col">Email</th>
-                  <th style="text-align:center" scope="col">Name</th>
-                  <th style="text-align:center" scope="col">Last name</th>
-                  <th style="text-align:center" scope="col">State</th>
-                  <th style="text-align:center" scope="col">Options</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
+                  <tr>
+                      <th style="text-align:center" scope="col">Email</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Name</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Last Name</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">State</th>
+                      <th></th>
+                      <th style="text-align:center" scope="col">Options</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                  </tr>
               </thead>
               <tbody>
-                
-                <tr *ngFor="let usuario of collection| paginate: { itemsPerPage: 5, currentPage: p }">
-                  <td style="text-align:center">{{usuario.correo}}</td>
-                  <td style="text-align:center">{{usuario.nombre}}</td>
-                  <td style="text-align:center">{{usuario.apellidos}}</td>
-                  <td style="text-align:center">{{usuario.estado}}</td>
-                
-                 <td style="text-align:center">
+                  <tr *ngFor="let usuario of usuarios| paginate: { itemsPerPage: 5, currentPage: p }">
+                      <td style="text-align:center">{{usuario.correo}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{usuario.nombre}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{usuario.apellidos}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{usuario.estado}}</td>
+                      <td></td>
+                      
+                        <td style="text-align:center">
                    
-                      <i [routerLink]="['../../customer/edit',usuario._id]"class="fs-5 fas fa-edit text-primary" ></i>
-                   
-                  
-                      <i (click)="eliminarUsuario(usuario._id, usuario)"class="fs-5 fas fa-trash text-danger"></i>
-                   
-                  </td>
-                  <td></td>
-                  <td></td>
-                </tr>
-  
-              
-  
-               
-  
+                          <i [routerLink]="['../../customer/edit',usuario._id]"class="fs-5 fas fa-edit text-primary" ></i>
+                       
+                      
+                          <i (click)="eliminarUsuario(usuario._id, usuario)"class="fs-5 fas fa-trash text-danger"></i>
+                       
+                      </td>
+                      
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+                  <tr *ngIf="usuarios==null || usuarios.length==0">
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
               </tbody>
-            </table>
-           
-            <h5 style="text-align:center; margin-top: 10px;" *ngIf="collection.length == 0">We don't have users to show</h5>
-          </div>
-        </div>
-        <pagination-controls class= "col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+          </table>
+          <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
       </div>
-    </div>
   </div>
+</div>
