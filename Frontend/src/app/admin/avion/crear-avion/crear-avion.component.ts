@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AvionService } from 'src/app/services/avion.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-crear-avion',
   templateUrl: './crear-avion.component.html',
@@ -13,12 +13,12 @@ export class CrearAvionComponent implements OnInit {
 //variables de formulario
 avionForm = new FormGroup({
   modelo: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-  anho: new FormControl('', [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1990)]),
+  anho: new FormControl('', [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1950)]),
   marca: new FormControl('', Validators.required),
   cant_filas: new FormControl('', [Validators.required, Validators.min(5)]), 
-  cant_af: new FormControl('', [Validators.required, Validators.min(6)]),
+  cant_af: new FormControl('6', [Validators.required, Validators.min(6)]),
    imagen: new FormControl('', Validators.required),
-   estado: new FormControl('', [Validators.required, Validators.min(0)]),
+   estado: new FormControl("1", [Validators.required, Validators.min(0)]),
    cant_pasa: new FormControl('',)
 });
 
@@ -34,7 +34,7 @@ reloadCurrentRoute() {
   });
 }
 //Combo de marcas
-listaMarcas=['Airbus', 'Boeing'];
+listaMarcas=environment.listaMarcas;
 
   constructor(private sanitizer: DomSanitizer, private avionS: AvionService, private router: Router) { }
 

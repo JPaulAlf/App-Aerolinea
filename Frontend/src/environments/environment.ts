@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4000',
+  listaMarcas: ['Airbus', 'Boeing']
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
