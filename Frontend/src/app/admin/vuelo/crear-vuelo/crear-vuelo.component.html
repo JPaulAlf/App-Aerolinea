@@ -68,8 +68,7 @@
                                         <th style="text-align:center" scope="col">Model</th>
                                         <th style="text-align:center" scope="col">Passengers</th>
                                         <th style="text-align:center" scope="col">Select</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                     
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,8 +80,11 @@
                                                 <i class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                    </tr>
+                                    <tr *ngIf="aviones==null || aviones.length==0">
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -130,8 +132,7 @@
                                         <th style="text-align:center" scope="col">From</th>
                                         <th style="text-align:center" scope="col">To</th>
                                         <th style="text-align:center" scope="col">Select</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,8 +145,11 @@
                                                     class="fs-5 fas fa-check-circle"></i>
                                             </a>
                                         </td>
-                                        <td></td>
-                                        <td></td>
+                                    </tr>
+                                    <tr *ngIf="rutas==null || rutas.length==0">
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -166,8 +170,7 @@
                                         <th style="text-align:center" scope="col">Date</th>
                                         <th style="text-align:center" scope="col">Time</th>
                                         <th style="text-align:center" scope="col">Select</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -179,9 +182,12 @@
                                                 <i (click)="selectHorario(horarioItem._id)"
                                                     class="fs-5 fas fa-check-circle"></i>
                                             </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
+                                        </td>                  
+                                    </tr>
+                                    <tr *ngIf="horarios==null || horarios.length==0">
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
+                                        <td style="text-align:center">- - -</td>
                                     </tr>
                                 </tbody>
                             </table>

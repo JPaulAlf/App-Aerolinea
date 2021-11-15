@@ -1,44 +1,62 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xl-12 ">
-            <!--offset leaves two columns to the left-->
-            <div class="card">
-                <div style="overflow:auto;" class="card-body text-left">
-                    <h1 class="display-6" style="margin-top:25px; text-align:center">
-                        Flights Overview
-                    </h1>
-                    <table class="table table-striped mt-5">
-                        <!--routerlink, used to render another component-->
-                        <thead>
-                            <tr>
-                                <th style="text-align:center" scope="col">Schedule</th>
-                                <th style="text-align:center" scope="col">From</th>
-                                <th style="text-align:center" scope="col">To</th>
-                                <th style="text-align:center" scope="col">Remove</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr *ngFor="let vuelo of vuelos| paginate: { itemsPerPage: 5, currentPage: p }">
-                                <td style="text-align:center">{{vuelo.horario_id.fecha}}</td>
-                                <td style="text-align:center">{{vuelo.ruta_id.inicio.nombre}}</td>
-                                <td style="text-align:center">{{vuelo.ruta_id.destino.nombre}}</td>
-                                <td style="text-align:center">
-                                    <a (click)="updateState(vuelo._id)">
-                                        <i class="fs-5 fas fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <pagination-controls class= "col-auto text-center" (pageChange)="p = $event"></pagination-controls>
-                </div>
-            </div>
+<!-- Content Column -->
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+    <!-- Project Card Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h1 class="display-6" style=" text-align:center">
+                Flights Overview
+            </h1>
+        </div>
+        <div class="card-body overflow-auto">
+            <table class="table table-striped">
+                <!--routerlink, used to render another component-->
+                <thead>
+                    <tr>
+                        <th style="text-align:center" scope="col">Schedule</th>
+                        <th scope="col"></th>
+                        <th style="text-align:center" scope="col">From</th>
+                        <th scope="col"></th>
+                        <th style="text-align:center" scope="col">To</th>
+                        <th scope="col"></th>
+                        <th style="text-align:center" scope="col">Remove</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vuelo of vuelos| paginate: { itemsPerPage: 5, currentPage: p }">
+                        <td style="text-align:center">{{vuelo.horario_id.fecha}}</td>
+                        <td></td>
+                        <td style="text-align:center">{{vuelo.ruta_id.inicio.nombre}}</td>
+                        <td></td>
+                        <td style="text-align:center">{{vuelo.ruta_id.destino.nombre}}</td>
+                        <td></td>
+                        <td style="text-align:center">
+                            <a (click)="updateState(vuelo._id)">
+                                <i class="fs-5 fas fa-trash text-danger"></i>
+                            </a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr *ngIf="vuelos==null || vuelos.length==0">
+                        <td style="text-align:center">- - -</td>
+                        <td></td>
+                        <td style="text-align:center">- - -</td>
+                        <td></td>
+                        <td style="text-align:center">- - -</td>
+                        <td></td>
+                        <td style="text-align:center">- - -</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>
