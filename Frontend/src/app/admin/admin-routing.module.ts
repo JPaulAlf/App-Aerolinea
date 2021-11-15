@@ -34,7 +34,7 @@ const routes: Routes = [
   //direcciones en ingles, para que en el NAVEGADOR salgan acorde al sitio para
 
   { path: 'flight/add-flight', component: CrearVueloComponent },
-  { path: 'flight/edit-flight', component: EditarVueloComponent },
+  { path: 'flight/see-flight/:id', component: EditarVueloComponent },
   { path: 'flight/overview-flight', component: VerVueloComponent },
 
   { path: 'route/add-route', component: CrearRutaComponent },

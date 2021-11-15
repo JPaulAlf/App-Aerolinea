@@ -8,7 +8,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./ver-vuelo.component.css'],
 })
 export class VerVueloComponent implements OnInit {
-  constructor(private vueloService: VueloService,private toastr:ToastrService) {}
+  constructor(
+    private vueloService: VueloService,
+    private toastr: ToastrService
+  ) {}
   vuelos: any = [];
   p: any = 1;
 
@@ -17,7 +20,8 @@ export class VerVueloComponent implements OnInit {
       for (const item of vuelo) {
         var date = new Date(item.horario_id.fecha);
         //Se da formato a la fecha y se le concatena la hora de salida, para llamar solo 1 campo en el HTML
-        item.horario_id.fecha = date.toLocaleDateString() +" "+item.horario_id.hora_sal;
+        item.horario_id.fecha =
+          date.toLocaleDateString() + ' ' + item.horario_id.hora_sal;
       }
       var vuelosAuxiliares = [];
       for (const item of vuelo) {
@@ -25,7 +29,7 @@ export class VerVueloComponent implements OnInit {
           vuelosAuxiliares.push(item);
         }
       }
-      this.vuelos = vuelosAuxiliares.reverse();
+      this.vuelos = vuelo.reverse();
     });
   }
 
@@ -33,12 +37,24 @@ export class VerVueloComponent implements OnInit {
     this.listarVuelos();
   }
 
-  updateState(id: string): void {
-    if (confirm('Are you sure about delete this flight?')) {
-      var desactivo = { "estado": 0 };
+  updateState(id: string, estadoActual: any): void {
+    if (estadoActual == 0) {
+      var activo = { estado: 1 };
+      this.vueloService.editState(id, activo).subscribe((res: any) => {
+        this.listarVuelos();
+        this.toastr.success(
+          'The state of the flight was changed',
+          'Flight activated'
+        );
+      });
+    } else {
+      var desactivo = { estado: 0 };
       this.vueloService.editState(id, desactivo).subscribe((res: any) => {
         this.listarVuelos();
-        this.toastr.error('The state of the flight was changed','Flight deleted');
+        this.toastr.error(
+          'The state of the flight was changed',
+          'Flight deactivate'
+        );
       });
     }
   }
@@ -50,4 +66,6 @@ export class VerVueloComponent implements OnInit {
       });
     }
   }
+
+  verVuelo(id: string) {}
 }
