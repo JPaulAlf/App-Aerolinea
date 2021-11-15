@@ -4,7 +4,7 @@
   <div class="card shadow mb-4">
       <div class="card-header py-3">
           <h1 class="display-6" style=" text-align:center">
-              Flights Overview
+              Users Overview
           </h1>
       </div>
       <div class="card-body overflow-auto">
@@ -41,8 +41,11 @@
                           <i [routerLink]="['../../customer/edit',usuario._id]"class="fs-5 fas fa-edit text-primary" ></i>
                        
                       
-                          <i (click)="eliminarUsuario(usuario._id, usuario)"class="fs-5 fas fa-trash text-danger"></i>
-                       
+                          
+                          <i *ngIf='usuario.estado==0' (click)="eliminarUsuario(usuario._id, usuario)" 
+                          class="fs-5 fas fa-arrow-circle-up text-success"></i>
+                          <i *ngIf='usuario.estado==1' (click)="eliminarUsuario(usuario._id, usuario)" 
+                          class="fs-5 fas fa-arrow-circle-down text-danger"></i>
                       </td>
                       
                       <td></td>

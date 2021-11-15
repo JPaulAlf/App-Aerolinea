@@ -37,7 +37,9 @@ export class CrearClienteComponent implements OnInit {
     contrasenna2: new FormControl('', Validators.required),
     imagen: new FormControl(),
     sennas: new FormControl('', Validators.required),
-    direccion: new FormControl()
+    direccion: new FormControl(),
+    estado: new FormControl(),
+    pwd: new FormControl()
     
      
   });
@@ -117,19 +119,21 @@ if (this.lat == "" && this.lng == "") {
   const direccion = {
     sennas:this.usuarioForm.get('sennas')?.value,
     latitud: this.lat,
-    longitud:this. lng
+    longitud: this.lng
   }
-  this.usuarioForm.get('direccion')?.setValue(direccion)
+  this.usuarioForm.get('direccion')?.setValue(direccion);
+  this.usuarioForm.get('pwd')?.setValue(this.usuarioForm.get('contrasenna1')?.value);
+  this.usuarioForm.get('estado')?.setValue("1");
   if (this.usuarioForm.valid) {
     //se setea el objeto dirección
     const usuario = this.usuarioForm.value
-    
+
     this._usuarioService.create(usuario).subscribe((data) => {
-      this.toastr.success('User creaded','Success');
+      this.toastr.success('User created','Success');
    });
   }else{
     this.toastr.error('Form invalid','Error');
-
+console.log(this.usuarioForm.value)
     }
     
    

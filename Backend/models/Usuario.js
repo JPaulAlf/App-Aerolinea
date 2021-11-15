@@ -37,6 +37,9 @@ const Usuario = mongoose.model(
           direccion: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Direccion'
+          },
+          imagen: {
+            type: String
           }
     })
 );

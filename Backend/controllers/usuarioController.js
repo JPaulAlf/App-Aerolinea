@@ -70,7 +70,7 @@ module.exports.getById = async (req, res, next) => {
 
 
 module.exports.create = async (req, res, next) => {
-    var {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion} = req.body;
+    var {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen} = req.body;
 
     const { sennas, latitud, longitud } = direccion
     const direccionUser = await new DireccionModel({ sennas: sennas, latitud: latitud, longitud: longitud });
@@ -78,7 +78,7 @@ module.exports.create = async (req, res, next) => {
 
     
     direccion = direccionUser._id;
-    const User = await new UsuarioModel({rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion});
+    const User = await new UsuarioModel({rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen});
     User.save();
     res.json(User);
   };
@@ -104,7 +104,7 @@ module.exports.create = async (req, res, next) => {
 
    
 
-    const {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion } = req.body;
+    const {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen } = req.body;
     const { sennas, latitud, longitud } = direccion
     const direccionUser = await DireccionModel.findOneAndUpdate(
         { _id: direccion._id },
@@ -115,7 +115,7 @@ module.exports.create = async (req, res, next) => {
 
     const user = await UsuarioModel.findOneAndUpdate(
       { _id: req.params.id },
-      {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado}, // ==> {title: title, body: body}
+      {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, imagen}, // ==> {title: title, body: body}
       { new: true } // retornar el registro que hemos modificado con los nuevos valores
     );
     res.json(user);
