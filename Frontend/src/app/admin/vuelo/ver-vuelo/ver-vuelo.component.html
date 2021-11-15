@@ -36,7 +36,7 @@
                                 <i class="fs-5 fas fa-eye text-primary"></i>
                             </a>
                             <a (click)="updateState(vuelo._id, vuelo.estado)">
-                                <i class="fs-5 fas fa-arrow-circle-up text-success"></i>
+                                <i class="fs-5 fas fa-arrow-circle-down text-danger"></i>
                             </a>
                         </td>
                         <td style="text-align:center" *ngIf="vuelo.estado==0">
@@ -44,7 +44,7 @@
                                 <i class="fs-5 fas fa-eye text-primary"></i>
                             </a>
                             <a (click)="updateState(vuelo._id, vuelo.estado)">
-                                <i class="fs-5 fas fa-arrow-circle-down text-danger"></i>
+                                <i class="fs-5 fas fa-arrow-circle-up text-success"></i>
                             </a>
                         </td>
                         <td></td>

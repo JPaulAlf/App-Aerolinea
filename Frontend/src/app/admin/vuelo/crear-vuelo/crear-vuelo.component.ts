@@ -110,8 +110,10 @@ export class CrearVueloComponent implements OnInit {
     var avionMarca: any = [];
     this.avionService.get().subscribe((avion) => {
       for (const item of avion) {
-        if (item.marca == marca) {
-          avionMarca.push(item);
+        if(item.estado==1){
+          if (item.marca == marca) {
+            avionMarca.push(item);
+          }
         }
       }
       this.aviones = avionMarca;
@@ -119,7 +121,13 @@ export class CrearVueloComponent implements OnInit {
   }
   listaRutas() {
     this.rutaService.get().subscribe((ruta) => {
-      this.rutas = ruta;
+      var rutasAux:any=[];
+      for (const item of ruta) {
+        if(item.estado==1){
+          rutasAux.push(item);
+        }
+      }
+      this.rutas = rutasAux;
     });
   }
   listaRuta_Horario(rutaID: any) {
