@@ -5,7 +5,7 @@ const AeropuertoModel = require("../models/Aeropuerto");
 module.exports.get = async (req, res, next) => {
   const vuelos = await VueloModel.find().populate("avion_id ruta_id horario_id").exec();
 
-  const vuelosAuxiliar=[];
+  const vuelosAuxiliar = [];
   for (const vuelo of vuelos) {
     const inicio = await AeropuertoModel.findById(vuelo.ruta_id.inicio).exec();
     const destino = await AeropuertoModel.findById(vuelo.ruta_id.destino).exec();
@@ -25,6 +25,19 @@ module.exports.getSencillo = async (req, res, next) => {
 };
 
 module.exports.getById = async (req, res, next) => {
+  const id = req.params.id;
+  const vuelo = await VueloModel.findOne({ _id: id }).populate("avion_id ruta_id horario_id").exec();
+
+  const inicio = await AeropuertoModel.findById(vuelo.ruta_id.inicio).exec();
+  const destino = await AeropuertoModel.findById(vuelo.ruta_id.destino).exec();
+
+  vuelo.ruta_id.inicio = inicio;
+  vuelo.ruta_id.destino = destino;
+
+  res.json(vuelo);
+};
+
+module.exports.getById_Sencillo = async (req, res, next) => {
   const id = req.params.id;
   const vuelo = await VueloModel.findOne({ _id: id }).populate("avion_id ruta_id horario_id").exec();
   res.json(vuelo);

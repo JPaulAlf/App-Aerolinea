@@ -20,17 +20,22 @@ export class EditarVueloComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   idURL: any = null;
-  _avionSeleccionado: any = null;
+  _vueloSeleccionado: any = null;
+  _asientosAvion: any = [];
+  p_asientosAvion: any = 1;
 
   ngOnInit(): void {
     this.idURL = this.aRoute.snapshot.paramMap.get('id');
     this.toastr.error('ID>>' + this.idURL, 'Id obtenido');
+    this.obtengoVuelo(this.idURL);
   }
 
-  obtengoVuelo(){
-
+  obtengoVuelo(id: any) {
+    this.vueloService.getById(id).subscribe((item) => {
+      var date = new Date(item.horario_id.fecha);
+      item.horario_id.fecha = date.toLocaleDateString();
+      this._vueloSeleccionado = item;
+      this._asientosAvion = item.asientos;
+    });
   }
-
-  
-
 }

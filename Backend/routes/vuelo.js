@@ -13,6 +13,8 @@ router.get("/get-flight-aux", vueloController.getSencillo);
 
 router.get("/getBy-flight/:id", vueloController.getById);
 
+router.get("/getBy-flight-aux/:id", vueloController.getById_Sencillo);
+
 router.post("/add-flight",  vueloController.create);
 
 router.delete("/delete-flight/:id", vueloController.delete);
