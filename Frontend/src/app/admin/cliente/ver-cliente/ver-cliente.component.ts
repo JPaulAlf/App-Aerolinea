@@ -62,7 +62,5 @@ export class VerClienteComponent implements OnInit {
 
     });
   }
-  editarUsuario(id:any){
-    this.router.navigate(['/customer/edit/'+id]);
-  }
+ 
 }

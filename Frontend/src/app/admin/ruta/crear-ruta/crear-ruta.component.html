@@ -22,7 +22,7 @@
 </ul>
 
 <div class="">
-    <form enctype="multipart/form-data" class="row g-3 needs-validation was-validated" novalidate>
+    <form [formGroup] = "rutaForm" (ngSubmit) = "enviar()" enctype="multipart/form-data" class="row g-3 needs-validation " >
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -35,41 +35,47 @@
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Start airport</label>
-                            <select name="my-select" (change)="selectChange_Inicio($event)" class="form-select"
-                                aria-label="Default select example" required>
-                                <option selected disabled value="">None selected</option>
-                                <option [value]="item._id" *ngFor="let item of _aeropuertoInicio">
-                                    {{item.nombre}}
+                            <select  formControlName="inicio" class="form-control"  >
+                                <option value="">
+                                    Choose
+                                 </option>
+                                <option *ngFor="let aeropuerto of _aeropuertoInicio" [ngValue]="aeropuerto">
+                                    {{aeropuerto.nombre}}
                                 </option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select one airport!
+                            <div class="text-danger" *ngIf="rutaForm.get('inicio')?.hasError('required')
+                            && rutaForm.get('inicio')?.touched">
+                              <span>Start airport is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Arrival airport</label>
-                            <select name="my-select" (change)="selectChange_Final($event)" class="form-select"
-                                aria-label="Default select example" required>
-                                <option selected disabled value="">None selected</option>
-                                <option [value]="item._id" *ngFor="let item of _aeropuertoFinal">
-                                    {{item.nombre}}
+                            <select  formControlName="destino"  id="fabri" class="form-control" required >
+                                <option value="">
+                                   Choose
+                                </option>
+                                <option *ngFor="let aeropuerto of _aeropuertoDestino" [ngValue]="aeropuerto">
+                                    {{aeropuerto.nombre}}
                                 </option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select one airport!
+                            <div class="text-danger" *ngIf="rutaForm.get('destino')?.hasError('required')
+                            && rutaForm.get('destino')?.touched">
+                              <span>Arrival airport is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="text-danger" *ngIf="!rutaForm.get('destino')?.hasError('required')&& !rutaForm.get('destino')?.hasError('required') && rutaForm.get('destino')?.value == rutaForm.get('inicio')?.value">
+                              <span>The airports must be <strong>different</strong></span>
+                            </div>
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Price</label>
                             <div class="col-lg-12">
-                                <input type="number" class="form-control" required />
+                                <input  formControlName="precio_trayecto" type="number" class="form-control" required />
                                 <div class="invalid-feedback">
                                     Please fill in the price space!
                                 </div>
@@ -80,7 +86,7 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Time of travel</label>
                             <div class="col-lg-12">
-                                <input type="number" class="form-control" required />
+                                <input  formControlName="duracion" type="number" class="form-control" required />
                                 <div class="invalid-feedback">
                                     Please fill in the time space!
                                 </div>

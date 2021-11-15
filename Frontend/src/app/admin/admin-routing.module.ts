@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'flight/overview-flight', component: VerVueloComponent },
 
   { path: 'route/add-route', component: CrearRutaComponent },
-  { path: 'route/edit-route/:id', component: EditarRutaComponent },
+  { path: 'route/edit/:id', component: EditarRutaComponent },
   { path: 'route/overview-route', component: VerRutaComponent },
 
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
