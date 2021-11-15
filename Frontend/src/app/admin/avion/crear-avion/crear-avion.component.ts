@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
 export class CrearAvionComponent implements OnInit {
 //variables de formulario
 avionForm = new FormGroup({
-  modelo: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  modelo: new FormControl(null, [Validators.required, Validators.minLength(3)]),
   anho: new FormControl('', [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1990)]),
   marca: new FormControl('', Validators.required),
   cant_filas: new FormControl('', [Validators.required, Validators.min(5)]), 
   cant_af: new FormControl('', [Validators.required, Validators.min(6)]),
    imagen: new FormControl('', Validators.required),
    estado: new FormControl('', [Validators.required, Validators.min(0)]),
+   cant_pasa: new FormControl('',)
 });
 
 
@@ -33,7 +34,7 @@ reloadCurrentRoute() {
   });
 }
 //Combo de marcas
-listaMarcas=['Ford', 'Ferrari', 'Mazzeratti', 'Lamborgini', 'Deloitte','Toyota'];
+listaMarcas=['Airbus', 'Boeing'];
 
   constructor(private sanitizer: DomSanitizer, private avionS: AvionService, private router: Router) { }
 
@@ -41,6 +42,7 @@ listaMarcas=['Ford', 'Ferrari', 'Mazzeratti', 'Lamborgini', 'Deloitte','Toyota']
   }
 
 submitForm(): void {
+  this.avionForm.get('cant_pasa')?.setValue(parseInt(this.avionForm.get('cant_af')?.value)*parseInt(this.avionForm.get('cant_filas')?.value));
   this.avionForm.get('imagen')?.setValue(this.previsualizacion);
   if (this.avionForm.valid) {
     this.avionS.create(this.avionForm.value).subscribe((data) => {

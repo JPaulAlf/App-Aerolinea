@@ -42,11 +42,11 @@ const routes: Routes = [
   { path: 'route/overview-route', component: VerRutaComponent },
 
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
-  { path: 'airplane/edit-airplane', component: EditarAvionComponent },
+  { path: 'airplane/edit/:id', component: EditarAvionComponent },
   { path: 'airplane/overview-airplane', component: VerAvionComponent },
 
   { path: 'airport/add-airport', component: CrearAeropuertoComponent },
-  { path: 'airport/edit-airport', component: EditarAeropuertoComponent },
+  { path: 'airport/edit/:id', component: EditarAeropuertoComponent },
   { path: 'airport/overview-airport', component: VerAeropuertoComponent },
 
   { path: 'customer/add-customer', component: CrearClienteComponent },

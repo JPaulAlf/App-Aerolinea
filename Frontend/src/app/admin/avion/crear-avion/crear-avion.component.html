@@ -22,7 +22,7 @@
 </ul>
 
 <div class="">
-    <form [formGroup]="avionForm" (ngSubmit)="submitForm()" class="row g-3">
+    <form [formGroup]="avionForm" (ngSubmit)="submitForm()" class="row g-3 needs-validation was-validated" novalidate>
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -35,9 +35,13 @@
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label for="fabri" class="form-label">Manufacturer</label>
-                            <input formControlName="marca" type="text" id="fabri" class="form-control" required />
+                            <select formControlName="marca" id="fabri" class="form-control" required >
+                                <option *ngFor="let brand of listaMarcas" [ngValue]="brand">
+                                    {{brand}}
+                                </option>
+                            </select>
                             <div class="invalid-feedback">
-                                Falta fabricante!
+                                Missing Manufacturer!!
                             </div>
                         </div>
                     </div>
@@ -45,9 +49,9 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Model</label>
                             <div class="col-lg-12">
-                                <input formControlName="modelo" type="text" class="form-control" required />
+                                <input formControlName="modelo" type="text" class="form-control" required/>
                                 <div class="invalid-feedback">
-                                    Se requiere modelo!
+                                    Model required!!
                                 </div>
                             </div>
                         </div>
@@ -61,7 +65,7 @@
                             <div class="col-lg-12">
                                 <input formControlName="anho" type="number" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Falta año de contrucción!
+                                    Missing construction year!!
                                 </div>
                             </div>
                         </div>
@@ -70,9 +74,12 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">State</label>
                             <div class="col-lg-12">
-                                <input formControlName="estado" type="number" class="form-control" required />
+                                <select formControlName="estado" type="number" class="form-control">
+                                    <option value="1" >Enabled</option>
+                                    <option value="0">Disabled</option>
+                                </select>
                                 <div class="invalid-feedback">
-                                    Falta año de contrucción!
+                                    State required!!
                                 </div>
                             </div>
                         </div>
@@ -85,7 +92,7 @@
 
             <div class="tab-pane fade " id="Caracteristicas" role="tabpanel" aria-labelledby="Caracteristicas-tab">
                 <h1 class="display-6" style="margin-top:25px; text-align:center">
-                    Caracteristicas
+                    Characteristics
                 </h1>
                 <hr class="my-4">
 
@@ -96,7 +103,7 @@
                                 <label for="basic-url" class="form-label">Number of lanes</label>
                                 <input formControlName="cant_filas" type="number" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Se requiere la cantidad de filas del avion!
+                                    Require number of lanes in airplane!!
                                 </div>
                             </div>
                         </div>
@@ -107,7 +114,7 @@
                                 <label for="basic-url" class="form-label">Seats per lane</label>
                                 <input formControlName="cant_af" type="number" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Se requiere la cantidad de asientos por fila del avion!
+                                    Required number of seats per lane!!
                                 </div>
                             </div>
                         </div>
@@ -125,9 +132,8 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Favor seleccionar una imagen para el avion</h5>
-                                <p class="card-text">Con el boton colocado debajo, puede seleccionar una imagen de su
-                                    ordenador</p>
+                                <h5 class="card-title">Please select an image for the airplane</h5>
+                                <p class="card-text">With the downside button youy can select an image</p>
                                 <br />
                                 <div class="form-group">
                                     <div class="mb-3">
@@ -147,12 +153,12 @@
 
             <div class="tab-pane fade " id="Crear" role="tabpanel" aria-labelledby="Crear-tab">
                 <h1 class="display-6" style="margin-top:25px; text-align:center">
-                    Crear
+                    Create
                 </h1>
                 <hr class="my-4">
                 <br />
                 <p class="lead" style=" text-align: center; margin-top:20px">
-                    ¡ATENCION! Se guardara el AVION especificado en la Base de Datos
+                    ¡ATTENTION! the AIRPLANE will be store in Database
                 </p>
 
                 <input type="submit" value="Registrar Avion" class="btn btn-primary"

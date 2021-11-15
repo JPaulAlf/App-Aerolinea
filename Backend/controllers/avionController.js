@@ -37,3 +37,12 @@ module.exports.get = async (req, res, next) => {
     );
     res.json(Avion);
   };
+  module.exports.updateState = async (req, res, next) => {
+    const {estado} = req.body;
+    const avion = await AvionModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {estado}, // ==> {title: title, body: body}
+      { new: true } // retornar el registro que hemos modificado con los nuevos valores
+    );
+    res.json(avion);
+  };
