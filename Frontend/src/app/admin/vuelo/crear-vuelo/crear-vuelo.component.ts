@@ -60,21 +60,27 @@ export class CrearVueloComponent implements OnInit {
       this.rutaService.getById(this._idRuta).subscribe((ruta) => {
         var duracion: any = '';
         var horaSal: any = '';
+        var fecSal: any = '';
         duracion = ruta.duracion;
         for (const item of ruta.horarios) {
           if (item._id == _idHorario_Local) {
             //obtener la hora de salida.
             horaSal = item.hora_sal;
+            fecSal=item.fecha;
           }
         }
+
+        var date = new Date(fecSal);
+        fecSal = date.toLocaleDateString();
+
         var h = Math.floor(duracion / 60);
         var m = duracion % 60;
         horaSal = horaSal + ':00';
         var _HoraLLegada = '';
-        _HoraLLegada = moment(horaSal, 'HH:mm:ss')
+        _HoraLLegada = moment(fecSal+" "+horaSal, 'D/M/YYYY HH:mm:ss')
           .add(h, 'hours')
           .add(m, 'minutes')
-          .format('HH:mm:ss');
+          .format('D/M/YYYY HH:mm');
 
         //Aca va el metodo de guardar en la base de datos
         var valores = {
