@@ -16,48 +16,85 @@
                 <div class="tab-content">
                   <div class="tab-content-inner active " data-content="signup">
                     <h3 class="mb-4">Search flights now with us!</h3>
-                    <form action="#">
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01"><i class="fs-4 fas fa-plane-departure"></i></label>
-                        <select class="form-select" id="inputGroupSelect01">
-                          <option selected>Select airport</option>
-                          <option value="1">Philippines</option>
-                          <option value="2">USA</option>
-                          <option value="3">Australia</option>
-                          <option value="4">Singapore</option>
+
+                    <form action="#" [formGroup]="itemsForm" (ngSubmit)="enviar()" enctype="multipart/form-data"
+                      class="needs-validation ">
+
+                      <div class="input-group ">
+                        <label class="input-group-text" for="inputGroupSelect01"><i
+                            class="fs-4 fas fa-plane-departure"></i></label>
+                        <select formControlName="inicio" class="form-control">
+                          <option value="" disabled>
+                            Select airport
+                          </option>
+                          <option *ngFor="let aeropuerto of _aeropuertoInicio" [ngValue]="aeropuerto">
+                            {{aeropuerto.nombre}}
+                          </option>
+                        </select>
+
+                      </div>
+                      <div class="text-danger"
+                        *ngIf="itemsForm.get('inicio')?.hasError('required') && itemsForm.get('inicio')?.touched">
+                        <span>Start airport is <strong>required</strong></span>
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i
+                            class="fs-4 fas fa-plane-arrival"></i></label>
+
+                        <select formControlName="destino" id="fabri" class="form-control" required>
+                          <option value="" disabled>
+                            Select airport
+                          </option>
+                          <option *ngFor="let aeropuerto of _aeropuertoDestino" [ngValue]="aeropuerto">
+                            {{aeropuerto.nombre}}
+                          </option>
                         </select>
                       </div>
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01"><i class="fs-4 fas fa-plane-arrival"></i></label>
-                        <select class="form-select" id="inputGroupSelect01">
-                          <option selected>Select airport</option>
-                          <option value="1">Philippines</option>
-                          <option value="2">USA</option>
-                          <option value="3">Australia</option>
-                          <option value="4">Singapore</option>
-                        </select>
+                      <div class="text-danger" *ngIf="itemsForm.get('destino')?.hasError('required')
+                      && itemsForm.get('destino')?.touched">
+                        <span>Arrival airport is <strong>required</strong></span>
                       </div>
-                      <div class="input-group mb-3">
-                        <input type="date" aria-label="First name" class="form-control">
-                        <input type="date" aria-label="Last name" class="form-control">
+
+                      <div class="text-danger text-center"
+                        *ngIf="!itemsForm.get('destino')?.hasError('required')&& !itemsForm.get('destino')?.hasError('required') && itemsForm.get('destino')?.value == itemsForm.get('inicio')?.value">
+                        <span>The airports must be <strong>different</strong></span>
                       </div>
-                      <div class="mb-3 d-flex justify-content-center">
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                            value="option1">
-                          <label class="form-check-label" for="inlineRadio1">Round Trip</label>
-                        </div>
+
+                      <div class="input-group mt-3" *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==false">
+                        <input  type="date" id="fecha1"  class="form-control" disabled>
+                        <input  type="date" id="fecha2"  class="form-control" disabled>
+                      </div>
+
+                      <div class="input-group mt-3" *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==true">
+                        <input formControlName="fechaInicio" type="date" id="fecha1"  class="form-control">
+                        <input  type="date" id="fecha2"  class="form-control" disabled>
+                      </div>
+
+                      <div class="input-group mt-3" *ngIf="itemsForm.get('selectRoundTrip')?.value==true && itemsForm.get('selectOneWay')?.value==true">
+                        <input formControlName="fechaInicio" type="date" id="fecha1"  class="form-control">
+                        <input formControlName="fechaFinal" type="date" id="fecha2"  class="form-control">
+                      </div>
+
+                      <div class="mb-3 mt-3 d-flex justify-content-center">
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                            value="option2">
+                            value="option2"  (change)="seleccion_OneWay()">
                           <label class="form-check-label" for="inlineRadio2">One Way</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1" (change)="seleccion_RoundTrip()">
+                          <label class="form-check-label" for="inlineRadio1">Round Trip</label>
+                        </div>
                       </div>
+
                       <div class="row form-group">
                         <div class=" mb-1 col-md-12">
                           <input type="submit" class="btn btn-primary btn-block" value="Search">
                         </div>
                       </div>
+
                     </form>
                   </div>
                 </div>

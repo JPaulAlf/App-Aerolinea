@@ -26,7 +26,7 @@ export class EditarVueloComponent implements OnInit {
 
   ngOnInit(): void {
     this.idURL = this.aRoute.snapshot.paramMap.get('id');
-    this.toastr.error('ID>>' + this.idURL, 'Id obtenido');
+    this.toastr.success('ID number:\n' + this.idURL, 'Flight details');
     this.obtengoVuelo(this.idURL);
   }
 
