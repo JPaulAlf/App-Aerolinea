@@ -4,6 +4,7 @@ import {RutaService} from 'src/app/services/ruta.service';
 import {AeropuertoService} from 'src/app/services/aeropuerto.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forEach } from 'lodash';
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root',
 })
@@ -146,10 +147,18 @@ export class CrearRutaComponent implements OnInit {
         return;
       }
 
-      const horario = {
+      var horario = {
         fecha: this.rutaForm.get('date')?.value,
         hora_sal: this.rutaForm.get('time')?.value
       }
+     
+
+      var fecha = new Date(horario.fecha).toLocaleDateString();
+      horario.fecha = moment(fecha, 'D/M/YYYY')
+      .add(1, 'days')
+      
+      .format('D/M/YYYY');
+     
      var flag:boolean = false;
       this._horariosCreados.forEach((element: any) => {
        if (element.fecha == horario.fecha && element.hora_sal == horario.hora_sal) {

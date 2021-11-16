@@ -10,10 +10,12 @@ import { VerVueloComponent } from './vuelo/ver-vuelo/ver-vuelo.component';
 import { CrearRutaComponent } from './ruta/crear-ruta/crear-ruta.component';
 import { EditarRutaComponent } from './ruta/editar-ruta/editar-ruta.component';
 import { VerRutaComponent } from './ruta/ver-ruta/ver-ruta.component';
+import { DetalleRutaComponent } from './ruta/detalle-ruta/detalle-ruta.component';
 
 import { CrearAvionComponent } from '../admin/avion/crear-avion/crear-avion.component';
 import { EditarAvionComponent } from '../admin/avion/editar-avion/editar-avion.component';
 import { VerAvionComponent } from '../admin/avion/ver-avion/ver-avion.component';
+
 
 import { CrearAeropuertoComponent } from './aeropuerto/crear-aeropuerto/crear-aeropuerto.component';
 import { EditarAeropuertoComponent } from './aeropuerto/editar-aeropuerto/editar-aeropuerto.component';
@@ -41,6 +43,7 @@ const routes: Routes = [
   { path: 'route/add-route', component: CrearRutaComponent },
   { path: 'route/edit/:id', component: EditarRutaComponent },
   { path: 'route/overview-route', component: VerRutaComponent },
+  { path: 'route/see-route/:id', component: DetalleRutaComponent },
 
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
   { path: 'airplane/edit/:id', component: EditarAvionComponent },

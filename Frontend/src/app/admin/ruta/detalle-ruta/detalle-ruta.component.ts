@@ -10,11 +10,11 @@ import * as moment from 'moment';
   providedIn: 'root',
 })
 @Component({
-  selector: 'app-editar-ruta',
-  templateUrl: './editar-ruta.component.html',
-  styleUrls: ['./editar-ruta.component.css'],
+  selector: 'app-detalle-ruta',
+  templateUrl: './detalle-ruta.component.html',
+  styleUrls: ['./detalle-ruta.component.css'],
 })
-export class EditarRutaComponent implements OnInit {
+export class DetalleRutaComponent implements OnInit {
  
   constructor(private aRoute: ActivatedRoute ,private router: Router, private toastr: ToastrService , private _rutaService: RutaService, private _aeropuertoService: AeropuertoService) {}
 
@@ -144,11 +144,8 @@ export class EditarRutaComponent implements OnInit {
   obtenerRuta(){
     var ruta:any;
     if(this.id !== null) {
-      
+
       this._rutaService.getById(this.id).subscribe( data => {
-
-
-        
         data.horarios.forEach((element:any) => {
 
           var fecha = new Date(element.fecha).toLocaleDateString();
@@ -209,13 +206,7 @@ export class EditarRutaComponent implements OnInit {
         hora_sal: this.rutaForm.get('time')?.value
       }
       var fecha = new Date(horario.fecha).toLocaleDateString();
-      horario.fecha = moment(fecha, 'D/M/YYYY')
-      .add(1, 'days')
-      
-      .format('D/M/YYYY');
-      
-
-    
+      horario.fecha = fecha;
      var flag:boolean = false;
       this._horariosCreados.forEach((element: any) => {
        if (element.fecha == horario.fecha && element.hora_sal == horario.hora_sal) {
