@@ -27,6 +27,7 @@ import { EditarRutaComponent } from './ruta/editar-ruta/editar-ruta.component';
 import { VerRutaComponent } from './ruta/ver-ruta/ver-ruta.component';
 import { DetalleUsuarioComponent } from './cliente/detalle-usuario/detalle-usuario.component';
 import { DetalleRutaComponent } from './ruta/detalle-ruta/detalle-ruta.component';
+import { DetalleAeropuertoComponent } from './aeropuerto/detalle-aeropuerto/detalle-aeropuerto.component';
 
 
 
@@ -50,6 +51,7 @@ import { DetalleRutaComponent } from './ruta/detalle-ruta/detalle-ruta.component
     VerRutaComponent,
     DetalleUsuarioComponent,
     DetalleRutaComponent,
+    DetalleAeropuertoComponent,
   ],
   imports: [
     NgxPaginationModule,

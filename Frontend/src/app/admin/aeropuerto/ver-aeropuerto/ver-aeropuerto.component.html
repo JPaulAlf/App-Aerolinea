@@ -35,9 +35,10 @@
                       <td></td>
                       <td style="text-align:center">{{aero.descripcion}}</td>
                       <td></td>
-                      <td style="text-align:center">
+                      <td style="text-align:center" width="150px">
                     
                         <a [routerLink]="['../../airport/edit',aero._id]"><i class="fs-5 fas fa-edit text-primary" ></i></a>
+                        <a [routerLink]="['../../airport/details',aero._id]"><i class="fs-5 fas fa-eye text-primary" ></i></a>
                           
                           <i *ngIf='aero.estado==0' (click)="estadoAerop(aero._id, aero)" 
                           class="fs-5 fas fa-arrow-circle-up text-success"></i>

@@ -5,17 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AeropuertoService } from 'src/app/services/aeropuerto.service';
-
-
 @Injectable({
   providedIn: 'root',
 })
 @Component({
-  selector: 'app-editar-aeropuerto',
-  templateUrl: './editar-aeropuerto.component.html',
-  styleUrls: ['./editar-aeropuerto.component.css'],
+  selector: 'app-detalle-aeropuerto',
+  templateUrl: './detalle-aeropuerto.component.html',
+  styleUrls: ['./detalle-aeropuerto.component.css']
 })
-export class EditarAeropuertoComponent implements OnInit {
+export class DetalleAeropuertoComponent implements OnInit {
   private map!: google.maps.Map;
   constructor(
     private toastr: ToastrService,
@@ -104,37 +102,9 @@ export class EditarAeropuertoComponent implements OnInit {
 
       marker.setIcon('../../../../assets/images/pin.png');
 
-      marker.addListener('click', () => {
-        informacion.open(this.map, marker);
-      });
+     
 
-      this.map.addListener('click', (mapsMouseEvent: any) => {
-        let lngLat = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
-        location = JSON.parse(lngLat);
-
-        this.map.setCenter(location);
-        marker.setPosition(location);
-
-        this.lat = location.lat.toString();
-        this.lon = location.lng.toString();
-
-        var textoMensaje =
-          '<h4>You are here!</h4>' +
-          '<p><b>LNG: </b>' +
-          location.lng +
-          '</p>' +
-          '<p><b>LAT: </b>' +
-          location.lat +
-          '</p>';
-
-        informacion.setContent(textoMensaje);
-
-        marker.setIcon('../../../../assets/images/pin.png');
-
-        marker.addListener('click', () => {
-          informacion.open(this.map, marker);
-        });
-      });
+      
     });
   }
 }

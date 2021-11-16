@@ -19,6 +19,7 @@ import { VerAvionComponent } from '../admin/avion/ver-avion/ver-avion.component'
 import { CrearAeropuertoComponent } from './aeropuerto/crear-aeropuerto/crear-aeropuerto.component';
 import { EditarAeropuertoComponent } from './aeropuerto/editar-aeropuerto/editar-aeropuerto.component';
 import { VerAeropuertoComponent } from './aeropuerto/ver-aeropuerto/ver-aeropuerto.component';
+import { DetalleAeropuertoComponent } from './aeropuerto/detalle-aeropuerto/detalle-aeropuerto.component';
 
 import { CrearClienteComponent } from './cliente/crear-cliente/crear-cliente.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'airport/add-airport', component: CrearAeropuertoComponent },
   { path: 'airport/edit/:id', component: EditarAeropuertoComponent },
   { path: 'airport/overview-airport', component: VerAeropuertoComponent },
+  { path: 'airport/details/:id', component: DetalleAeropuertoComponent },
 
   { path: 'customer/add-customer', component: CrearClienteComponent },
   { path: 'customer/edit/:id', component: EditarClienteComponent },
