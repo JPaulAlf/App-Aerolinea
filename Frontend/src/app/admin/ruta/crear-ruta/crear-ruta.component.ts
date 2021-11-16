@@ -176,14 +176,18 @@ if (!flag) {
     if (this.rutaForm.valid) {
       //se setea el objeto dirección
       var ruta = this.rutaForm.value
-      console.log(this._horariosCreados)
+     
       ruta.horarios = this._horariosCreados;
       this._rutaService.create(ruta).subscribe((data) => {
         this.toastr.success('Route created','Success');
+        this.rutaForm.reset();
      });
+    
+    
+    this._horariosCreados = [];
     }else{
       this.toastr.error('Form invalid','Error');
-  console.log(this.rutaForm.value)
+ 
       }
 }
 

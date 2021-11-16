@@ -131,6 +131,7 @@ if (this.lat == "" && this.lng == "") {
 
     this._usuarioService.create(usuario).subscribe((data) => {
       this.toastr.success('User created','Success');
+      this.usuarioForm.reset();
    });
   }else{
     this.toastr.error('Form invalid','Error');

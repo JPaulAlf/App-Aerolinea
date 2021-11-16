@@ -157,7 +157,9 @@ if (this.lat == "" && this.lng == "") {
     if(this.id !== null) {
       this._usuarioService.editClient(this.id,usuario).subscribe((data) => {
         this.toastr.success('User updated','Success');
+        this.usuarioForm.reset();
      });
+    
     }else{
       this.toastr.error('User not exist','Error');
     }
