@@ -1,4 +1,3 @@
-
 <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
     <!-- SELECTOR DEL TAB-->
 
@@ -15,8 +14,8 @@
     </li>
     <li class="nav-item" role="presentation">
         <!-- ESTE ES EL TAB 2 -->
-        <button class="nav-link" id="Direccion-tab" data-bs-toggle="tab" data-bs-target="#Direccion"
-            type="button" role="tab" aria-controls="Direccion" aria-selected="false">Step-3</button>
+        <button class="nav-link" id="Direccion-tab" data-bs-toggle="tab" data-bs-target="#Direccion" type="button"
+            role="tab" aria-controls="Direccion" aria-selected="false">Step-3</button>
     </li>
     <li class="nav-item" role="presentation">
         <!-- ESTE ES EL TAB 3 -->
@@ -27,7 +26,7 @@
 </ul>
 
 <div class="">
-    <form [formGroup] = "usuarioForm" (ngSubmit) = "enviar()" enctype="multipart/form-data" class="row g-3 " >
+    <form [formGroup]="usuarioForm" (ngSubmit)="enviar()" enctype="multipart/form-data" class="row g-3 ">
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -38,34 +37,29 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 mb-3">
-                        <label for="basic-url" class="form-label">Name and Last Name</label>
+                        <label for="basic-url" class="form-label">Name</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input formControlName="nombre" type="text" placeholder="Name" class="form-control" >
-                               
-                                <input formControlName="apellidos" type="text" placeholder="Last Name" class="form-control" >
-                               
+                                <input formControlName="nombre" type="text" placeholder="Name" class="form-control">
                             </div>
                             <div class="text-danger" *ngIf="usuarioForm.get('nombre')?.hasError('required')
-                            && usuarioForm.get('nombre')?.touched || usuarioForm.get('apellidos')?.hasError('required')
-                            && usuarioForm.get('apellidos')?.touched">
-                              <span>Name and last name is <strong>required</strong></span>
+                            && usuarioForm.get('nombre')?.touched">
+                                <span>Name is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 mb-3">
+                        <label for="basic-url" class="form-label">Last Name</label>
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Email</label>
-                            <div class="col-lg-12">
-                                <input formControlName="correo" type="email" placeholder="Email" class="form-control"  />
-                               
+                            <div class="input-group">
+                                <input formControlName="apellidos" type="text" placeholder="Last Name"
+                                    class="form-control">
                             </div>
-                            <div class="text-danger" *ngIf="usuarioForm.get('correo')?.hasError('required')
-                            && usuarioForm.get('correo')?.touched">
-                              <span>Email is <strong>required</strong></span>
+                            <div class="text-danger" *ngIf="usuarioForm.get('apellidos')?.hasError('required')
+                            && usuarioForm.get('apellidos')?.touched">
+                                <span>Last name is <strong>required</strong></span>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 
@@ -74,11 +68,24 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Date of Birth</label>
                             <div class="col-lg-12">
-                                <input formControlName="fech_nacimiento" type="date" class="form-control"  />
+                                <input formControlName="fech_nacimiento" type="date" class="form-control" />
                                 <div class="text-danger" *ngIf="usuarioForm.get('fech_nacimiento')?.hasError('required')
                                 && usuarioForm.get('fech_nacimiento')?.touched">
-                                  <span>Date of birth is <strong>required</strong></span>
+                                    <span>Date of birth is <strong>required</strong></span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Email</label>
+                            <div class="col-lg-12">
+                                <input formControlName="correo" type="email" placeholder="Email" class="form-control" />
+
+                            </div>
+                            <div class="text-danger" *ngIf="usuarioForm.get('correo')?.hasError('required')
+                            && usuarioForm.get('correo')?.touched">
+                                <span>Email is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
@@ -89,10 +96,11 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Work Phone Number</label>
                             <div class="col-lg-12">
-                                <input formControlName="tel_trabajo" type="number" class="form-control"  placeholder="(###)####-##-##" required />
+                                <input formControlName="tel_trabajo" type="number" class="form-control"
+                                    placeholder="(###)####-##-##" required />
                                 <div class="text-danger" *ngIf="usuarioForm.get('tel_trabajo')?.hasError('required')
                                 && usuarioForm.get('tel_trabajo')?.touched">
-                                  <span>Work phone number is <strong>required</strong></span>
+                                    <span>Work phone number is <strong>required</strong></span>
                                 </div>
                             </div>
                         </div>
@@ -101,10 +109,11 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Personal Phone Number</label>
                             <div class="col-lg-12">
-                                <input formControlName="tel_celular" type="number" class="form-control"  placeholder="(###)####-##-##" required />
+                                <input formControlName="tel_celular" type="number" class="form-control"
+                                    placeholder="(###)####-##-##" required />
                                 <div class="text-danger" *ngIf="usuarioForm.get('tel_celular')?.hasError('required')
                                 && usuarioForm.get('tel_celular')?.touched">
-                                  <span>Personal phone number is <strong>required</strong></span>
+                                    <span>Personal phone number is <strong>required</strong></span>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +138,7 @@
                                 <input formControlName="usuario" type="text" class="form-control" />
                                 <div class="text-danger" *ngIf="usuarioForm.get('usuario')?.hasError('required')
                                 && usuarioForm.get('usuario')?.touched">
-                                  <span>Username is <strong>required</strong></span>
+                                    <span>Username is <strong>required</strong></span>
                                 </div>
                             </div>
                         </div>
@@ -139,18 +148,21 @@
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Password</label>
                                 <div class="input-group">
-                                    <input formControlName="contrasenna1" type="password" placeholder="Password" class="form-control" >
-                                    <input formControlName="contrasenna2" type="password" placeholder="Confirm Password" class="form-control" >
-                                    
+                                    <input formControlName="contrasenna1" type="password" placeholder="Password"
+                                        class="form-control">
+                                    <input formControlName="contrasenna2" type="password" placeholder="Confirm Password"
+                                        class="form-control">
+
                                 </div>
                             </div>
                             <div class="text-danger" *ngIf="usuarioForm.get('contrasenna1')?.hasError('required')
                             && usuarioForm.get('contrasenna1')?.touched || usuarioForm.get('contrasenna2')?.hasError('required')
                             && usuarioForm.get('contrasenna2')?.touched">
-                              <span>Password is <strong>required</strong></span>
+                                <span>Password is <strong>required</strong></span>
                             </div>
-                            <div class="text-danger" *ngIf="usuarioForm.get('contrasenna1')?.value != usuarioForm.get('contrasenna2')?.value">
-                              <span>The passwords are differents <strong></strong></span>
+                            <div class="text-danger"
+                                *ngIf="usuarioForm.get('contrasenna1')?.value != usuarioForm.get('contrasenna2')?.value">
+                                <span>The passwords are differents <strong></strong></span>
                             </div>
                         </div>
                     </div>
@@ -168,13 +180,14 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">Please choose a image to your profile</h5>
-                                <p class="card-text">With the button positioned below, you can select an image from your computer
+                                <p class="card-text">With the button positioned below, you can select an image from your
+                                    computer
                                 </p>
                                 <br />
                                 <div class="form-group">
                                     <div class="mb-3">
-                                        <input  (change)="obtenerImagen($event)" class="form-control form-control-lg"
-                                            id="formFileSm" type="file"/>
+                                        <input (change)="obtenerImagen($event)" class="form-control form-control-lg"
+                                            id="formFileSm" type="file" />
                                     </div>
                                 </div>
                             </div>
@@ -205,15 +218,15 @@
                                 <input formControlName="sennas" type="text" class="form-control" />
                                 <div class="text-danger" *ngIf="usuarioForm.get('sennas')?.hasError('required')
                                 && usuarioForm.get('sennas')?.touched">
-                                  <span>Location Description is  <strong>required</strong></span>
+                                    <span>Location Description is <strong>required</strong></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
-                
+
 
 
                 <br />
@@ -238,7 +251,3 @@
         </div> <!-- fin del tb content-->
     </form> <!-- fin del form-->
 </div> <!-- fin del row principal-->
-
-
-
-

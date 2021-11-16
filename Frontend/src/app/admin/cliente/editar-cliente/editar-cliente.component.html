@@ -38,34 +38,29 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 mb-3">
-                        <label for="basic-url" class="form-label">Name and Last Name</label>
+                        <label for="basic-url" class="form-label">Name</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input formControlName="nombre" type="text" placeholder="Name" class="form-control" >
-                               
-                                <input formControlName="apellidos" type="text" placeholder="Last Name" class="form-control" >
-                               
+                                <input formControlName="nombre" type="text" placeholder="Name" class="form-control">
                             </div>
                             <div class="text-danger" *ngIf="usuarioForm.get('nombre')?.hasError('required')
-                            && usuarioForm.get('nombre')?.touched || usuarioForm.get('apellidos')?.hasError('required')
-                            && usuarioForm.get('apellidos')?.touched">
-                              <span>Name and last name is <strong>required</strong></span>
+                            && usuarioForm.get('nombre')?.touched">
+                                <span>Name is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 mb-3">
+                        <label for="basic-url" class="form-label">Last Name</label>
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Email</label>
-                            <div class="col-lg-12">
-                                <input formControlName="correo" type="email" placeholder="Email" class="form-control"  />
-                               
+                            <div class="input-group">
+                                <input formControlName="apellidos" type="text" placeholder="Last Name"
+                                    class="form-control">
                             </div>
-                            <div class="text-danger" *ngIf="usuarioForm.get('correo')?.hasError('required')
-                            && usuarioForm.get('correo')?.touched">
-                              <span>Email is <strong>required</strong></span>
+                            <div class="text-danger" *ngIf="usuarioForm.get('apellidos')?.hasError('required')
+                            && usuarioForm.get('apellidos')?.touched">
+                                <span>Last name is <strong>required</strong></span>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 
@@ -74,11 +69,24 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Date of Birth</label>
                             <div class="col-lg-12">
-                                <input  formControlName="fech_nacimiento" type="date" class="form-control"  />
+                                <input formControlName="fech_nacimiento" type="date" class="form-control" />
                                 <div class="text-danger" *ngIf="usuarioForm.get('fech_nacimiento')?.hasError('required')
                                 && usuarioForm.get('fech_nacimiento')?.touched">
-                                  <span>Date of birth is <strong>required</strong></span>
+                                    <span>Date of birth is <strong>required</strong></span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <label for="basic-url" class="form-label">Email</label>
+                            <div class="col-lg-12">
+                                <input formControlName="correo" type="email" placeholder="Email" class="form-control" />
+
+                            </div>
+                            <div class="text-danger" *ngIf="usuarioForm.get('correo')?.hasError('required')
+                            && usuarioForm.get('correo')?.touched">
+                                <span>Email is <strong>required</strong></span>
                             </div>
                         </div>
                     </div>
