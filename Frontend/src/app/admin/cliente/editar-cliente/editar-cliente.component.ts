@@ -158,6 +158,7 @@ if (this.lat == "" && this.lng == "") {
       this._usuarioService.editClient(this.id,usuario).subscribe((data) => {
         this.toastr.success('User updated','Success');
         this.usuarioForm.reset();
+        this.router.navigate(["/admin/customer/overview-customer"])
      });
     
     }else{
