@@ -22,6 +22,7 @@ import { VerAeropuertoComponent } from './aeropuerto/ver-aeropuerto/ver-aeropuer
 import { CrearClienteComponent } from './cliente/crear-cliente/crear-cliente.component';
 import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
 import { VerClienteComponent } from './cliente/ver-cliente/ver-cliente.component';
+import { DetalleUsuarioComponent } from './cliente/detalle-usuario/detalle-usuario.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,8 @@ const routes: Routes = [
   { path: 'customer/add-customer', component: CrearClienteComponent },
   { path: 'customer/edit/:id', component: EditarClienteComponent },
   { path: 'customer/overview-customer', component: VerClienteComponent },
+  { path: 'customer/see-customer/:id', component: DetalleUsuarioComponent },
+
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
