@@ -16,7 +16,6 @@ import { CrearAvionComponent } from '../admin/avion/crear-avion/crear-avion.comp
 import { EditarAvionComponent } from '../admin/avion/editar-avion/editar-avion.component';
 import { VerAvionComponent } from '../admin/avion/ver-avion/ver-avion.component';
 
-
 import { CrearAeropuertoComponent } from './aeropuerto/crear-aeropuerto/crear-aeropuerto.component';
 import { EditarAeropuertoComponent } from './aeropuerto/editar-aeropuerto/editar-aeropuerto.component';
 import { VerAeropuertoComponent } from './aeropuerto/ver-aeropuerto/ver-aeropuerto.component';
@@ -28,10 +27,9 @@ import { DetalleUsuarioComponent } from './cliente/detalle-usuario/detalle-usuar
 
 const routes: Routes = [
   {
-    path: '', component: InicioComponent,
-    children: [
-      { path: '/admin-dashboard', component: InicioComponent },
-    ]
+    path: '',
+    component: InicioComponent,
+    children: [{ path: '/admin-dashboard', component: InicioComponent }],
   },
 
   //direcciones en ingles, para que en el NAVEGADOR salgan acorde al sitio para
@@ -57,10 +55,9 @@ const routes: Routes = [
   { path: 'customer/edit/:id', component: EditarClienteComponent },
   { path: 'customer/overview-customer', component: VerClienteComponent },
   { path: 'customer/see-customer/:id', component: DetalleUsuarioComponent },
-
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
