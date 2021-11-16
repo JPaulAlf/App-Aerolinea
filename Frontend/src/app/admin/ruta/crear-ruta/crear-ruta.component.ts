@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import {RutaService} from 'src/app/services/ruta.service';
 import {AeropuertoService} from 'src/app/services/aeropuerto.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { forEach } from 'lodash';
 @Component({
   selector: 'app-crear-ruta',
   templateUrl: './crear-ruta.component.html',
@@ -21,6 +22,8 @@ export class CrearRutaComponent implements OnInit {
     precio_trayecto: new FormControl('', Validators.required), 
     descuento: new FormControl('', Validators.required),
     horarios: new FormControl(),
+    date: new FormControl(),
+    time: new FormControl(),
   
     
      
@@ -50,7 +53,7 @@ export class CrearRutaComponent implements OnInit {
   // _aeropuertoFinalSelec: any = '---';
 
   // //Lista de horarios fabricados
-  _horariosCreados: any = [];
+  _horariosCreados: any[] = [];
   p_Horario: any = 1;
 
   // selectChange_Inicio(event: any) {
@@ -111,7 +114,14 @@ export class CrearRutaComponent implements OnInit {
   //   }
   // }
 
-  borrarHorarioCreado(_id: any) {}
+  borrarHorarioCreado(element: any): void {
+    this._horariosCreados.forEach( (item, index) => {
+      if(item === element) this._horariosCreados.splice(index,1);
+    });
+
+    this.toastr.warning("Shedule removed");
+
+  }
 
   ngOnInit(): void {
 
@@ -122,8 +132,59 @@ export class CrearRutaComponent implements OnInit {
     });
 
   }
+  agregarHorarios(){
+    console.log(this.rutaForm.get('date')?.value)
+      if (this.rutaForm.get('date')?.value == "" || this.rutaForm.get('date')?.value==null) {
+        this.toastr.error("The date is required","Error")
+        return;
+      }
+      if (this.rutaForm.get('time')?.value == "" || this.rutaForm.get('time')?.value==null) {
+        this.toastr.error("The time is required","Error")
+        return;
+      }
 
-  enviar(){
+      const horario = {
+        fecha: this.rutaForm.get('date')?.value,
+        hora_sal: this.rutaForm.get('time')?.value
+      }
+     var flag:boolean = false;
+      this._horariosCreados.forEach((element: any) => {
+       if (element.fecha == horario.fecha && element.hora_sal == horario.hora_sal) {
+        
+        flag = true;
+       }
+     });
 
+if (!flag) {
+  this._horariosCreados.push(horario);
+  this.toastr.success("Shedule added")
+}else{
+  this.toastr.error("the schedule already exists","Error")
+}
+     
   }
+  enviar(){
+    if(this.rutaForm.get('inicio')?.value == this.rutaForm.get('destino')?.value){
+        this.toastr.error("The airports must be different","Error")
+        return;
+    }
+    if (this._horariosCreados.length ==0) {
+      this.toastr.error("Schedules are required", "Error")
+      return;
+    }
+    this.rutaForm.get('horaios')?.setValue(this._horariosCreados);
+    if (this.rutaForm.valid) {
+      //se setea el objeto dirección
+      var ruta = this.rutaForm.value
+      console.log(this._horariosCreados)
+      ruta.horarios = this._horariosCreados;
+      this._rutaService.create(ruta).subscribe((data) => {
+        this.toastr.success('Route created','Success');
+     });
+    }else{
+      this.toastr.error('Form invalid','Error');
+  console.log(this.rutaForm.value)
+      }
+}
+
 }

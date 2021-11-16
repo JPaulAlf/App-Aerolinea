@@ -22,7 +22,7 @@ module.exports.create = async (req, res, next) =>  {
  
 
 var horarios_id=[];
-
+console.log(horarios);
 await horarios.forEach(element => {
   const { fecha, hora_sal } = element;
   const horario =  new HorarioModel({ 
