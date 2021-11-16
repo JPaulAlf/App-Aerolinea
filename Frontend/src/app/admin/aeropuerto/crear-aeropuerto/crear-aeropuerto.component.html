@@ -22,7 +22,7 @@
 </ul>
 
 <div class="">
-    <form enctype="multipart/form-data" class="row g-3 needs-validation was-validated" novalidate>
+    <form [formGroup]="aeropForm" (ngSubmit)="submitForm()" class="row g-3 needs-validation was-validated" novalidate>
         <div class="tab-content" id="myTabContent">
 
             <div class="tab-pane fade show active" id="Informacion" role="tabpanel" aria-labelledby="Informacion-tab">
@@ -35,7 +35,7 @@
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
                             <label  class="form-label">Name</label>
-                            <input type="text"  class="form-control" required />
+                            <input formControlName='nombre' type="text"  class="form-control" required />
                             <div class="invalid-feedback">
                                 Missing name!!
                             </div>
@@ -43,12 +43,30 @@
                     </div>
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
-                            <label for="basic-url" class="form-label">Acronym</label>
+                            <label for="basic-url" class="form-label">Country</label>
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" required />
+                                <input formControlName='pais' type="text" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Missing Acronym!
+                                    Missing country!
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <label  class="form-label">City</label>
+                            <input formControlName='ciudad' type="text"  class="form-control" required />
+                            <div class="invalid-feedback">
+                                Missing city!!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <label  class="form-label">Description</label>
+                            <input formControlName='descripcion' type="text"  class="form-control" required />
+                            <div class="invalid-feedback">
+                                Missing description!!
                             </div>
                         </div>
                     </div>
@@ -90,7 +108,7 @@
                     ATTENTION! The specified AIRPORT will be saved in the Database.
                 </p>
 
-                <input type="submit" value="Register Airport" class="btn btn-primary"
+                <input type="submit" value="Create Airport" class="btn btn-primary"
                     style=" text-align: center; margin-left: 50%; transform: translateX(-50%); margin-top:60px" />
                 <br />
 

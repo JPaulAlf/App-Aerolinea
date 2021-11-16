@@ -12,8 +12,8 @@ module.exports.get = async (req, res, next) => {
   };
   
   module.exports.create = (req, res, next) => {
-    const { nombre, pais, ciudad, latitud, longitud, descripcion} = req.body;
-    const aeropuerto = new AeropuertoModel({ nombre, pais, ciudad, latitud, longitud, descripcion});
+    const { nombre, pais, ciudad, latitud, longitud, descripcion, estado} = req.body;
+    const aeropuerto = new AeropuertoModel({ nombre, pais, ciudad, latitud, longitud, descripcion, estado });
     aeropuerto.save();
     res.json(aeropuerto);
   };
@@ -29,10 +29,10 @@ module.exports.get = async (req, res, next) => {
   };
   
   module.exports.update = async (req, res, next) => {
-    const { nombre, pais, ciudad, latitud, longitud, descripcion } = req.body;
+    const { nombre, pais, ciudad, latitud, longitud, descripcion, estado } = req.body;
     const aeropuerto = await AeropuertoModel.findOneAndUpdate(
       { _id: req.params.id },
-      {nombre, pais, ciudad, latitud, longitud, descripcion }, // ==> {title: title, body: body}
+      {nombre, pais, ciudad, latitud, longitud, descripcion, estado }, // ==> {title: title, body: body}
       { new: true } // retornar el registro que hemos modificado con los nuevos valores
     );
     res.json(aeropuerto);

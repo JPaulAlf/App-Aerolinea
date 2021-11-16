@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class VerAvionComponent implements OnInit {
 
   
-avioncitos:any = [];
+avioncitos:any[] = [];
 p: any = 1;
 collection: any[] = this.avioncitos;  
   constructor(private avionS: AvionService, private toast: ToastrService, private router: Router) {
@@ -21,12 +21,13 @@ collection: any[] = this.avioncitos;
 
   obtenerAvioncitos(){
     this.avionS.get().subscribe(aviones =>{
-      this.avioncitos=aviones;
+      this.avioncitos=aviones.reverse();
       this.collection=this.avioncitos;
     }, err => {
 
       console.log(err);
     });
+    
   }
 
   estadoAvion(id:any, avion:any) {

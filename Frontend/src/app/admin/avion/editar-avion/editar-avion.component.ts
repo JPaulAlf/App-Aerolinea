@@ -51,7 +51,7 @@ export class EditarAvionComponent implements OnInit {
     this.avionForm.get('imagen')?.setValue(this.previsualizacion);
     if (this.avionForm.valid) {
       this.avionS.update(this.avion._id ,this.avionForm.value).subscribe((data) => {
-        this.router.navigate(['admin/airplane/overview-airplane'])
+        this.router.navigate(['admin/airplane/overview-airplane']);
       });
     }
   }
