@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {RutaService} from 'src/app/services/ruta.service';
 import {AeropuertoService} from 'src/app/services/aeropuerto.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forEach } from 'lodash';
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-crear-ruta',
   templateUrl: './crear-ruta.component.html',
