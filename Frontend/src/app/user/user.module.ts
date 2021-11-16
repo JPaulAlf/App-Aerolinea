@@ -7,12 +7,14 @@ import { UserRoutingModule } from './user-routing.module';
 import { InicioComponent } from '../user/inicio/inicio.component';
 import { ContactoComponent } from '../user/contacto/contacto.component';
 import { AcercaDeComponent } from '../user/acerca-de/acerca-de.component';
+import { OfertasComponent } from './ofertas/ofertas.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     ContactoComponent,
-    AcercaDeComponent
+    AcercaDeComponent,
+    OfertasComponent
   ],
   imports: [
     CommonModule,

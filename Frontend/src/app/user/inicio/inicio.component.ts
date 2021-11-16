@@ -74,7 +74,7 @@ export class InicioComponent implements OnInit {
       for(const item of data){
         if(item.descuento!=0){
           item.descuento= item.descuento*100;
-          if(this._rutasDescuento.length<12){
+          if(this._rutasDescuento.length<7){
             this._rutasDescuento.push(item);
           }
         }
