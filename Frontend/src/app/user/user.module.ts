@@ -8,13 +8,17 @@ import { InicioComponent } from '../user/inicio/inicio.component';
 import { ContactoComponent } from '../user/contacto/contacto.component';
 import { AcercaDeComponent } from '../user/acerca-de/acerca-de.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     ContactoComponent,
     AcercaDeComponent,
-    OfertasComponent
+    OfertasComponent,
+    InicioSesionComponent,
+    RegistroComponent
   ],
   imports: [
     CommonModule,

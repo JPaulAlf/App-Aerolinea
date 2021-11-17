@@ -456,7 +456,7 @@ a:hover{
   color: #09C6AB;
 }
 .gtco-cover a:hover {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .gtco-cover .overlay {
   z-index: 1;
