@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AvionService } from 'src/app/services/avion.service';
 import { environment } from 'src/environments/environment';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-editar-avion',
   templateUrl: './editar-avion.component.html',

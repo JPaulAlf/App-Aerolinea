@@ -37,6 +37,7 @@
                   <td></td>
                   <td style="text-align:center">
                     <a [routerLink]="['../../airplane/edit',avion._id]"><i class="fs-5 fas fa-edit text-primary" ></i></a>
+                    <a [routerLink]="['../../airplane/details',avion._id]"><i class="fs-5 fas fa-eye text-primary" ></i></a>
                       <i *ngIf='avion.estado==0' (click)="estadoAvion(avion._id, avion)" 
                       class="fs-5 fas fa-arrow-circle-up text-success"></i>
                       <i *ngIf='avion.estado==1' (click)="estadoAvion(avion._id, avion)" 

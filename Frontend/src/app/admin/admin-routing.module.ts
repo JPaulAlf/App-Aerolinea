@@ -15,6 +15,7 @@ import { DetalleRutaComponent } from './ruta/detalle-ruta/detalle-ruta.component
 import { CrearAvionComponent } from '../admin/avion/crear-avion/crear-avion.component';
 import { EditarAvionComponent } from '../admin/avion/editar-avion/editar-avion.component';
 import { VerAvionComponent } from '../admin/avion/ver-avion/ver-avion.component';
+import { DetalleAvionComponent } from '../admin/avion/detalle-avion/detalle-avion.component';
 
 import { CrearAeropuertoComponent } from './aeropuerto/crear-aeropuerto/crear-aeropuerto.component';
 import { EditarAeropuertoComponent } from './aeropuerto/editar-aeropuerto/editar-aeropuerto.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'airplane/add-airplane', component: CrearAvionComponent },
   { path: 'airplane/edit/:id', component: EditarAvionComponent },
   { path: 'airplane/overview-airplane', component: VerAvionComponent },
+  { path: 'airplane/details/:id', component: DetalleAvionComponent },
 
   { path: 'airport/add-airport', component: CrearAeropuertoComponent },
   { path: 'airport/edit/:id', component: EditarAeropuertoComponent },
