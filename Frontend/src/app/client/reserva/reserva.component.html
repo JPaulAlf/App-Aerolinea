@@ -1,1 +1,176 @@
-<p>reserva works!</p>
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
+    style="background-image: url(./assets/images/avion-prueba.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-left">
+                <div class="row row-mt-15em">
+                    <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+                        <span class="intro-text-small">We have the flight that you want</span>
+                        <h1>Flights</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="gtco-section container">
+
+    <div class="col-md-12 col-md-offset-2 text-center gtco-heading animate-box">
+        <h2>Search flights now!</h2>
+        <p>Fill in the spaces and we will look for our available flights</p>
+    </div>
+
+    <!-- BUSCADOR DE VUELOS -->
+    <div class="tab-content">
+        <div class="tab-content-inner active " data-content="signup">
+            <form action="#" [formGroup]="itemsForm" (ngSubmit)="buscarVuelo()" enctype="multipart/form-data"
+                class="needs-validation " style="margin-left: 18%; margin-right: 18%;">
+
+                <div class="input-group ">
+                    <label class="input-group-text" for="inputGroupSelect01"><i
+                            class="fs-4 fas fa-plane-departure"></i></label>
+                    <select formControlName="inicio" class="form-control">
+                        <option value="" disabled>
+                            Select airport
+                        </option>
+                        <option *ngFor="let aeropuerto of _aeropuertoInicio" [ngValue]="aeropuerto">
+                            {{aeropuerto.nombre}}
+                        </option>
+                    </select>
+
+                </div>
+                <div class="text-danger"
+                    *ngIf="itemsForm.get('inicio')?.hasError('required') && itemsForm.get('inicio')?.touched">
+                    <span>Start airport is <strong>required</strong></span>
+                </div>
+
+                <div class="input-group mt-3">
+                    <label class="input-group-text" for="inputGroupSelect01"><i
+                            class="fs-4 fas fa-plane-arrival"></i></label>
+
+                    <select formControlName="destino" id="fabri" class="form-control" required>
+                        <option value="" disabled>
+                            Select airport
+                        </option>
+                        <option *ngFor="let aeropuerto of _aeropuertoDestino" [ngValue]="aeropuerto">
+                            {{aeropuerto.nombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="text-danger" *ngIf="itemsForm.get('destino')?.hasError('required')
+        && itemsForm.get('destino')?.touched">
+                    <span>Arrival airport is <strong>required</strong></span>
+                </div>
+
+                <div class="text-danger text-center"
+                    *ngIf="!itemsForm.get('destino')?.hasError('required')&& !itemsForm.get('destino')?.hasError('required') && itemsForm.get('destino')?.value == itemsForm.get('inicio')?.value">
+                    <span>The airports must be <strong>different</strong></span>
+                </div>
+
+                <div class="input-group mt-3"
+                    *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==false">
+                    <input type="date" id="fecha1" class="form-control" disabled>
+                    <input type="date" id="fecha2" class="form-control" disabled>
+                </div>
+
+                <div class="input-group mt-3"
+                    *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==true">
+                    <input formControlName="fechaInicio" type="date" id="fecha1" class="form-control">
+                    <input type="date" id="fecha2" class="form-control" disabled>
+                </div>
+
+                <div class="input-group mt-3"
+                    *ngIf="itemsForm.get('selectRoundTrip')?.value==true && itemsForm.get('selectOneWay')?.value==true">
+                    <input formControlName="fechaInicio" type="date" id="fecha1" class="form-control">
+                    <input formControlName="fechaFinal" type="date" id="fecha2" class="form-control">
+                </div>
+
+                <div class="mb-3 mt-3 d-flex justify-content-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2" (change)="seleccion_OneWay()">
+                        <label class="form-check-label" for="inlineRadio2">One Way</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1" (change)="seleccion_RoundTrip()">
+                        <label class="form-check-label" for="inlineRadio1">Round Trip</label>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class=" mb-1 col-md-12">
+                        <input type="submit" class="btn btn-primary btn-block" value="Search"
+                            style=" text-align: center; margin-left: 50%; transform: translateX(-50%); width:40%">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- VUELOS ENCONTRADOS -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box" >
+        <!-- Project Card Example -->
+        <p *ngIf="_vuelosBusqueda_Con_Filtro.length==0 && itemsForm.get('selectSearchFlight')?.value==true">
+            Oops !! It seems we don't have a flights for the selected date!
+        </p>
+        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearchFlight')?.value==true">
+            <div class="card-body overflow-auto">
+                <table class="table table-striped">
+                    <!--routerlink, used to render another component-->
+                    <thead>
+                        <tr>
+                            <th style="text-align:center" scope="col">Departure</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Arrival</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Discount</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Price</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Buy</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of _vuelosBusqueda_Con_Filtro| paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.hora_lleg}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.ruta_id.descuento}}</td>
+                            <td></td>
+                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                            <td></td>
+                            <td style="text-align:center">${{item.hora_lleg}}</td>
+                            <td></td>
+                        </tr>
+                        <tr *ngIf="_vuelosBusqueda_Con_Filtro==null || _vuelosBusqueda_Con_Filtro.length==0">
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROCESO DE COMPRA DEL VUELO -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
+        <div *ngif="itemsForm.get('selectFlight')?.value==true">
+            <p>ESTA ES EL ESPACIO O AREA PARA LA RESERVA</p>
+        </div>
+    </div>
+
+</div>

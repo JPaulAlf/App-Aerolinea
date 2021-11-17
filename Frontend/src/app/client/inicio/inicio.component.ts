@@ -22,17 +22,17 @@ export class InicioComponent implements OnInit {
     private _rutaService: RutaService,
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService, 
+    private usuarioService: UsuarioService
   ) {}
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
   _rutasDescuento: any = [];
 
-  v_NumRutas: any = "---";
-  v_NumAviones: any = "---";
-  v_NumClientes: any = "---";
-  v_NumVuelos: any = "---";
+  v_NumRutas: any = '---';
+  v_NumAviones: any = '---';
+  v_NumClientes: any = '---';
+  v_NumVuelos: any = '---';
 
   itemsForm = new FormGroup({
     inicio: new FormControl('', Validators.required),
@@ -59,8 +59,6 @@ export class InicioComponent implements OnInit {
 
   buscarVuelo() {}
 
-
-
   seleccion_RoundTrip() {
     this.itemsForm.get('selectRoundTrip')?.setValue(true);
     this.itemsForm.get('selectOneWay')?.setValue(true);
@@ -69,12 +67,12 @@ export class InicioComponent implements OnInit {
     this.itemsForm.get('selectRoundTrip')?.setValue(false);
     this.itemsForm.get('selectOneWay')?.setValue(true);
   }
-  rutasDescuento(){
+  rutasDescuento() {
     this._rutaService.get().subscribe((data) => {
-      for(const item of data){
-        if(item.descuento!=0){
-          item.descuento= item.descuento*100;
-          if(this._rutasDescuento.length<4){
+      for (const item of data) {
+        if (item.descuento != 0) {
+          item.descuento = item.descuento * 100;
+          if (this._rutasDescuento.length < 4) {
             this._rutasDescuento.push(item);
           }
         }
@@ -83,7 +81,7 @@ export class InicioComponent implements OnInit {
   }
   contar_NumeroRutas() {
     this._rutaService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -92,7 +90,7 @@ export class InicioComponent implements OnInit {
   }
   contar_NumeroAviones() {
     this.avionService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -101,7 +99,7 @@ export class InicioComponent implements OnInit {
   }
   contar_NumeroClientes() {
     this.usuarioService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -110,17 +108,13 @@ export class InicioComponent implements OnInit {
   }
   contar_NumeroVuelos() {
     this.vueloService.getSencillo().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
-        if(i.estado==1){
+        if (i.estado == 1) {
           cantidad++;
         }
       }
       this.v_NumVuelos = cantidad;
     });
   }
-
-
-
-
 }
