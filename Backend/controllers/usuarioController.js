@@ -55,7 +55,7 @@ module.exports.signin = async (req, res, next) => {
 
 module.exports.get = async (req, res, next) => {
     
-        const usuario = await UsuarioModel.find().populate("direccion").exec();
+        const usuario = await UsuarioModel.find({rol:0}).populate("direccion").exec();
         res.json(usuario);
     
    

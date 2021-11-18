@@ -30,6 +30,7 @@ export class VerClienteComponent implements OnInit {
 
       console.log(data);
       this.usuarios = data;
+      
       this.collection = this.usuarios;
     }, err => {
 
