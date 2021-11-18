@@ -24,7 +24,7 @@ export class ReservaComponent implements OnInit {
     private vueloService: VueloService,
     private avionService: AvionService,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -91,10 +91,7 @@ export class ReservaComponent implements OnInit {
         data.hora_lleg;
     });
 
-    //Logica de compra de vuelo
-    //
-    //
-    this.listarAsientos_Vuelo();
+    // this.listarAsientos_Vuelo();
   }
 
   vuelosConFiltro() {
@@ -129,54 +126,61 @@ export class ReservaComponent implements OnInit {
     });
   }
 
-  formalizarReserva() { }
+  formalizarReserva() {}
 
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // ////////////////LISTADO DE ASIENTOS DEL AVION////////////////////////////
 
+  // numeroFilas_Vuelo: any = '';
+  // asientosVuelo: any = [];
+  // asientos: any = [];
 
+  // listarAsientos_Vuelo() {
+  //   //reinicia los asientos, si cambia la seleccion del vuelo
+  //   this.numeroFilas_Vuelo = '';
+  //   this.asientosVuelo = [];
+  //   this.asientos = [];
 
-  ////////////////////////////////////////////////////////////
+  //   this.vueloService.getById(this.idVueloSeleccionado).subscribe((data) => {
+  //     //llena arreglo con el numero de asientos del vuelo
+  //     for (let index = 0; index < data.avion_id.cant_af; index++) {
+  //       this.asientosVuelo.push({ numFil: index + 1 });
+  //     }
 
+  //     //                     ---ASIENTOS----   ---ASIENTOS----
+  //     //                            0                1
+  //     //ArregloDeArreglos  [ [{ }, { } ,{ }], [{ }, { } ,{ }] ]
+  //     //                       0    1     2     0    1     2
+  //     var contador = 0;
+  //     var asientosAux: any = [];
+  //     var asientosFila: any = [];
 
-  numeroFilas_Vuelo: any = '';
-  asientosVuelo: any = [];
-  asientos: any = [];
+  //     for (let i = 0; i < data.avion_id.cant_filas; i++) {
+  //       for (let j = 0; j < data.avion_id.cant_af; j++) {
+  //         asientosFila.push(data.asientos[contador]);
+  //         contador++;
+  //       }
+  //       asientosAux.push(asientosFila);
+  //       asientosFila = [];
+  //     }
 
-  listarAsientos_Vuelo() {
-    //reinicia los asientos, si cambia la seleccion del vuelo
-    this.numeroFilas_Vuelo = '';
-    this.asientosVuelo = [];
-    this.asientos = [];
+  //     this.asientos = asientosAux;
 
-    this.vueloService.getById(this.idVueloSeleccionado).subscribe((data) => {
-      //llena arreglo con el numero de asientos del vuelo
-      for (let index = 0; index < data.avion_id.cant_af; index++) {
-        this.asientosVuelo.push({ numFil: index + 1 });
-      }
-
-
-
-      //                     ---ASIENTOS----   ---ASIENTOS----
-      //                            0                1
-      //ArregloDeArreglos  [ [{ }, { } ,{ }], [{ }, { } ,{ }] ]
-      //                       0    1     2     0    1     2
-      var contador = 0;
-      var asientosAux: any = [];
-      var asientosFila: any = [];
-
-      for (let i = 0; i < data.avion_id.cant_filas; i++) {
-        for (let j = 0; j < data.avion_id.cant_af; j++) {
-          asientosFila.push(data.asientos[contador])
-          contador++;
-        }
-        asientosAux.push(asientosFila)
-        asientosFila = [];
-      }
-
-      this.asientos = asientosAux;
-
-      console.log(this.asientos)
-
-
-    });
-  }
+  //     console.log(this.asientos);
+  //   });
+  // }
 } //fin del componente
