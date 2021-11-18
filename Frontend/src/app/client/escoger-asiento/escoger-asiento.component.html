@@ -1,0 +1,53 @@
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
+    style="background-image: url(./assets/images/ofertas.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-left">
+                <div class="row row-mt-15em">
+                    <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+                        <span class="intro-text-small">New offers every day</span>
+                        <h1>Offers</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="gtco-section container">
+
+    <div class="col-md-12 col-md-offset-2 text-center gtco-heading animate-box">
+        <h2>Airplanes Seats</h2>
+        <p>Choose between the available seats</p>
+    </div>
+
+    <!-- Content Column -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4 gtco-heading animate-box">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body overflow-auto">
+                <div id="avion">
+                    <table class="table table-striped mt-4 mb-4 me-4">
+                        <!--routerlink, used to render another component-->
+                        <thead>
+                            <tr *ngFor='let numero of encabezado'>
+                                <th></th>
+                                <th>{{numero}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let items of asientosVista">
+                               <td *ngFor='let item of items'>
+                                   <!--Radio buttons con if para deshabilitar-->
+                               </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+

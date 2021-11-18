@@ -6,6 +6,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { CheckInComponent } from './check-in/check-in.component';
 import { HistoricoComponent } from './historico/historico.component';
+import { EscogerAsientoComponent } from './escoger-asiento/escoger-asiento.component';
+
 
 const routes: Routes = [
   {
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'purchase-flight', component: ReservaComponent },
   { path: 'check-in', component: CheckInComponent },
   { path: 'purchases', component: HistoricoComponent },
+  { path: 'flight-seats', component: EscogerAsientoComponent },
 ];
 
 @NgModule({

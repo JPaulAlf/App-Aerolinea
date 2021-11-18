@@ -11,6 +11,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { CheckInComponent } from './check-in/check-in.component';
 import { HistoricoComponent } from './historico/historico.component';
+import { EscogerAsientoComponent } from './escoger-asiento/escoger-asiento.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { HistoricoComponent } from './historico/historico.component';
     ReservaComponent,
     CheckInComponent,
     HistoricoComponent,
+    EscogerAsientoComponent,
   
   ],
   imports: [
