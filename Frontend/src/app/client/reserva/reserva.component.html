@@ -202,7 +202,49 @@
 
 
 
-    <!-- PROCESO DE COMPRA DEL VUELO -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- PROCESO DE COMPRA DEL VUELO
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
 
         <div>
@@ -210,7 +252,6 @@
             <div class="card shadow mb-4">
                 <div class="card-body overflow-auto">
                     <table class="table table-striped">
-                        <!--routerlink, used to render another component-->
                         <thead>
                             <tr>
                                 <th *ngFor="let item of asientosVuelo" style="text-align:center" scope="col">
@@ -221,20 +262,21 @@
                         <tbody id="tablaAsientos">
                             <tr *ngFor="let item of asientos">
                                 <td *ngFor="let item2 of item" style="text-align:center">
-                                    <a *ngIf="item2.est==false">
-                                        <i class="fs-5 fas fa-arrow-circle-up text-success"></i>
-                                    </a>
-                                    <a *ngIf="item2.est==true">
-                                        <i class="fs-5 fas fa-arrow-circle-down text-danger"></i>
-                                    </a>
+                                    <div class="mb-3 mt-3 d-flex justify-content-center">
+                                        <div *ngIf="item2.est==false" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="option1" style="background-color:green">
+                                        </div>
+                                        <div *ngIf="item2.est==true" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="option1" disabled style="background-color:red">
+                                        </div>
+                                    </div>
                                 </td>
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
-
-    </div>
+    </div> -->
