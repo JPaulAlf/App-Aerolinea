@@ -52,11 +52,13 @@
                             <td></td>
                             <td style="text-align:center">${{item.precio_trayecto}}</td>
                             <td></td>
-                            <td style="text-align:center">${{item.precio_trayecto}}</td>
+                            <td style="text-align:center">
+                                <i id="comprar" class="fs-5 far fa-credit-card text-success"></i>
+                            </td>
                             <td></td>
                         </tr>
                         <tr *ngIf="_rutasDescuento==null || _rutasDescuento.length==0">
-                            <td style="text-align:center">- - -</td>
+                            <td style="text-align:center ">- - -</td>
                             <td></td>
                             <td style="text-align:center">- - -</td>
                             <td></td>

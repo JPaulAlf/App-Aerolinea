@@ -31,6 +31,11 @@ export class ReservaComponent implements OnInit {
   _vuelosBusqueda_Con_Filtro: any = [];
   p: any = 1;
 
+  selectFlight: string = 'False';
+  rutaSeleccionado: string = 'Route not selected!';
+  horarioSeleccionado: string = 'Schedule not selected!';
+  idVueloSeleccionado: string = 'Flight not selected!';
+
   itemsForm = new FormGroup({
     inicio: new FormControl('', Validators.required),
     destino: new FormControl('', Validators.required),
@@ -39,7 +44,7 @@ export class ReservaComponent implements OnInit {
     selectRoundTrip: new FormControl(''),
     selectOneWay: new FormControl(''),
     selectSearchFlight: new FormControl(''),
-    selectFlight: new FormControl(''),
+    //selectFlight: new FormControl(''),
   });
 
   ngOnInit(): void {
@@ -65,11 +70,30 @@ export class ReservaComponent implements OnInit {
     this.vuelosConFiltro();
   }
 
-  SeleccionarVuelo() {
-    this.itemsForm.get('selectFlight')?.setValue(true);
+  SeleccionarVuelo(_id: any) {
+    //this.itemsForm.get('selectFlight')?.setValue(true);
+    this.selectFlight = 'true';
+    this.idVueloSeleccionado = _id;
+    this.vueloService.getById(this.idVueloSeleccionado).subscribe((data) => {
+      //Ruta seleccionada
+      this.rutaSeleccionado =
+        data.ruta_id.inicio.nombre + ' >>> ' + data.ruta_id.destino.nombre;
+
+      //Horario de la ruta seleccionada
+      var date = new Date(data.horario_id.fecha);
+      data.horario_id.fecha = date.toLocaleDateString();
+      this.horarioSeleccionado =
+        data.horario_id.fecha +
+        ' ' +
+        data.horario_id.hora_sal +
+        ' >>> ' +
+        data.hora_lleg;
+    });
+
     //Logica de compra de vuelo
     //
     //
+    this.listarAsientos_Vuelo();
   }
 
   vuelosConFiltro() {
@@ -101,7 +125,59 @@ export class ReservaComponent implements OnInit {
         }
       }
       this._vuelosBusqueda_Con_Filtro = vuelosAuxiliares.reverse();
-      console.log(this._vuelosBusqueda_Con_Filtro);
     });
   }
-}
+
+  formalizarReserva() {}
+
+
+
+  
+////////////////////////////////////////////////////////////
+
+
+  numeroFilas_Vuelo: any = '';
+  asientosVuelo: any = [];
+  asientos: any = [];
+
+  listarAsientos_Vuelo() {
+    //reinicia los asientos, si cambia la seleccion del vuelo
+    this.numeroFilas_Vuelo = '';
+    this.asientosVuelo = [];
+    this.asientos = [];
+
+    this.vueloService.getById(this.idVueloSeleccionado).subscribe((data) => {
+      //llena arreglo con el numero de asientos del vuelo
+      for (let index = 0; index < data.avion_id.cant_filas; index++) {
+        this.asientosVuelo.push({ numFil: index + 1 });
+      }
+
+      //llena arreglo con asientos formateados
+      //Estos son los que se imprimen para ser seleccionados
+      for (const item of data.asientos) {
+        this.asientos.push({
+          numFil: item.fil,
+          numFil_numAsiento: item.fil + '_' + item.num,
+          estado: item.est,
+        });
+      }
+
+      //                     ---ASIENTOS----   ---ASIENTOS----
+      //                            0                1
+      //ArregloDeArreglos  [ [{ }, { } ,{ }], [{ }, { } ,{ }] ]
+      //                       0    1     2     0    1     2
+
+       for (let i = 0; i < data.avion_id.cant_filas; i++) {
+        for (let j = 0; j < data.avion_id.cant_af; j++) {
+          
+        }
+      }
+
+
+
+
+
+
+    });
+  }
+} //fin del componente

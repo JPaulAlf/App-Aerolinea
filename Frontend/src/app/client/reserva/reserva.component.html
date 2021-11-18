@@ -1,5 +1,5 @@
 <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
-    style="background-image: url(./assets/images/avion-prueba.jpg)">
+    style="background-image: url(./assets/images/avion-reserva.jpg)">
     <div class="overlay"></div>
     <div class="gtco-container">
         <div class="row">
@@ -110,7 +110,7 @@
     </div>
 
     <!-- VUELOS ENCONTRADOS -->
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box" >
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
         <!-- Project Card Example -->
         <p *ngIf="_vuelosBusqueda_Con_Filtro.length==0 && itemsForm.get('selectSearchFlight')?.value==true">
             Oops !! It seems we don't have a flights for the selected date!
@@ -140,11 +140,14 @@
                             <td></td>
                             <td style="text-align:center">{{item.hora_lleg}}</td>
                             <td></td>
-                            <td style="text-align:center">{{item.ruta_id.descuento}}</td>
+                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                             <td></td>
                             <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
                             <td></td>
-                            <td style="text-align:center">${{item.hora_lleg}}</td>
+                            <td style="text-align:center">
+                                <i (click)="SeleccionarVuelo(item._id)" id="comprar"
+                                    class="fs-5 far fa-credit-card text-success"></i>
+                            </td>
                             <td></td>
                         </tr>
                         <tr *ngIf="_vuelosBusqueda_Con_Filtro==null || _vuelosBusqueda_Con_Filtro.length==0">
@@ -168,9 +171,70 @@
 
     <!-- PROCESO DE COMPRA DEL VUELO -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
-        <div *ngif="itemsForm.get('selectFlight')?.value==true">
-            <p>ESTA ES EL ESPACIO O AREA PARA LA RESERVA</p>
+
+        <div>
+            <p>Let start with the pay</p>
+            <form action="#" (ngSubmit)="formalizarReserva()" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Route Selected</label>
+                                <input id="textoSelect" type="text" class="form-control" value={{rutaSeleccionado}}
+                                    readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Schedule Selected</label>
+                                <input id="textoSelect" type="text" class="form-control" value={{horarioSeleccionado}}
+                                    readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
 
-</div>
+
+
+    <!-- PROCESO DE COMPRA DEL VUELO -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
+
+        <div>
+            <p>Filas de asientos</p>
+            <div class="card shadow mb-4">
+                <div class="card-body overflow-auto">
+                    <table class="table table-striped">
+                        <!--routerlink, used to render another component-->
+                        <thead>
+                            <tr>
+                                <th *ngFor="let item of asientosVuelo" style="text-align:center" scope="col">
+                                    {{item.numFil}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAsientos">
+                            <tr *ngFor="let item of asientos">
+                                <td *ngFor="let item2 of item" style="text-align:center">
+                                    <a *ngIf="item2.estado==false">
+                                        <i class="fs-5 fas fa-arrow-circle-up text-success"></i>
+                                    </a>
+                                    <a *ngIf="item2.estado==true">
+                                        <i class="fs-5 fas fa-arrow-circle-down text-danger"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
