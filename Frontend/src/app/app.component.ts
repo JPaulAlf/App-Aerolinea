@@ -15,12 +15,12 @@ export class AppComponent {
   constructor(private tokenStorageService: TokenStorageService) {}
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.isLoggedIn, 'this.isLoggedIn');
+    //console.log(this.isLoggedIn, 'this.isLoggedIn');
     if (this.isLoggedIn) {
       const { user } = this.tokenStorageService.getUser();
       this.roles = user.rol;
       this.usuario = user.usuario;
-      console.log(this.roles)
+      //console.log(this.roles)
       this.showAdminBoard = this.roles===1;
       this.showModeratorBoard =  this.roles===0;
       

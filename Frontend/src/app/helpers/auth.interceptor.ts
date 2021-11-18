@@ -22,7 +22,7 @@ import {
       let authReq = req;
       const token = this.token.getToken();
   
-      console.log('Token: ' + token);
+      //console.log('Token: ' + token);
   
       if (token != null) {
         authReq = req.clone({

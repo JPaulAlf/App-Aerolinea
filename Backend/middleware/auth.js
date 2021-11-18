@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    console.log(token);
+  //  console.log(token);
     const { usuario } = jwt.verify(token, "secret");
     
     req.usuario = await usuarioModel.findOne({ usuario }).exec();

@@ -3,7 +3,7 @@ const permit = (...permittedRoles) => {
   // return a middleware
   return (request, response, next) => {
     const { usuario } = request;
-    console.log(usuario)
+   // console.log(usuario)
     // valida si el usuario ha sido autenticado, y si tiene el rol necesario
     if (usuario && permittedRoles.includes(usuario.rol)) {
       next();
