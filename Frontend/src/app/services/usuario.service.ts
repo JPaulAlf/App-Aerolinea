@@ -24,7 +24,7 @@ export class UsuarioService {
   }
 
   create(usuario: any): Observable<any> {
-    return this.http.post(`${BLOG_API_ENDPOINT}/create-client/`, usuario);
+    return this.http.post(`${BLOG_API_ENDPOINT}/create-client/`, usuario,httpOptions);
   }
 
   deleteClient(id: string): Observable<any> {
@@ -44,4 +44,11 @@ export class UsuarioService {
   editState(id: string, usuario: any): Observable<any> {
     return this.http.put(`${BLOG_API_ENDPOINT}/update-client-state/${id}`,usuario);
   }
+  signup(usuario: any): Observable<any> {
+    return this.http.post(`${BLOG_API_ENDPOINT}/signup`, usuario,httpOptions);
+  }
+  signIn(usuario: any): Observable<any> {
+    return this.http.post(`${BLOG_API_ENDPOINT}/signin`, usuario,httpOptions);
+  }
+
 }

@@ -6533,4 +6533,7 @@ button.close {
   transition: 0.5s;
 }
 
+.logout:hover{
+  cursor: pointer;
+}
 

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/Usuario");
+const usuarioModel = require("../models/Usuario");
 //Se obtiene las variables de entorno
-const config = process.env;
+const config = "secret";
 
 //Se verifica que el token sea valido
 const verifyToken = async (req, res, next) => {
@@ -12,9 +12,13 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const { username } = jwt.verify(token, config.SECRETWORDJWT);
-    req.user = await userModel.findOne({ username }).exec();
+    console.log(token);
+    const { usuario } = jwt.verify(token, "secret");
+    
+    req.usuario = await usuarioModel.findOne({ usuario }).exec();
+  
   } catch (err) {
+    console.log(err)
     return res.status(401).send("Invalid Token");
   }
   return next();

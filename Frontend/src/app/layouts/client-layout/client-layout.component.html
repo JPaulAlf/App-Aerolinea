@@ -7,7 +7,7 @@
     <li><a class="option" routerLink="client/check-in">Check-in</a></li>
     <li><a class="option" routerLink="client/purchases">Purchases</a></li>
     <li><a class="option" routerLink="client/profile">Profile</a></li>
-    <li><a class="option" routerLink="/">Log out</a></li>
+    <li><a class="option logout" (click)="logout()">Log out</a></li>
   </ul>
 
 </div>
@@ -25,7 +25,7 @@
           <li><a routerLink="client/check-in">Check-in</a></li>
           <li><a routerLink="client/purchases">Purchases</a></li>
           <li><a routerLink="client/profile">Profile</a></li>
-          <li><a routerLink="/">Log out</a></li>
+          <li><a (click)="logout()" class="logout">Log out</a></li>
         </ul>
       </div>
     </div>

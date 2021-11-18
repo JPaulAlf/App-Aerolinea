@@ -127,8 +127,8 @@ if (this.lat == "" && this.lng == "") {
   this.usuarioForm.get('estado')?.setValue("1");
   if (this.usuarioForm.valid) {
     //se setea el objeto dirección
-    const usuario = this.usuarioForm.value
-
+    var usuario = this.usuarioForm.value
+    usuario.rol = 0;
     this._usuarioService.create(usuario).subscribe((data) => {
       this.toastr.success('User created','Success');
       this.usuarioForm.reset();

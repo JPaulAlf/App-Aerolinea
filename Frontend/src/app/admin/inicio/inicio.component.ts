@@ -4,6 +4,9 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import {Router} from '@angular/router';
+
 
 declare function ejecutarAnimacion(): any;
 
@@ -27,7 +30,8 @@ export class InicioComponent implements OnInit {
     private vueloService: VueloService,
     private avionService: AvionService,
     private usuarioService: UsuarioService, 
-    private rutaService: RutaService
+    private rutaService: RutaService, 
+   
   ) {}
 
   contar_NumeroRutas() {
@@ -79,6 +83,10 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+
+
+
     ejecutarAnimacion();
     //Campos dinamicos que se llenan desde la BD 
     this.contar_NumeroRutas();

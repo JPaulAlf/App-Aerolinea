@@ -8,7 +8,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { styles } from './mapstyles';
 import { ActivatedRoute, Router } from '@angular/router';
 import { waitForAsync } from '@angular/core/testing';
-
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 declare function ejecutarAnimacion(): any;
 
 @Injectable({
@@ -45,14 +45,17 @@ export class PerfilComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private toastr: ToastrService,
     private _usuarioService: UsuarioService,
-    private router: Router
+    private router: Router, 
+    private token:TokenStorageService
   ) {
-    this.id = this.aRoute.snapshot.paramMap.get('id');
-    this.obtenerUsuario();
+    
+   
   }
 
   ngOnInit(): void {
     ejecutarAnimacion();
+    this.obtenerUsuario();
+    
   }
 
   mapa() {
@@ -194,7 +197,7 @@ export class PerfilComponent implements OnInit {
     });
   obtenerUsuario() {
     if (this.id !== null) {
-      this._usuarioService.getById(this.id).subscribe((data) => {
+      this._usuarioService.getById(this.token.getUser().user._id).subscribe((data) => {
         this.lat = data.direccion.latitud;
         this.lng = data.direccion.longitud;
         this.previsualizacion = data.imagen;

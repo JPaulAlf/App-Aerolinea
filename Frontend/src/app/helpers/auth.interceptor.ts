@@ -29,6 +29,10 @@ import {
           headers: req.headers.set(TOKEN_HEADER_KEY, token),
         });
       }
+
+      
+
+
       return next.handle(authReq);
     }
   }

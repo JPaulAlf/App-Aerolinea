@@ -4,52 +4,53 @@ const DireccionModel = require("../models/Direccion");
 const jwt = require('jsonwebtoken');
 
 //Se obtiene las variables de entorno
-const config = process.env;
+const config = "secret";
 
 // creación de nuevos usuarios
 module.exports.signup = async (req, res, next) => {
-    const { usuario, pwd } = req.body;
-    if (!usuario || !pwd) {
-        res.json({ success: false, msg: 'Please pass usuario and pwd.' });
-    } else {
-        var newUser = new UsuarioModel({ usuario: usuario, pwd: pwd });
-        // save the user
-        newUser.save(function (err) {
-            if (err) {
-                return res.json({ success: false, msg: 'User already exists.' });
-            }
-            res.json({ success: true, msg: 'Successful created new user.' });
-        });
-    }
+  var {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen} = req.body;
+
+  const { sennas, latitud, longitud } = direccion
+  console.log(direccion.latitud+" , "+direccion.longitud);
+  const direccionUser = await new DireccionModel({ sennas: sennas, latitud: latitud, longitud: longitud });
+  direccionUser.save();
+
+  
+  direccion = direccionUser._id;
+  const User = await new UsuarioModel({rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen});
+  User.save();
+  res.json(User);
 };
 
 // logueo de usuarios
 module.exports.signin = async (req, res, next) => {
 
-    const { usuario, pwd } = req.body;
+  const { usuario, pwd } = req.body;
 
-    const user = await UsuarioModel.findOne({ usuario: usuario }).exec();
+  const user = await UsuarioModel.findOne({ usuario: usuario }).exec();
 
-    if (!user) {
-        res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-    } else {
-        //Si el usuario existe verifica si las contraseñas
-        user.comparepwd(pwd, user.pwd, function (err, isMatch) {
-            if (isMatch && !err) {
-                // Si el usuario es correcto y la contraseña coindice se procede a crear el token
-                const token = jwt.sign({ "usuario": usuario}, 
-                                         config.SECRETWORDJWT, 
-                                         { expiresIn: "2h"}
-                                       );
-                // return the information including token as JSON
-                res.json({ success: true, token: 'JWT ' + token });
-
-            } else {
-                //si la contraseña no coincide se procede a indicar el error
-                res.status(401).send({ success: false, msg: 'Authentication failed. Wrong pwd.' });
-            }
-        });
-    }
+  if (!user) {
+      res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+  } else {
+      //Si el usuario existe verifica si las contraseñas
+      user.comparePassword(pwd, user.pwd, function (err, isMatch) {
+          if (isMatch && !err) {
+            // Si el usuario es correcto y la contraseña coindice se procede a crear el token
+            const token = jwt.sign(
+              { usuario: usuario },
+              config,
+              { expiresIn: "2h" }
+            );
+            // return the information including token as JSON
+            const payload = { rol: user.rol, usuario: user.usuario, _id: user._id };
+            res.json({ success: true, token: token, user: payload });
+          } else {
+              //si la contraseña no coincide se procede a indicar el error
+              //res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+              res.json({ success: false, msg: 'Authentication failed. Wrong password.' });
+          }
+      });
+  }
 };
 
 module.exports.get = async (req, res, next) => {
