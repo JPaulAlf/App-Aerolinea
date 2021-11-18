@@ -16,10 +16,10 @@ export class AdminLayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.token.getUser().roles == 0 || this.token.getToken() == null) {
-      this.router.navigate(['/offers'])
-      return;
-    }
+    // if (this.token.getUser().roles == 0 || this.token.getToken() == null) {
+    //   this.router.navigate(['/offers'])
+    //   return;
+    // }
     this._usuarioService.getById(this.token.getUser().user._id).subscribe(
       (data) => {
 

@@ -12,11 +12,11 @@ import { TokenStorageService } from '../../services/token-storage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private tokenStorageService: TokenStorageService,
     private router: Router
-  ) {}
+  ) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -28,10 +28,16 @@ export class AuthGuard implements CanActivate {
     const isAuthenticated = !!this.tokenStorageService.getToken();
     if (!isAuthenticated) {
       // redirige al usuario a la pagina de login
-      this.router.navigate(['/login']);
+      this.router.navigate(['/sign-in']);
       return false;
     } else {
-      return true;
+      if (this.tokenStorageService.getUser().roles == 1) {
+        return true
+      } else {
+        this.router.navigate(['/sign-in']);
+        return false
+      }
+
     }
   }
 }
