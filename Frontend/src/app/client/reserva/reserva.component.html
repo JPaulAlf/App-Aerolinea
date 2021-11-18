@@ -221,10 +221,10 @@
                         <tbody id="tablaAsientos">
                             <tr *ngFor="let item of asientos">
                                 <td *ngFor="let item2 of item" style="text-align:center">
-                                    <a *ngIf="item2.estado==false">
+                                    <a *ngIf="item2.est==false">
                                         <i class="fs-5 fas fa-arrow-circle-up text-success"></i>
                                     </a>
-                                    <a *ngIf="item2.estado==true">
+                                    <a *ngIf="item2.est==true">
                                         <i class="fs-5 fas fa-arrow-circle-down text-danger"></i>
                                     </a>
                                 </td>

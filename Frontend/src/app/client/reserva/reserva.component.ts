@@ -6,6 +6,7 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
+import { forEach } from 'lodash';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -23,7 +24,7 @@ export class ReservaComponent implements OnInit {
     private vueloService: VueloService,
     private avionService: AvionService,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -128,12 +129,12 @@ export class ReservaComponent implements OnInit {
     });
   }
 
-  formalizarReserva() {}
+  formalizarReserva() { }
 
 
 
-  
-////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////
 
 
   numeroFilas_Vuelo: any = '';
@@ -148,34 +149,32 @@ export class ReservaComponent implements OnInit {
 
     this.vueloService.getById(this.idVueloSeleccionado).subscribe((data) => {
       //llena arreglo con el numero de asientos del vuelo
-      for (let index = 0; index < data.avion_id.cant_filas; index++) {
+      for (let index = 0; index < data.avion_id.cant_af; index++) {
         this.asientosVuelo.push({ numFil: index + 1 });
       }
 
-      //llena arreglo con asientos formateados
-      //Estos son los que se imprimen para ser seleccionados
-      for (const item of data.asientos) {
-        this.asientos.push({
-          numFil: item.fil,
-          numFil_numAsiento: item.fil + '_' + item.num,
-          estado: item.est,
-        });
-      }
+
 
       //                     ---ASIENTOS----   ---ASIENTOS----
       //                            0                1
       //ArregloDeArreglos  [ [{ }, { } ,{ }], [{ }, { } ,{ }] ]
       //                       0    1     2     0    1     2
+      var contador = 0;
+      var asientosAux: any = [];
+      var asientosFila: any = [];
 
-       for (let i = 0; i < data.avion_id.cant_filas; i++) {
+      for (let i = 0; i < data.avion_id.cant_filas; i++) {
         for (let j = 0; j < data.avion_id.cant_af; j++) {
-          
+          asientosFila.push(data.asientos[contador])
+          contador++;
         }
+        asientosAux.push(asientosFila)
+        asientosFila = [];
       }
 
+      this.asientos = asientosAux;
 
-
-
+      console.log(this.asientos)
 
 
     });
