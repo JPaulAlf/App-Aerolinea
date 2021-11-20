@@ -109,13 +109,16 @@
         </div>
     </div>
 
-    <!-- VUELOS ENCONTRADOS -->
+    <!-- VUELOS ENCONTRADOS ROUND TRIP-->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
         <!-- Project Card Example -->
-        <p *ngIf="_vuelosBusqueda_Con_Filtro.length==0 && itemsForm.get('selectSearchFlight')?.value==true">
+        <p *ngIf="_vuelosBusqueda_RoundTrip1.length==0 && itemsForm.get('selectSearch_RoundTrip')?.value==true">
             Oops !! It seems we don't have a flights for the selected date!
         </p>
-        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearchFlight')?.value==true">
+        <p *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
+            Outbound flight
+        </p>
+        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
             <div class="card-body overflow-auto">
                 <table class="table table-striped">
                     <!--routerlink, used to render another component-->
@@ -135,7 +138,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let item of _vuelosBusqueda_Con_Filtro| paginate: { itemsPerPage: 10, currentPage: p }">
+                            *ngFor="let item of _vuelosBusqueda_RoundTrip1| paginate: { itemsPerPage: 10, currentPage: p }">
                             <td style="text-align:center">{{item.horario_id.fecha}}</td>
                             <td></td>
                             <td style="text-align:center">{{item.hora_lleg}}</td>
@@ -145,12 +148,71 @@
                             <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
                             <td></td>
                             <td style="text-align:center">
-                                <i (click)="SeleccionarVuelo(item._id)" id="comprar"
+                                <i (click)="SeleccionarVuelo1_RoundTrip(item._id)" id="comprar"
                                     class="fs-5 far fa-credit-card text-success"></i>
                             </td>
                             <td></td>
                         </tr>
-                        <tr *ngIf="_vuelosBusqueda_Con_Filtro==null || _vuelosBusqueda_Con_Filtro.length==0">
+                        <tr *ngIf="_vuelosBusqueda_RoundTrip1==null || _vuelosBusqueda_RoundTrip1.length==0">
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+        <br>
+        <p *ngIf="_vuelosBusqueda_RoundTrip2.length==0 && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+            Oops !! It seems we don't have a flights for the selected date!
+        </p>
+        <p *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
+            Return flight
+        </p>
+        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
+            <div class="card-body overflow-auto">
+                <table class="table table-striped">
+                    <!--routerlink, used to render another component-->
+                    <thead>
+                        <tr>
+                            <th style="text-align:center" scope="col">Departure</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Arrival</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Discount</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Price</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Buy</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of _vuelosBusqueda_RoundTrip2| paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.hora_lleg}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
+                            <td></td>
+                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                            <td></td>
+                            <td style="text-align:center">
+                                <i (click)="SeleccionarVuelo2_RoundTrip(item._id)" id="comprar"
+                                    class="fs-5 far fa-credit-card text-success"></i>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr *ngIf="_vuelosBusqueda_RoundTrip2==null || _vuelosBusqueda_RoundTrip2.length==0">
                             <td style="text-align:center">- - -</td>
                             <td></td>
                             <td style="text-align:center">- - -</td>
@@ -169,10 +231,72 @@
         </div>
     </div>
 
-    <!-- PROCESO DE COMPRA DEL VUELO -->
+    <!-- VUELOS ENCONTRADOS ONE WAY-->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
+        <!-- Project Card Example -->
+        <p *ngIf="_vuelosBusqueda_OneWay.length==0 && itemsForm.get('selectSearch_OneWay')?.value==true">
+            Oops !! It seems we don't have a flights for the selected date!
+        </p>
+        <p *ngIf="itemsForm.get('selectSearch_OneWay')?.value==true">
+            Outbound flight
+        </p>
+        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_OneWay')?.value==true">
+            <div class="card-body overflow-auto">
+                <table class="table table-striped">
+                    <!--routerlink, used to render another component-->
+                    <thead>
+                        <tr>
+                            <th style="text-align:center" scope="col">Departure</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Arrival</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Discount</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Price</th>
+                            <th scope="col"></th>
+                            <th style="text-align:center" scope="col">Buy</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of _vuelosBusqueda_OneWay| paginate: { itemsPerPage: 10, currentPage: p }">
+                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.hora_lleg}}</td>
+                            <td></td>
+                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
+                            <td></td>
+                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                            <td></td>
+                            <td style="text-align:center">
+                                <i (click)="SeleccionarVuelo_OneWay(item._id)" id="comprar"
+                                    class="fs-5 far fa-credit-card text-success"></i>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr *ngIf="_vuelosBusqueda_OneWay==null || _vuelosBusqueda_OneWay.length==0">
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                            <td style="text-align:center">- - -</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
 
-        <div>
+    <!-- PROCESO DE COMPRA DEL VUELO ROUND WAY-->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
+        <div
+            *ngIf="itemsForm.get('selectFlight1_RoundTrip')?.value==true && itemsForm.get('selectFlight2_RoundTrip')?.value==true">
             <p>Let start with the pay</p>
             <form action="#" (ngSubmit)="formalizarReserva()" enctype="multipart/form-data">
                 <div class="row">
@@ -180,8 +304,8 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Route Selected</label>
-                                <input id="textoSelect" type="text" class="form-control" value={{rutaSeleccionado}}
-                                    readonly />
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{rutaSeleccionado1_RoundTrip}} readonly />
                             </div>
                         </div>
                     </div>
@@ -189,15 +313,63 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Schedule Selected</label>
-                                <input id="textoSelect" type="text" class="form-control" value={{horarioSeleccionado}}
-                                    readonly />
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{horarioSeleccionado1_RoundTrip}} readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Route Selected</label>
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{rutaSeleccionado2_RoundTrip}} readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Schedule Selected</label>
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{horarioSeleccionado2_RoundTrip}} readonly />
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
 
+    <!-- PROCESO DE COMPRA DEL VUELO ONE WAY-->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
+        <div *ngIf="itemsForm.get('selectFlight_OneWay')?.value==true">
+            <p>Let start with the pay</p>
+            <form action="#" (ngSubmit)="formalizarReserva()" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Route Selected</label>
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{rutaSeleccionado_OneWay}} readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="basic-url" class="form-label">Schedule Selected</label>
+                                <input id="textoSelect" type="text" class="form-control"
+                                    value={{horarioSeleccionado_OneWay}} readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 
@@ -243,7 +415,6 @@
 
 
 
-    
     <!-- PROCESO DE COMPRA DEL VUELO
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
 
