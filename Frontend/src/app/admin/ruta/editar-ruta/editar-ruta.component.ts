@@ -245,7 +245,10 @@ if (!flag) {
     if (this.rutaForm.valid) {
       //se setea el objeto dirección
       var ruta = this.rutaForm.value
-     
+      if (this.rutaForm.get('descuento')?.value >=1) {
+        this.toastr.error("The discount must be less","Error")
+        return;
+      }
       ruta.horarios = this._horariosCreados;
       this._aeropuertoInicio.forEach((element:any) => {
         if (element._id == ruta.inicio._id) {

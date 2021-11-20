@@ -1,6 +1,6 @@
 const UsuarioModel = require("../models/Usuario");
 const DireccionModel = require("../models/Direccion");
-
+const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 
 //Se obtiene las variables de entorno
@@ -72,7 +72,8 @@ module.exports.getUsernames = async (req, res, next) => {
 
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
-  const usuario = await UsuarioModel.findOne({ _id: id }).populate("direccion").exec();
+  var usuario = await UsuarioModel.findOne({ _id: id }).populate("direccion").exec();
+  usuario.pwd='';
   res.json(usuario);
 };
 

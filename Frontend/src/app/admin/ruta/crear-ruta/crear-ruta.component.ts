@@ -180,12 +180,22 @@ if (!flag) {
         this.toastr.error("The airports must be different","Error")
         return;
     }
+
+
+
+
+
+
     if (this._horariosCreados.length ==0) {
       this.toastr.error("Schedules are required", "Error")
       return;
     }
     this.rutaForm.get('horaios')?.setValue(this._horariosCreados);
     if (this.rutaForm.valid) {
+      if (this.rutaForm.get('descuento')?.value >=1) {
+        this.toastr.error("The discount must be less","Error")
+        return;
+      }
       //se setea el objeto dirección
       var ruta = this.rutaForm.value
      

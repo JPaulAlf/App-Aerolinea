@@ -75,6 +75,7 @@
           <div class="col-sm-12 col-lg-6 mb-3">
             <div class="form-group">
               <label for="basic-url" class="form-label">Price</label>
+              <p>Expressed in <strong>dollars</strong></p>
               <div class="col-lg-12">
                 <input formControlName="precio_trayecto" type="number" class="form-control" required />
                 <div class="text-danger" *ngIf="rutaForm.get('precio_trayecto')?.hasError('required')
@@ -87,6 +88,7 @@
           <div class="col-sm-12 col-lg-6 mb-3">
             <div class="form-group">
               <label for="basic-url" class="form-label">Time of travel</label>
+              <p>Expressed in <strong>minutes</strong></p>
               <div class="col-lg-12">
                 <input formControlName="duracion" type="number" class="form-control" required />
                 <div class="text-danger" *ngIf="rutaForm.get('duracion')?.hasError('required')
@@ -99,6 +101,7 @@
           <div class="col-sm-12 col-lg-6 mb-3">
             <div class="form-group">
               <label for="basic-url" class="form-label">Discount</label>
+              <p>Expressed in <strong>decimal format</strong></p>
               <div class="col-lg-12">
                 <input formControlName="descuento" type="number" class="form-control" required />
                 <div class="text-danger" *ngIf="rutaForm.get('descuento')?.hasError('required')
