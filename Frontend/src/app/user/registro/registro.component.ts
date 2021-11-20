@@ -20,6 +20,7 @@ declare function ejecutarAnimacion(): any;
 
 
 export class RegistroComponent implements OnInit {
+  private _usuarios:any[]=[]
   private map!: google.maps.Map
   lat: string = '';
   lng: string = '';
@@ -130,6 +131,21 @@ if (this.lat == "" && this.lng == "") {
     //se setea el objeto dirección
     var usuario = this.usuarioForm.value
     usuario.rol = 0;
+    this._usuarioService.getUsernames().subscribe((data) => {
+
+      this._usuarios = data
+
+    });
+
+
+
+    this._usuarios.forEach((element) => {
+      if(element.usuario == usuario.usuario){
+           
+        this.toastr.error('Username not available','Error');
+          return;
+      }
+    })
     this._usuarioService.signup(usuario).subscribe((data) => {
       this.toastr.success('Sign Up Finished','Success');
       this.usuarioForm.reset();

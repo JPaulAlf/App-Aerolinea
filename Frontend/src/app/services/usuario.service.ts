@@ -18,6 +18,9 @@ export class UsuarioService {
   get(): Observable<any> {
     return this.http.get(`${BLOG_API_ENDPOINT}/get/`, httpOptions);
   }
+  getUsernames(): Observable<any> {
+    return this.http.get(`${BLOG_API_ENDPOINT}/get-usernames/`, httpOptions);
+  }
 
   getById(id: string): Observable<any> {
     return this.http.get(`${BLOG_API_ENDPOINT}/get/${id}`);

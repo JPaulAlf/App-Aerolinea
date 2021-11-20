@@ -20,6 +20,7 @@ import { forEach } from 'lodash';
 
 
 export class CrearClienteComponent implements OnInit {
+ private _usuarios:any[]=[]
   private map!: google.maps.Map
   lat: string = '';
   lng: string = '';
@@ -46,6 +47,12 @@ export class CrearClienteComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private toastr:ToastrService, private _usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
+    this._usuarioService.getUsernames().subscribe((data) => {
+
+      this._usuarios = data
+      console.log(this._usuarios)
+
+    });
     let loader = new Loader({
       apiKey: 'AIzaSyBrSzQLopheNl98oKL3xPgWCdQMK03ZPgA'
     })
@@ -129,13 +136,29 @@ if (this.lat == "" && this.lng == "") {
     //se setea el objeto dirección
     var usuario = this.usuarioForm.value
     usuario.rol = 0;
+    
+    this._usuarioService.getUsernames().subscribe((data) => {
+
+      this._usuarios = data
+      
+
+    });
+
+this._usuarios.forEach((element) => {
+  if(element.usuario == usuario.usuario){
+       
+    this.toastr.error('Username not available','Error');
+      return;
+  }
+})
+    
     this._usuarioService.create(usuario).subscribe((data) => {
       this.toastr.success('User created','Success');
       this.usuarioForm.reset();
    });
   }else{
     this.toastr.error('Form invalid','Error');
-console.log(this.usuarioForm.value)
+
     }
     
    

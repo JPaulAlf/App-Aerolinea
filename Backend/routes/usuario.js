@@ -11,6 +11,7 @@ router.post("/signin", userController.signin);
 
 router.post('/create-client/', userController.create);
 router.get('/get/', userController.get);
+router.get('/get-usernames/', userController.getUsernames);
 router.put('/update-profile/:id',auth,permit(0), userController.update);
 router.put('/update-client/:id',auth,permit(1), userController.update);
 router.get('/get/:id',auth,permit(1,0), userController.getById);

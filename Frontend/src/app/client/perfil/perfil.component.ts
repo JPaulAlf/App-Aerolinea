@@ -20,6 +20,8 @@ declare function ejecutarAnimacion(): any;
   styleUrls: ['./perfil.component.css'],
 })
 export class PerfilComponent implements OnInit {
+  private usuarioOriginal!:any;
+  private _usuarios:any[]=[]
   private map!: google.maps.Map;
   id!: string | null;
   lat: string = '';
@@ -155,6 +157,30 @@ export class PerfilComponent implements OnInit {
       //se setea el objeto dirección
       const usuario = this.usuarioForm.value;
       if (this.id !== null) {
+        this._usuarioService.getUsernames().subscribe((data) => {
+
+          this._usuarios = data
+    
+        });
+    
+        this._usuarios.forEach((element) => {
+          if(element.usuario == usuario.usuario){
+               
+            this.toastr.error('Username not available','Error');
+              return;
+          }
+        })
+    
+    
+        if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
+          this.toastr.error('Username not available','Error');
+            return;
+        }
+    
+        if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
+          this.toastr.error('Username not available','Error');
+            return;
+        }
         this._usuarioService.editClient(this.id, usuario).subscribe((data) => {
           this.toastr.success('User updated', 'Success');
           this.usuarioForm.reset();
@@ -213,6 +239,7 @@ export class PerfilComponent implements OnInit {
           '-' +
           (fecha[0].length == 2 ? '' : '0') +
           fecha[0];
+          this.usuarioOriginal = data;
         this.usuarioForm.setValue({
           nombre: data.nombre,
 

@@ -61,6 +61,14 @@ module.exports.get = async (req, res, next) => {
    
 
 }
+module.exports.getUsernames = async (req, res, next) => {
+    
+  const usuario = await UsuarioModel.find({},{usuario:1,_id:0}).exec();
+  res.json(usuario);
+
+
+
+}
 
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;

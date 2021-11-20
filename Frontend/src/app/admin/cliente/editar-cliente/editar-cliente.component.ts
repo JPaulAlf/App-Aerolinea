@@ -21,6 +21,8 @@ import { waitForAsync } from '@angular/core/testing';
 
 
 export class EditarClienteComponent implements OnInit {
+  private _usuarios:any[]=[]
+  private usuarioOriginal!:any;
   private map!: google.maps.Map
   id!: string | null;
   lat: string = '';
@@ -155,6 +157,24 @@ if (this.lat == "" && this.lng == "") {
     //se setea el objeto dirección
     const usuario = this.usuarioForm.value
     if(this.id !== null) {
+      this._usuarioService.getUsernames().subscribe((data) => {
+
+        this._usuarios = data
+  
+      });
+      this._usuarios.forEach((element) => {
+        if(element.usuario == usuario.usuario){
+             
+          this.toastr.error('Username not available','Error');
+            return;
+        }
+      })
+  
+  
+      if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
+        this.toastr.error('Username not available','Error');
+          return;
+      }
       this._usuarioService.editClient(this.id,usuario).subscribe((data) => {
         this.toastr.success('User updated','Success');
         this.usuarioForm.reset();
@@ -214,6 +234,7 @@ if (this.lat == "" && this.lng == "") {
         
        var fecha = new Date(data.fech_nacimiento).toLocaleDateString().split('/');
        var formatDate = fecha[2]+"-"+(fecha[1].length==2?"":"0")+fecha[1]+"-"+(fecha[0].length==2?"":"0")+fecha[0]
+       this.usuarioOriginal = data;
         this.usuarioForm.setValue({
           nombre: data.nombre,
          
