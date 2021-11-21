@@ -53,6 +53,7 @@ export class ReservaComponent implements OnInit {
     destino: new FormControl('', Validators.required),
     fechaInicio: new FormControl('', Validators.required),
     fechaFinal: new FormControl('', Validators.required),
+
     selectRoundTrip: new FormControl(''),
     selectOneWay: new FormControl(''),
     selectSearch_RoundTrip: new FormControl(''),
@@ -89,6 +90,7 @@ export class ReservaComponent implements OnInit {
       this.itemsForm.get('selectSearch_OneWay')!.setValue(false);
 
       //Metodo de busqueda y llenado de las 2 tablas
+      // >>>>>> ACA DEBE DE LLENAR LOS ARREGLOS
       this.vueloService.get().subscribe((vuelo) => {
         for (const item of vuelo) {
           var date = new Date(item.horario_id.fecha);
@@ -109,6 +111,7 @@ export class ReservaComponent implements OnInit {
     }
 
     //Si busca un OneWay,debe de realizarse 1 tablas y 1 busqueda
+    // >>>>>> ACA DEBE DE LLENAR LOS ARREGLOS
     if (
       this.itemsForm.get('selectOneWay')!.value == true &&
       this.itemsForm.get('selectRoundTrip')!.value == false
@@ -142,7 +145,6 @@ export class ReservaComponent implements OnInit {
     ) {
       this.toastr.warning('Please select all options first', 'Flight');
     }
-
   }
 
   //Esto debe de guardar la reserva en la Base de datos
@@ -151,15 +153,29 @@ export class ReservaComponent implements OnInit {
   seleccion_RoundTrip() {
     this.itemsForm.get('selectRoundTrip')?.setValue(true);
     this.itemsForm.get('selectOneWay')?.setValue(true);
+
     this.itemsForm.get('selectSearch_OneWay')?.setValue(false);
     this.itemsForm.get('selectFlight_OneWay')!.setValue(false);
+
+    this.rutaSeleccionado_OneWay = 'Route not selected!';
+    this.horarioSeleccionado_OneWay = 'Schedule not selected!';
+    this.idVueloSeleccionado_OneWay = 'Flight not selected!';
   }
   seleccion_OneWay() {
     this.itemsForm.get('selectOneWay')?.setValue(true);
+
     this.itemsForm.get('selectRoundTrip')?.setValue(false);
     this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
     this.itemsForm.get('selectFlight1_RoundTrip')!.setValue(false);
     this.itemsForm.get('selectFlight2_RoundTrip')!.setValue(false);
+
+    this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
+    this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
+    this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
+
+    this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
+    this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
+    this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
   }
 
   SeleccionarVuelo_OneWay(_id: any) {
@@ -167,7 +183,12 @@ export class ReservaComponent implements OnInit {
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(true);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(true);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(true);
+
       this.itemsForm.get('selectSearch_OneWay')!.setValue(false);
+
+      this.rutaSeleccionado_OneWay = 'Route not selected!';
+      this.horarioSeleccionado_OneWay = 'Schedule not selected!';
+      this.idVueloSeleccionado_OneWay = 'Flight not selected!';
     }
     if (
       this.itemsForm.get('selectOneWay')!.value == true &&
@@ -175,11 +196,21 @@ export class ReservaComponent implements OnInit {
     ) {
       this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
       this.itemsForm.get('selectFlight_OneWay')?.setValue(true);
+
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(false);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(false);
+
+      this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
+
+      this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
     }
     this.idVueloSeleccionado_OneWay = _id;
+
     this.vueloService
       .getById(this.idVueloSeleccionado_OneWay)
       .subscribe((data) => {
@@ -204,7 +235,12 @@ export class ReservaComponent implements OnInit {
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(true);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(true);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(true);
+
       this.itemsForm.get('selectSearch_OneWay')!.setValue(false);
+
+      this.rutaSeleccionado_OneWay = 'Route not selected!';
+      this.horarioSeleccionado_OneWay = 'Schedule not selected!';
+      this.idVueloSeleccionado_OneWay = 'Flight not selected!';
     }
     if (
       this.itemsForm.get('selectOneWay')!.value == true &&
@@ -212,9 +248,18 @@ export class ReservaComponent implements OnInit {
     ) {
       this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
       this.itemsForm.get('selectFlight_OneWay')?.setValue(true);
+
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(false);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(false);
+
+      this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
+
+      this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
     }
     this.idVueloSeleccionado1_RoundTrip = _id;
     this.vueloService
@@ -241,7 +286,12 @@ export class ReservaComponent implements OnInit {
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(true);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(true);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(true);
+
       this.itemsForm.get('selectSearch_OneWay')!.setValue(false);
+
+      this.rutaSeleccionado_OneWay = 'Route not selected!';
+      this.horarioSeleccionado_OneWay = 'Schedule not selected!';
+      this.idVueloSeleccionado_OneWay = 'Flight not selected!';
     }
     if (
       this.itemsForm.get('selectOneWay')!.value == true &&
@@ -249,9 +299,18 @@ export class ReservaComponent implements OnInit {
     ) {
       this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
       this.itemsForm.get('selectFlight_OneWay')?.setValue(true);
+
       this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
       this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(false);
       this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(false);
+
+      this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
+
+      this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
+      this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
+      this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
     }
     this.idVueloSeleccionado2_RoundTrip = _id;
     this.vueloService
