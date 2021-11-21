@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const Reserva = mongoose.model(
     "Reserva", 
     new mongoose.Schema({ 
-        vuelo_id: {
+        vuelo_id_1: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Vuelo',
+          },
+          vuelo_id_2: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Vuelo',
           },
