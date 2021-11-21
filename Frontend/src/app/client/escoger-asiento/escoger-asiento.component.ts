@@ -5,11 +5,11 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-interface IAsientos
-  {"fill":Number,
-  "num":Number,
-  "est": boolean}
+declare function ejecutarAnimacion(): any;
+// interface IAsientos
+//   {"fil":Number,
+//   "num":Number,
+//   "est": boolean}
 
 
 
@@ -36,41 +36,102 @@ export class EscogerAsientoComponent implements OnInit {
 reserva: any={};
 
 avion: any={};
-asientos:IAsientos[]=[]
-asientosVista:Array<IAsientos[]>=[];
+//asientos:IAsientos[]=[]
+//asientosVista:Array<IAsientos[]>=[];
 vuelo:any={};
 numFilas:number=0;
 numAF:number=0;
 
-encabezado:number[]=[];
+encabezado:any[]=[];
 
 contador:number=0;
 
-obtenerDatos(){
-  this.reserva=this.reservaS.getById(this.aRouter.snapshot.paramMap.get('id') + '');
-  this.vuelo=this.reserva.vuelo_id;
-  this.avion=this.avionS.getById(this.vuelo.avion_id+"");
-  this.numFilas=Number(this.avion.cant_filas);
-  this.numAF=Number(this.avion.cant_af);
-  this.asientos=this.vuelo.asientos;
-}
+asientoEscogido:any='';
 
+ numeroFilas_Vuelo: any = '';
+ asientosVuelo: any = [];
+ asientos: any = [];
+
+obtenerDatos(){
+  //this.reserva=this.reservaS.getById(this.aRouter.snapshot.paramMap.get('id') + '');
+  this.vuelo=this.vueloS.getById('61959d5601b9367d8b45d93b').subscribe((data) => {
+      for (let index = 0; index < data.avion_id.cant_af; index++) {
+        this.asientosVuelo.push({ numFil: index + 1 });
+      }
+
+      //                     ---ASIENTOS----   ---ASIENTOS----
+      //                            0                1
+      //ArregloDeArreglos  [ [{ }, { } ,{ }], [{ }, { } ,{ }] ]
+      //                       0    1     2     0    1     2
+      var contador = 0;
+      var asientosAux: any = [];
+      var asientosFila: any = [];
+
+      // for (let i = 0; i < data.avion_id.cant_filas; i++) {
+      //   for (let j = 0; j < data.avion_id.cant_af; j++) {
+      //     asientosFila.push(data.asientos[contador]);
+      //     contador++;
+      //   }
+      //   asientosAux.push(asientosFila);
+      //   asientosFila = [];
+      // }
+      //Metodo que funciona
+      data.asientos.forEach((asi: any)=> {
+        if(contador<data.avion_id.cant_af){
+              asientosFila.push(asi);
+              contador++;
+        }else{
+          console.log(asientosFila)
+              asientosAux.push(asientosFila);
+              asientosFila=[];
+              asientosFila.push(asi);
+              contador=1;
+        };
+      });
+
+      this.asientos = asientosAux;
+
+      console.log(this.asientos);
+      this.encabezado = Array(this.numAF).fill(1).map((x, i) => i + 1);  
+    });
+  
+  //this.reserva.vuelo_id;
+}
+escogerAsiento(){
+  this.asientoEscogido= document.querySelector('input[name=seleccion]:checked');// as NodeListOf<HTMLElement>;
+  if(this.asientoEscogido==null){
+    alert('Choose a seat')
+  }else{
+    alert(this.asientoEscogido.value)
+  }
+  
+  
+}
 
   ngOnInit(): void {
     this.obtenerDatos();
-    this.encabezado = Array(this.numAF).fill(1).map((x, i) => i + 1); 
-    let arrayAsi:IAsientos[]=[];
-    this.asientos.forEach(asi => {
-      if(this.contador>=this.numAF){
-        arrayAsi.push(asi);
-        this.contador++;
-      }else{
-        this.asientosVista.push(arrayAsi);
-        arrayAsi=[];
-        arrayAsi.push(asi)
-        this.contador=1;
-      }
-    });
+    ejecutarAnimacion();
+    // this.vuelo=this.vueloS.getById('61959d5601b9367d8b45d93b').subscribe((data) => {
+    //   this.avion=data.avion_id;
+    //   this.numFilas=Number(this.avion.cant_filas);
+    //   this.numAF=Number(this.avion.cant_af);
+    //   this.asientos=this.vuelo.asientos;
+    //   console.log(this.vuelo);
+    //     }); //this.reserva.vuelo_id;
+      
+    // console.log(this.vuelo);
+    // let arrayAsi:IAsientos[]=[];
+    // this.asientos.forEach(asi => {
+    //   if(this.contador>=this.numAF){
+    //     arrayAsi.push(asi);
+    //     this.contador++;
+    //   }else{
+    //     this.asientosVista.push(arrayAsi);
+    //     arrayAsi=[];
+    //     arrayAsi.push(asi)
+    //     this.contador=1;
+    //   }
+    // });
   }
 
 }

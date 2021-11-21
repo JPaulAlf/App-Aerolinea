@@ -63,9 +63,9 @@
                         <div class="form-group">
                             <label for="basic-url" class="form-label">Year of manufacture</label>
                             <div class="col-lg-12">
-                                <input formControlName="anho" type="number" class="form-control" required />
+                                <input formControlName="anho" type="number" min="1990" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Missing construction year!!
+                                    Missing construction year!! Only airplanes after 1990
                                 </div>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <label for="basic-url" class="form-label">Number of lanes</label>
-                                <input formControlName="cant_filas" type="number" class="form-control" required />
+                                <input formControlName="cant_filas" type="number" min="5" class="form-control" required />
                                 <div class="invalid-feedback">
-                                    Require number of lanes in airplane!!
+                                    Require number of lanes in airplane!! Minimun 5
                                 </div>
                             </div>
                         </div>
