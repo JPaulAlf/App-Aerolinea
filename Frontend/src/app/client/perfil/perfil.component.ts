@@ -163,24 +163,20 @@ export class PerfilComponent implements OnInit {
     
         });
     
-        this._usuarios.forEach((element) => {
-          if(element.usuario == usuario.usuario){
-               
-            this.toastr.error('Username not available','Error');
-              return;
-          }
-        })
-    
-    
-        if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
-          this.toastr.error('Username not available','Error');
-            return;
-        }
-    
-        if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
-          this.toastr.error('Username not available','Error');
-            return;
-        }
+        var exist:any = false;
+      if (this.usuarioOriginal.usuario != usuario.usuario) {
+        console.log(this.usuarioOriginal.usuario+" "+usuario.usuario)
+         exist = this.validarExisteUsuario(usuario.usuario);
+      }
+     
+   
+     
+      
+      if (exist) {
+        console.log("entra")
+        this.toastr.error('Username not available','Error');
+        return;
+      }
         this._usuarioService.editClient(this.id, usuario).subscribe((data) => {
           this.toastr.success('User updated', 'Success');
           this.usuarioForm.reset();
@@ -202,6 +198,38 @@ export class PerfilComponent implements OnInit {
     this.archivos.push(imagen);
   }
 
+  async validarExisteUsuario(usernameNew: string):Promise<boolean> {
+    var e = false;
+    await this._usuarioService.getUsernames().subscribe( (data) => {
+  
+      
+     
+        
+       for (let index = 0; index < data.length; index++) {
+         const element = data[index];
+         console.log(element)
+         if (element == usernameNew) {
+          
+           e =  true
+         }
+       }
+          
+        
+      
+       
+          
+          
+       
+        
+        
+     
+    })
+  
+  
+  return e;
+  
+  
+  }
   extraerBase64 = async ($event: any) =>
     new Promise((resolve, reject) => {
       try {

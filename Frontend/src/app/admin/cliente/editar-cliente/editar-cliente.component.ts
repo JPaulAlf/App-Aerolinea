@@ -22,7 +22,7 @@ import { waitForAsync } from '@angular/core/testing';
 
 export class EditarClienteComponent implements OnInit {
   private _usuarios:any[]=[]
-  private usuarioOriginal!:any;
+  private usuarioOriginal:any;
   private map!: google.maps.Map
   id!: string | null;
   lat: string = '';
@@ -157,24 +157,23 @@ if (this.lat == "" && this.lng == "") {
     //se setea el objeto dirección
     const usuario = this.usuarioForm.value
     if(this.id !== null) {
-      this._usuarioService.getUsernames().subscribe((data) => {
-
-        this._usuarios = data
-  
-      });
-      this._usuarios.forEach((element) => {
-        if(element.usuario == usuario.usuario){
-             
-          this.toastr.error('Username not available','Error');
-            return;
-        }
-      })
-  
-  
-      if(this.usuarioForm.get(usuario)?.value === this.usuarioOriginal.usuario){
-        this.toastr.error('Username not available','Error');
-          return;
+      var exist:any = false;
+      if (this.usuarioOriginal.usuario != usuario.usuario) {
+        console.log(this.usuarioOriginal.usuario+" "+usuario.usuario)
+         exist = this.validarExisteUsuario(usuario.usuario);
       }
+     
+   
+     
+      
+      if (exist) {
+        console.log("entra")
+        this.toastr.error('Username not available','Error');
+        return;
+      }
+      
+  
+      
       this._usuarioService.editClient(this.id,usuario).subscribe((data) => {
         this.toastr.success('User updated','Success');
         this.usuarioForm.reset();
@@ -195,7 +194,38 @@ if (this.lat == "" && this.lng == "") {
 
 
 
+async validarExisteUsuario(usernameNew: string):Promise<boolean> {
+  var e = false;
+  await this._usuarioService.getUsernames().subscribe( (data) => {
 
+    
+   
+      
+     for (let index = 0; index < data.length; index++) {
+       const element = data[index];
+       console.log(element)
+       if (element == usernameNew) {
+        
+         e =  true
+       }
+     }
+        
+      
+    
+     
+        
+        
+     
+      
+      
+   
+  })
+
+
+return e;
+
+
+}
   obtenerImagen(event: any) {
     const imagen = event.target.files[0];
     this.extraerBase64(imagen).then((imagen: any) => {

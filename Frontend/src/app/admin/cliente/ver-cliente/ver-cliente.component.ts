@@ -13,7 +13,7 @@ export class VerClienteComponent implements OnInit {
   collection: any[] = this.usuarios;  
   constructor(private _usuarioService: UsuarioService, private toastr:ToastrService,private router: Router
     ) {
-
+      
 
 
 
@@ -21,8 +21,8 @@ export class VerClienteComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
     this.obtenerUsuarios(); 
-   
   }
   obtenerUsuarios() {
 
@@ -31,7 +31,7 @@ export class VerClienteComponent implements OnInit {
       console.log(data);
       this.usuarios = data;
       
-      this.collection = this.usuarios;
+      this.collection = this.usuarios.reverse();
     }, err => {
 
       console.log(err);

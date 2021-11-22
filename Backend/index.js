@@ -1,6 +1,8 @@
 const express = require('express');
+var bodyParser = require('body-parser');
 const conectarDB = require('./database');
 const app = express();
+app.use(bodyParser.json({limit:'50mb'}));
 const chalk = require("chalk");
 const cors = require("cors");
 

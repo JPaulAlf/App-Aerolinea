@@ -23,7 +23,7 @@ export class VerRutaComponent implements OnInit {
 
       console.log(data);
       this.rutas = data;
-      this.collection = this.rutas;
+      this.collection = this.rutas.reverse();
     }, err => {
 
       console.log(err);
