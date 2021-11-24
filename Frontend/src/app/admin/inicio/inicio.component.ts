@@ -4,9 +4,10 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
-import {Router} from '@angular/router';
+import { ReservaService } from 'src/app/services/reserva.service';
 
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { Router } from '@angular/router';
 
 declare function ejecutarAnimacion(): any;
 
@@ -20,23 +21,23 @@ export class InicioComponent implements OnInit {
   canvas: any;
   ctx: any;
 
-  v_NumRutas: any = "---";
-  v_NumAviones: any = "---";
-  v_NumClientes: any = "---";
-  v_NumVuelos: any = "---";
-  v_ListaTopVuelos:any=[];
+  v_NumRutas: any = '---';
+  v_NumAviones: any = '---';
+  v_NumClientes: any = '---';
+  v_NumVuelos: any = '---';
+  v_ListaTopVuelos: any = [];
 
   constructor(
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService, 
-    private rutaService: RutaService, 
-   
+    private usuarioService: UsuarioService,
+    private rutaService: RutaService,
+    private reservaService: ReservaService
   ) {}
 
   contar_NumeroRutas() {
     this.rutaService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -46,7 +47,7 @@ export class InicioComponent implements OnInit {
 
   contar_NumeroAviones() {
     this.avionService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -56,7 +57,7 @@ export class InicioComponent implements OnInit {
 
   contar_NumeroClientes() {
     this.usuarioService.get().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
         cantidad++;
       }
@@ -66,9 +67,9 @@ export class InicioComponent implements OnInit {
 
   contar_NumeroVuelos() {
     this.vueloService.getSencillo().subscribe((item) => {
-      var cantidad:any=0
+      var cantidad: any = 0;
       for (const i of item) {
-        if(i.estado==1){
+        if (i.estado == 1) {
           cantidad++;
         }
       }
@@ -78,17 +79,51 @@ export class InicioComponent implements OnInit {
 
   calcular_TopVuelos() {
     //Aca se debe de llenar la lista llamada: v_ListaTopVuelos
-    //Una vez esta se llene con el top de vuelos, se va a 
+    //Una vez esta se llene con el top de vuelos, se va a
     //cargar la tabla en el front
+    this.reservaService.get().subscribe((item) => {
+      const vuelos = [];
+      const vuelosConCantidad = [];
+      const vuelosTop5 = [];
+
+      for (const i of item) {
+        if (i.vuelo_id_1 != '' || i.vuelo_id_1 != null)
+          vuelos.push(i.vuelo_id_1);
+        if (i.vuelo_id_2 != '' || i.vuelo_id_2 != null)
+          vuelos.push(i.vuelo_id_2);
+      }
+
+      for (const i of vuelos) {
+        var cant = 0;
+        for (const j of vuelos) {
+          if (i == j) {
+            cant++;
+          }
+        }
+        vuelosConCantidad.push({ vuelo: i, cantidad: cant });
+      }
+
+      vuelosConCantidad.sort(function (a, b) {
+        if (a.cantidad > b.cantidad) {
+          return 1;
+        }
+        if (a.cantidad < b.cantidad) {
+          return -1;
+        }
+        return 0;
+      });
+
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length]);
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-1]);
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-2]);
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-3]);
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-4]);
+    });
   }
 
   ngOnInit(): void {
-    
-
-
-
     ejecutarAnimacion();
-    //Campos dinamicos que se llenan desde la BD 
+    //Campos dinamicos que se llenan desde la BD
     this.contar_NumeroRutas();
     this.contar_NumeroAviones();
     this.contar_NumeroClientes();
@@ -148,5 +183,4 @@ export class InicioComponent implements OnInit {
       },
     });
   }
-
 }
