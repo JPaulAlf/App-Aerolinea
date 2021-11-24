@@ -46,6 +46,8 @@ const UsuarioSchema = new Schema({
 
 UsuarioSchema.pre('save', function (next) {
     var user = this;
+  
+    console.log("entra")
     if (this.isModified('pwd') || this.isNew) {
         bcrypt.genSalt(10, function (err, salt) {
             if (err) {
@@ -55,6 +57,7 @@ UsuarioSchema.pre('save', function (next) {
                 if (err) {
                     return next(err);
                 }
+              
                 user.pwd = hash;
                 next();
             });

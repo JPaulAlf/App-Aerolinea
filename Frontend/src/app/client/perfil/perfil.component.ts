@@ -153,9 +153,11 @@ export class PerfilComponent implements OnInit {
       longitud: this.lng,
     };
     this.usuarioForm.get('direccion')?.setValue(direccion);
+    
     if (this.usuarioForm.valid) {
       //se setea el objeto dirección
-      const usuario = this.usuarioForm.value;
+      var usuario = this.usuarioForm.value;
+      usuario.pwd = this.usuarioForm.get("contrasenna1")?.value
       if (this.id !== null) {
         this._usuarioService.getUsernames().subscribe((data) => {
 

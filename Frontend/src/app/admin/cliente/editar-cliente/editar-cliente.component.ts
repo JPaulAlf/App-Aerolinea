@@ -153,9 +153,13 @@ if (this.lat == "" && this.lng == "") {
     longitud:this.lng
   }
   this.usuarioForm.get('direccion')?.setValue(direccion)
+
+  
   if (this.usuarioForm.valid) {
     //se setea el objeto dirección
-    const usuario = this.usuarioForm.value
+    var usuario = this.usuarioForm.value
+    console.log(this.usuarioForm.get("contrasenna1")?.value)
+    usuario.pwd = this.usuarioForm.get("contrasenna1")?.value
     if(this.id !== null) {
       var exist:any = false;
       if (this.usuarioOriginal.usuario != usuario.usuario) {

@@ -115,21 +115,33 @@ module.exports.create = async (req, res, next) => {
 
    
 
-    const {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen } = req.body;
+    var {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, direccion, imagen } = req.body;
     const { sennas, latitud, longitud } = direccion
     const direccionUser = await DireccionModel.findOneAndUpdate(
         { _id: direccion._id },
         {sennas, latitud, longitud}, // ==> {title: title, body: body}
         { new: true } // retornar el registro que hemos modificado con los nuevos valores
       );
+      console.log(pwd)
+      bcrypt.genSalt(10, function (err, salt) {
+        
+        bcrypt.hash(pwd, salt, null, async function (err, hash) {
+           
+          
+          pwd = hash;
+          const user = await UsuarioModel.findOneAndUpdate(
       
-
-    const user = await UsuarioModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, imagen}, // ==> {title: title, body: body}
-      { new: true } // retornar el registro que hemos modificado con los nuevos valores
-    );
-    res.json(user);
+            { _id: req.params.id },
+            {rol, usuario, pwd, nombre, apellidos, correo, fech_nacimiento, tel_trabajo, tel_celular, estado, imagen}, // ==> {title: title, body: body}
+            { new: true } // retornar el registro que hemos modificado con los nuevos valores
+          );
+      
+          
+          res.json(user);
+        });
+    });
+  
+    
   };
 
   module.exports.updateState = async (req, res, next) => {
