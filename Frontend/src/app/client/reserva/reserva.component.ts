@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AeropuertoService } from 'src/app/services/aeropuerto.service';
@@ -6,10 +6,18 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
+import {
+  IPayPalConfig,
+  ICreateOrderRequest 
+} from 'ngx-paypal';
+import {  } from 'ngx-pagination';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -24,6 +32,69 @@ export class ReservaComponent implements OnInit {
     private avionService: AvionService,
     private usuarioService: UsuarioService
   ) {}
+
+
+  public payPalConfig ? : IPayPalConfig;
+
+  public precioVuelo: number = 0;
+
+  private initConfig(): void {
+    this.payPalConfig = {
+        currency: 'USD',
+        clientId: 'AZDqbElOkBrfsd2QEdl46_NdvVakAiyN4AJwCWsdbX6bbos-f5ZfTCso-857ulBqaAq0CN-AyHHivwxD',
+        createOrderOnClient: (data) => < ICreateOrderRequest > {
+            intent: 'CAPTURE',
+            purchase_units: [{
+                amount: {
+                    currency_code: 'USD',
+                    value: '9.99',
+                    breakdown: {
+                        item_total: {
+                            currency_code: 'USD',
+                            value: '9.99'
+                        }
+                    }
+                },
+                items: [{
+                    name: 'Enterprise Subscription',
+                    quantity: '1',
+                    category: 'DIGITAL_GOODS',
+                    unit_amount: {
+                        currency_code: 'USD',
+                        value: '9.99',
+                    },
+                }]
+            }]
+        },
+        advanced: {
+            commit: 'true'
+        },
+        style: {
+            label: 'paypal',
+            layout: 'vertical'
+        },
+        onApprove: (data, actions) => {
+            console.log('onApprove - transaction was approved, but not authorized', data, actions);
+            actions.order.get().then((details: any) => {
+                console.log('onApprove - you can get full order details inside onApprove: ', details);
+            });
+
+        },
+        onClientAuthorization: (data) => {
+            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        },
+        onCancel: (data, actions) => {
+            console.log('OnCancel', data, actions);
+
+        },
+        onError: err => {
+            console.log('OnError', err);
+        },
+        onClick: (data, actions) => {
+            console.log('onClick', data, actions);
+        },
+    };
+}
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -65,12 +136,13 @@ export class ReservaComponent implements OnInit {
 
   ngOnInit(): void {
     ejecutarAnimacion();
+    this.initConfig();
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
       this._aeropuertoDestino = data;
     });
   }
-
+ 
   buscarVuelo() {
     //Tienen el ID del aeropuerto seleccionado
     var inicio_component = this.itemsForm.get('inicio')?.value;

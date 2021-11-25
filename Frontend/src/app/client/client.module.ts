@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { NgxPayPalModule } from 'ngx-paypal';
 import { ClientRoutingModule } from './client-routing.module';
 import { InicioComponent } from './inicio/inicio.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
@@ -30,7 +30,8 @@ import { EscogerAsientoComponent } from './escoger-asiento/escoger-asiento.compo
     ClientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxPayPalModule
   ]
 })
 export class ClientModule { }
