@@ -165,7 +165,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of _horariosCreados| paginate: { itemsPerPage: 5, currentPage: p_Horario }">
-                <td style="text-align:center">{{item.fecha}}</td>
+                <td style="text-align:center">{{item.fechaVisual}}</td>
                 <td style="text-align:center">{{item.hora_sal}}</td>
                 <td style="text-align:center">
                   <a>

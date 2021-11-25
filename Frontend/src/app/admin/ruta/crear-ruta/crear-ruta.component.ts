@@ -58,6 +58,7 @@ export class CrearRutaComponent implements OnInit {
 
   // //Lista de horarios fabricados
   _horariosCreados: any[] = [];
+
   p_Horario: any = 1;
 
   // selectChange_Inicio(event: any) {
@@ -149,12 +150,13 @@ export class CrearRutaComponent implements OnInit {
 
       var horario = {
         fecha: this.rutaForm.get('date')?.value,
-        hora_sal: this.rutaForm.get('time')?.value
+        hora_sal: this.rutaForm.get('time')?.value,
+        fechaVisual:this.rutaForm.get('date')?.value
       }
      
 
       var fecha = new Date(horario.fecha).toLocaleDateString();
-      horario.fecha = moment(fecha, 'D/M/YYYY')
+      horario.fechaVisual = moment(fecha, 'D/M/YYYY')
       .add(1, 'days')
       
       .format('D/M/YYYY');

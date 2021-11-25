@@ -62,6 +62,7 @@ export class EditarRutaComponent implements OnInit {
 
   // //Lista de horarios fabricados
   _horariosCreados: any[] = [];
+  
   p_Horario: any = 1;
 
   // selectChange_Inicio(event: any) {
@@ -158,7 +159,7 @@ export class EditarRutaComponent implements OnInit {
   
           
          
-          element.fecha = moment(fecha, 'D/M/YYYY')
+          element.fechaVisual = moment(fecha, 'D/M/YYYY')
             .add(1, 'days')
             
             .format('D/M/YYYY');
