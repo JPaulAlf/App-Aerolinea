@@ -168,9 +168,14 @@
                 <td style="text-align:center">{{item.fechaVisual}}</td>
                 <td style="text-align:center">{{item.hora_sal}}</td>
                 <td style="text-align:center">
-                  <a>
-                    <i (click)="borrarHorarioCreado(item)" class="fs-5 fas fa-trash"></i>
+                  <!-- colocar ngif para evitar borrar relacionados con vuelos -->
+                  <a *ngIf="!item.inUse" >  
+                    <i (click)="borrarHorarioCreado(item)" class="fs-5 danger fas fa-trash"></i>
                   </a>
+                  <a *ngIf="item.inUse" >
+                    <i class="fs-5 fas primary fa-shield-alt"></i>
+                  </a>
+                
                 </td>
               </tr>
               <tr *ngIf="_horariosCreados==null || _horariosCreados.length==0">

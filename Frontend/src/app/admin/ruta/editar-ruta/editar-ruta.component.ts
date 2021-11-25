@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {RutaService} from 'src/app/services/ruta.service';
+import {VueloService} from 'src/app/services/vuelo.service';
 import {AeropuertoService} from 'src/app/services/aeropuerto.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forEach } from 'lodash';
@@ -16,7 +17,7 @@ import * as moment from 'moment';
 })
 export class EditarRutaComponent implements OnInit {
  
-  constructor(private aRoute: ActivatedRoute ,private router: Router, private toastr: ToastrService , private _rutaService: RutaService, private _aeropuertoService: AeropuertoService) {}
+  constructor(private _vueloService:VueloService, private aRoute: ActivatedRoute ,private router: Router, private toastr: ToastrService , private _rutaService: RutaService, private _aeropuertoService: AeropuertoService) {}
 
   //Listas de los combos
   id!: string | null;
@@ -62,7 +63,7 @@ export class EditarRutaComponent implements OnInit {
 
   // //Lista de horarios fabricados
   _horariosCreados: any[] = [];
-  
+  _vuelos: any[] = [];
   p_Horario: any = 1;
 
   // selectChange_Inicio(event: any) {
@@ -133,15 +134,22 @@ export class EditarRutaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerVuelos();
     this.id = this.aRoute.snapshot.paramMap.get('id');
-    this.obtenerRuta();
+    
     this.cargarCombos();
    
   
     
 
   }
+  obtenerVuelos(){
+    this._vueloService.getSencillo().subscribe( data => {
+      this._vuelos = data;
 
+      this.obtenerRuta();
+    });
+  }
   obtenerRuta(){
     var ruta:any;
     if(this.id !== null) {
@@ -151,6 +159,15 @@ export class EditarRutaComponent implements OnInit {
 
         
         data.horarios.forEach((element:any) => {
+         console.log(this._vuelos)
+            for (const vuelo of this._vuelos) {
+              if (vuelo.horario_id._id == element._id) {
+                element.inUse = true
+               
+              }
+          }
+        
+        
 
           var fecha = new Date(element.fecha).toLocaleDateString();
          
@@ -207,14 +224,16 @@ export class EditarRutaComponent implements OnInit {
 
       var horario = {
         fecha: this.rutaForm.get('date')?.value,
-        hora_sal: this.rutaForm.get('time')?.value
+        hora_sal: this.rutaForm.get('time')?.value,
+        fechaVisual:'null',
+        inUse:false
       }
       var fecha = new Date(horario.fecha).toLocaleDateString();
-      horario.fecha = moment(fecha, 'D/M/YYYY')
+      horario.fechaVisual = moment(fecha, 'D/M/YYYY')
       .add(1, 'days')
       
       .format('D/M/YYYY');
-      
+     
 
     
      var flag:boolean = false;
@@ -251,6 +270,7 @@ if (!flag) {
         return;
       }
       ruta.horarios = this._horariosCreados;
+      console.log(ruta.horarios)
       this._aeropuertoInicio.forEach((element:any) => {
         if (element._id == ruta.inicio._id) {
           ruta.inicio = element

@@ -76,7 +76,7 @@ module.exports.update = async (req, res, next) => {
       { new: true } // retornar el registro que hemos modificado con los nuevos valores
     );
 
-    console.log(req.body.horarios_id)
+    console.log(req.horarios_id)
     res.json(ruta);
 };
 

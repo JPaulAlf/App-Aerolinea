@@ -4,6 +4,7 @@ import { VueloService } from '../../../services/vuelo.service';
 import { RutaService } from 'src/app/services/ruta.service';
 import { AvionService } from 'src/app/services/avion.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editar-vuelo',
@@ -33,7 +34,12 @@ export class EditarVueloComponent implements OnInit {
   obtengoVuelo(id: any) {
     this.vueloService.getById(id).subscribe((item) => {
       var date = new Date(item.horario_id.fecha);
-      item.horario_id.fecha = date.toLocaleDateString();
+      var fecha = date.toLocaleDateString();
+      item.horario_id.fecha = moment(fecha, 'D/M/YYYY')
+      .add(1, 'days')
+      
+      .format('D/M/YYYY')
+      
       this._vueloSeleccionado = item;
       this._asientosAvion = item.asientos;
     });

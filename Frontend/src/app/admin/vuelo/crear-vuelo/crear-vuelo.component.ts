@@ -72,7 +72,11 @@ export class CrearVueloComponent implements OnInit {
 
         var date = new Date(fecSal);
         fecSal = date.toLocaleDateString();
-
+        
+        fecSal = moment(fecSal, 'D/M/YYYY')
+        .add(1, 'days')
+        
+        .format('D/M/YYYY')
         var h = Math.floor(duracion / 60);
         var m = duracion % 60;
         horaSal = horaSal + ':00';
@@ -133,14 +137,18 @@ export class CrearVueloComponent implements OnInit {
           rutasAux.push(item);
         }
       }
-      this.rutas = rutasAux;
+      this.rutas = rutasAux.reverse();
     });
   }
   listaRuta_Horario(rutaID: any) {
     this.rutaService.getById(rutaID).subscribe((ruta) => {
       for (const item of ruta.horarios) {
         var date = new Date(item.fecha);
-        item.fecha = date.toLocaleDateString();
+        var fecha = date.toLocaleDateString();
+        item.fecha = moment(fecha, 'D/M/YYYY')
+        .add(1, 'days')
+        
+        .format('D/M/YYYY');
       }
       this.horarios = ruta.horarios;
     });
@@ -170,7 +178,11 @@ export class CrearVueloComponent implements OnInit {
     this.rutaService.getById(this._idRuta).subscribe((ruta) => {
       for (const item of ruta.horarios) {
         var date = new Date(item.fecha);
-        item.fecha = date.toLocaleDateString();
+        var fecha = date.toLocaleDateString();
+        item.fecha = moment(fecha, 'D/M/YYYY')
+        .add(1, 'days')
+        
+        .format('D/M/YYYY');
       }
       for (const item of ruta.horarios) {
         if (item._id == id) {
