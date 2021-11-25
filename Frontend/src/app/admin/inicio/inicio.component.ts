@@ -113,11 +113,12 @@ export class InicioComponent implements OnInit {
         return 0;
       });
 
-      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-1]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-2]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-3]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-4]);
+      vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-5]);
+
     });
   }
 
