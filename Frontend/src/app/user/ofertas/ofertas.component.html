@@ -26,6 +26,9 @@
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
             <div class="card-body overflow-auto">
+                <a (click)="monedaColones()" class="currency">
+                    <i class="fs-5 fas fa-coins text-warning"></i> Change currency to colones
+                </a>
                 <table class="table table-striped">
                     <!--routerlink, used to render another component-->
                     <thead>
@@ -48,7 +51,7 @@
                             <td></td>
                             <td style="text-align:center">{{item.descuento}}%</td>
                             <td></td>
-                            <td style="text-align:center">${{item.precio_trayecto}}</td>
+                            <td style="text-align:center">{{item.precio_trayecto}}</td>
                             <td></td>
                         </tr>
                         <tr *ngIf="_rutasDescuento==null || _rutasDescuento.length==0">
