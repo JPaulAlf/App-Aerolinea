@@ -26,7 +26,7 @@ export class OfertasComponent implements OnInit {
   {}
 
   _rutasDescuento: any = [];
-  precioDolar: any = '';
+  precioDolar: any = '650';
   p: any = 1;
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class OfertasComponent implements OnInit {
     //   .get('johnpaul899@hotmail.com', 'U2ANL22FHU')
     //   .subscribe((tipoDeCambio) => {
     //     // { compra: 500.00, venta: 500.00 }
-    //     precioDolar = tipoDeCambio.compra;
+    //     this.precioDolar = tipoDeCambio.compra;
     //   });
 
     this._rutasDescuento = []; //se limpia el arreglo que carga la tabla en dolares
@@ -68,7 +68,7 @@ export class OfertasComponent implements OnInit {
             item.precio_trayecto - item.precio_trayecto * item.descuento;
             
           //Conversion a COLONES por medio del API del BCCR
-          // item.precio_trayecto = precio_trayecto * precioDolar;
+           item.precio_trayecto = new Intl.NumberFormat("de-DE").format(item.precio_trayecto * this.precioDolar);
 
           //Se le da el icono que se va mostrar en la tabla
           item.precio_trayecto = '₡' + item.precio_trayecto;
