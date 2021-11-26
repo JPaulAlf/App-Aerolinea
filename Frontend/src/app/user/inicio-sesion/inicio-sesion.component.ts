@@ -46,38 +46,46 @@ export class InicioSesionComponent implements OnInit {
     if (this.usuarioForm.valid) {
 
       const usuario = this.usuarioForm.value;
-      console.log(this.usuarioForm.valid)
-      console.log(this.usuarioForm.value)
-      this._usuarioService.signIn(usuario).subscribe(
-        (data) => {
-
-          console.log(data.user._id);
-          if (data.success === true) {
-            console.log(data.success, 'data.success');
-            data.roles = data.user.rol; //esta es la razón del getUser().roles
-            this.tokenStorage.saveToken(data.token);
-            this.tokenStorage.saveUser(data);
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            this.roles = this.tokenStorage.getUser().roles;
-            if (this.roles === 0) {
-              this.router.navigate(['/client']);
+      
+      try {
+        this._usuarioService.signIn(usuario).subscribe(
+          (data) => {
+  
+           
+            if (data.success === true) {
+              console.log(data.success, 'data.success');
+              data.roles = data.user.rol; //esta es la razón del getUser().roles
+              this.tokenStorage.saveToken(data.token);
+              this.tokenStorage.saveUser(data);
+              this.isLoginFailed = false;
+              this.isLoggedIn = true;
+              this.roles = this.tokenStorage.getUser().roles;
+              if (this.roles === 0) {
+                this.router.navigate(['/client']);
+              }
+              if (this.roles === 1) {
+                this.router.navigate(['/admin']);
+              }
+              console.log(this.roles, 'this.roles');
+            } else {
+              this.toastr.error(data.msg,"ERROR")
+              this.errorMessage = data.msg;
+              this.isLoginFailed = true;
+             
             }
-            if (this.roles === 1) {
-              this.router.navigate(['/admin']);
-            }
-            console.log(this.roles, 'this.roles');
-          } else {
-            this.errorMessage = data.msg;
+          },
+          (err) => {
+            
+            this.errorMessage = err.msg;
             this.isLoginFailed = true;
+           
+           
           }
-        },
-        (err) => {
-          console.log(err);
-          this.errorMessage = err.msg;
-          this.isLoginFailed = true;
-        }
-      );
+        );
+      } catch (error) {
+        
+      }
+      
     }
   }
 }

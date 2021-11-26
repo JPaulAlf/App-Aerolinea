@@ -30,7 +30,8 @@ module.exports.signin = async (req, res, next) => {
   const user = await UsuarioModel.findOne({ usuario: usuario }).exec();
 
   if (!user) {
-      res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+      
+      res.json({ success: false, msg: 'Authentication failed. User not found.' });
   } else {
       //Si el usuario existe verifica si las contraseñas
       user.comparePassword(pwd, user.pwd, function (err, isMatch) {
