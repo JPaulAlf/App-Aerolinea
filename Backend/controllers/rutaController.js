@@ -77,6 +77,34 @@ module.exports.update = async (req, res, next) => {
     );
 
     console.log(req.horarios_id)
+
+// const aRutas = await RutaModel.find().populate("horarios").excec()
+
+// const aHorarios = await HorarioModel.find();
+// var depende = false;
+// for (const horario of aHorarios) {
+//   for (const ruta of aRutas) {
+    
+//     if (!depende) {
+//       depende = ruta.horarios.includes(horario)
+//     }
+   
+ 
+//   }
+
+//   if (!depende) {
+//     //se realiza el borrado del horario que no tiene relación con rutas
+//     var horarioDB = await HorarioModel.findByIdAndRemove(horario._id);
+//   }
+  
+  // }
+
+
+
+
+
+
+    
     res.json(ruta);
 };
 

@@ -7,3 +7,9 @@ margin-top: 15px;
     text-decoration: none!important;
 
 }
+.modal{
+    width: 100%;
+}
+i {
+    cursor: pointer;
+}

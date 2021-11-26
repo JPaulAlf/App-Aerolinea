@@ -11,6 +11,7 @@ import {
   ICreateOrderRequest 
 } from 'ngx-paypal';
 import {  } from 'ngx-pagination';
+import * as moment from 'moment';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -98,13 +99,13 @@ export class ReservaComponent implements OnInit {
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
-
+  tipoBusqueda:any = null;
   //estos son los arrays que se tienen que llenar para el filtro en el
   //Logica del frontEnd echa
   _vuelosBusqueda_OneWay: any = [];
   _vuelosBusqueda_RoundTrip1: any = [];
   _vuelosBusqueda_RoundTrip2: any = [];
-
+  
   p: any = 1;
 
   rutaSeleccionado_OneWay: string = 'Route not selected!';
@@ -143,80 +144,157 @@ export class ReservaComponent implements OnInit {
     });
   }
  
-  buscarVuelo() {
-    //Tienen el ID del aeropuerto seleccionado
-    var inicio_component = this.itemsForm.get('inicio')?.value;
-    var destino = this.itemsForm.get('destino')?.value;
+  buscarVuelo() { 
+    this._vuelosBusqueda_OneWay = [];
+    this._vuelosBusqueda_RoundTrip1 = [];
+    this._vuelosBusqueda_RoundTrip2 = [];
+    this.itemsForm.get('selectSearch_OneWay')?.setValue(false);
+    this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
+    this.itemsForm.get('selectFlight_OneWay')?.setValue(false);
+    this.itemsForm.get('selectFlight1_RoundTrip')?.setValue(false);
+    this.itemsForm.get('selectFlight2_RoundTrip')?.setValue(false);
+    this.rutaSeleccionado_OneWay = 'Route not selected!';
+    this.horarioSeleccionado_OneWay = 'Schedule not selected!';
+    this.idVueloSeleccionado_OneWay = 'Flight not selected!';
+  
+    this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
+    this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
+    this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
+  
+    this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
+    this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
+    this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
+    if (this.itemsForm.get("selectOneWay")?.value && !this.itemsForm.get("selectRoundTrip")?.value) {
+      //ONE_WAY
 
-    //De tipo Date
-    var fechaInicio = this.itemsForm.get('fechaInicio')?.value;
-    var fechaFinal = this.itemsForm.get('fechaFinal')?.value;
+      if (this.itemsForm.get("inicio")?.valid && this.itemsForm.get("destino")?.valid && this.itemsForm.get("fechaInicio")?.valid) {
+        //Realizar filtro
 
-    //Tienen un valor TRUE o FALSE, segun fue la seleccion del usuario
-    var selectRoundTrip = this.itemsForm.get('selectRoundTrip')?.value;
-    var selectOneWay = this.itemsForm.get('selectOneWay')?.value;
+        this.vueloService.get().subscribe((data) => {
 
-    //Si busca un RoundTrip,deben de realizarsen 2 tablas y 2 busquedas
-    if (this.itemsForm.get('selectRoundTrip')?.value == true) {
-      this.itemsForm.get('selectSearch_RoundTrip')!.setValue(true);
-      this.itemsForm.get('selectSearch_OneWay')!.setValue(false);
+          for (var vuelo of data) {
+            if (vuelo.estado == 1) {
+              var busqueda = this.itemsForm.value
+              var fecha = new Date(vuelo.horario_id.fecha).toLocaleDateString();
+              vuelo.horario_id.fecha = moment(fecha, 'D/M/YYYY')
+                .add(1, 'days') //fecha inicio
+                .format('D/M/YYYY');
 
-      //Metodo de busqueda y llenado de las 2 tablas
-      // >>>>>> ACA DEBE DE LLENAR LOS ARREGLOS
-      this.vueloService.get().subscribe((vuelo) => {
-        for (const item of vuelo) {
-          var date = new Date(item.horario_id.fecha);
-          //Se da formato a la fecha y se le concatena la hora de salida, para llamar solo 1 campo en el HTML
-          item.horario_id.fecha =
-            date.toLocaleDateString() + ' ' + item.horario_id.hora_sal;
-          item.ruta_id.descuento = item.ruta_id.descuento * 100;
-        }
-        var vuelosAuxiliares = [];
-        for (const item of vuelo) {
-          if (item.estado == 1) {
-            vuelosAuxiliares.push(item);
+
+
+
+              var fechaForm = new Date(busqueda.fechaInicio).toLocaleDateString();
+              var auxFechaInicio = moment(fechaForm, 'D/M/YYYY')
+                .add(1, 'days') //fecha incio Búsqueda
+                .format('D/M/YYYY');
+
+
+              if (vuelo.ruta_id.inicio._id == busqueda.inicio._id
+                && vuelo.ruta_id.destino._id == busqueda.destino._id
+                && vuelo.horario_id.fecha == auxFechaInicio) {
+
+                vuelo.horario_id.fecha = vuelo.horario_id.fecha + " " + vuelo.horario_id.hora_sal
+                this._vuelosBusqueda_OneWay.push(vuelo);
+              }
+
+
+            }
           }
+          this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
+          
+        })
+
+
+
+
+
+       
+        //Abre modal
+       
+
+      } else {
+        //rechazar y mostrar mensaje en modal 
+        this.toastr.error("Form Invalid", "Error")
+      }
+    } else {
+      if (this.itemsForm.get("selectOneWay")?.value && this.itemsForm.get("selectRoundTrip")?.value) {
+        //ROUND_TRIP
+        if (this.itemsForm.get("inicio")?.valid
+          && this.itemsForm.get("destino")?.valid
+          && this.itemsForm.get("fechaInicio")?.valid
+          && this.itemsForm.get("fechaFinal")?.valid) {
+          //Realizar filtro
+
+          this.vueloService.get().subscribe((data) => {
+
+            for (var vuelo of data) {
+              if (vuelo.estado == 1) {
+
+
+                var busqueda = this.itemsForm.value
+                var fecha = new Date(vuelo.horario_id.fecha).toLocaleDateString();
+                vuelo.horario_id.fecha = moment(fecha, 'D/M/YYYY')
+                  .add(1, 'days') //fecha inicio
+                  .format('D/M/YYYY');
+
+
+
+
+                var fechaInicio = new Date(busqueda.fechaInicio).toLocaleDateString();
+                var auxFechaInicio = moment(fechaInicio, 'D/M/YYYY')
+                  .add(1, 'days')               //fecha incio Búsqueda
+                  .format('D/M/YYYY');
+
+
+                var fechaDestino = new Date(busqueda.fechaFinal).toLocaleDateString();
+                var auxFechaDestino = moment(fechaDestino, 'D/M/YYYY')
+                  .add(1, 'days') //fecha incio Búsqueda
+                  .format('D/M/YYYY');
+
+
+
+                if (vuelo.ruta_id.inicio._id == busqueda.inicio._id
+                  && vuelo.ruta_id.destino._id == busqueda.destino._id
+                  && vuelo.horario_id.fecha == auxFechaInicio) {
+
+                  vuelo.horario_id.fecha = vuelo.horario_id.fecha + " " + vuelo.horario_id.hora_sal
+                  vuelo.ruta_id.descuento = vuelo.ruta_id.descuento * 100;
+                  this._vuelosBusqueda_RoundTrip1.push(vuelo);
+                }
+
+                if (vuelo.ruta_id.inicio._id == busqueda.destino._id
+                  && vuelo.ruta_id.destino._id == busqueda.inicio._id
+                  && vuelo.horario_id.fecha == auxFechaDestino) {
+                  vuelo.horario_id.fecha = vuelo.horario_id.fecha + " " + vuelo.horario_id.hora_sal
+                  vuelo.ruta_id.descuento = vuelo.ruta_id.descuento * 100;
+                  this._vuelosBusqueda_RoundTrip2.push(vuelo);
+
+                }
+
+              }
+            }
+            this.itemsForm.get('selectSearch_RoundTrip')!.setValue(true);
+          })
+
+
+
+
+         
+
+          //Abre modal
+        
+
+        } else {
+          //rechazar y mostrar mensaje en modal
+          this.toastr.error("Form Invalid", "Error")
         }
-        this._vuelosBusqueda_RoundTrip1 = vuelosAuxiliares.reverse();
-        this._vuelosBusqueda_RoundTrip2 = vuelosAuxiliares.reverse();
-      });
+      } else {
+        this.toastr.error("Please select one way or round trip before of request", "Error")
+      }
     }
 
-    //Si busca un OneWay,debe de realizarse 1 tablas y 1 busqueda
-    // >>>>>> ACA DEBE DE LLENAR LOS ARREGLOS
-    if (
-      this.itemsForm.get('selectOneWay')!.value == true &&
-      this.itemsForm.get('selectRoundTrip')!.value == false
-    ) {
-      this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
-      this.itemsForm.get('selectSearch_RoundTrip')!.setValue(false);
 
-      //Metodo de busqueda y llenado de 1 tabla
-      this.vueloService.get().subscribe((vuelo) => {
-        for (const item of vuelo) {
-          var date = new Date(item.horario_id.fecha);
-          //Se da formato a la fecha y se le concatena la hora de salida, para llamar solo 1 campo en el HTML
-          item.horario_id.fecha =
-            date.toLocaleDateString() + ' ' + item.horario_id.hora_sal;
-          item.ruta_id.descuento = item.ruta_id.descuento * 100;
-        }
-        var vuelosAuxiliares = [];
-        for (const item of vuelo) {
-          if (item.estado == 1) {
-            vuelosAuxiliares.push(item);
-          }
-        }
-        this._vuelosBusqueda_OneWay = vuelosAuxiliares.reverse();
-      });
-    }
 
-    //En caso que de buscar y no tenga seleccionada ninguna opcion
-    if (
-      this.itemsForm.get('selectOneWay')!.value == false &&
-      this.itemsForm.get('selectRoundTrip')!.value == false
-    ) {
-      this.toastr.warning('Please select all options first', 'Flight');
-    }
   }
 
   //Esto debe de guardar la reserva en la Base de datos
@@ -292,6 +370,10 @@ export class ReservaComponent implements OnInit {
         //Horario de la ruta seleccionada
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
+        
+       data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
+          .add(1, 'days') //fecha incio Búsqueda
+          .format('D/M/YYYY');
         this.horarioSeleccionado_OneWay =
           data.horario_id.fecha +
           ' ' +
@@ -343,6 +425,9 @@ export class ReservaComponent implements OnInit {
         //Horario de la ruta seleccionada
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
+        data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
+        .add(1, 'days') //fecha incio Búsqueda
+        .format('D/M/YYYY');
         this.horarioSeleccionado1_RoundTrip =
           data.horario_id.fecha +
           ' ' +
@@ -394,6 +479,9 @@ export class ReservaComponent implements OnInit {
         //Horario de la ruta seleccionada
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
+        data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
+        .add(1, 'days') //fecha incio Búsqueda
+        .format('D/M/YYYY');
         this.horarioSeleccionado2_RoundTrip =
           data.horario_id.fecha +
           ' ' +

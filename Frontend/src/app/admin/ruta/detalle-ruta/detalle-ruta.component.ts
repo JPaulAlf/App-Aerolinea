@@ -155,8 +155,8 @@ export class DetalleRutaComponent implements OnInit {
   
           
          
-          element.fecha = moment(fecha, 'D/M/YYYY')
-            .add(1, 'days')
+          element.fechaVisual = moment(fecha, 'D/M/YYYY')
+            
             
             .format('D/M/YYYY');
             this._horariosCreados.push(element);

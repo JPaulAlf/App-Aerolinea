@@ -113,186 +113,189 @@
 
     <!-- VUELOS ENCONTRADOS ROUND TRIP-->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
-        <!-- Project Card Example -->
-        <p *ngIf="_vuelosBusqueda_RoundTrip1.length==0 && itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            Oops !! It seems we don't have a flights for the selected date!
-        </p>
-        <p *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            Outbound flight
-        </p>
-        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            <div class="card-body overflow-auto">
+        <p
+              *ngIf="_vuelosBusqueda_RoundTrip1.length==0 && itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              Oops !! It seems we don't have a flights for the selected date!
+            </p>
+            <p *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              Outbound flight
+            </p>
+            <div class="card shadow mb-4"
+              *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              <div class="card-body overflow-auto">
                 <table class="table table-striped">
-                    <!--routerlink, used to render another component-->
-                    <thead>
-                        <tr>
-                            <th style="text-align:center" scope="col">Departure</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Arrival</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Discount</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Price</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Buy</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            *ngFor="let item of _vuelosBusqueda_RoundTrip1| paginate: { itemsPerPage: 10, currentPage: p }">
-                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.hora_lleg}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
-                            <td></td>
-                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
-                            <td></td>
-                            <td style="text-align:center">
-                                <i (click)="SeleccionarVuelo1_RoundTrip(item._id)" id="comprar"
-                                    class="fs-5 far fa-credit-card text-success"></i>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr *ngIf="_vuelosBusqueda_RoundTrip1==null || _vuelosBusqueda_RoundTrip1.length==0">
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                  <!--routerlink, used to render another component-->
+                  <thead>
+                    <tr>
+                      <th style="text-align:center" scope="col">Departure</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Arrival</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Discount</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Price</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Buy</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of _vuelosBusqueda_RoundTrip1| paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{item.hora_lleg}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
+                      <td></td>
+                      <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                      <td></td>
+                      <td style="text-align:center">
+                        <i (click)="SeleccionarVuelo1_RoundTrip(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr *ngIf="_vuelosBusqueda_RoundTrip1==null || _vuelosBusqueda_RoundTrip1.length==0">
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
                 </table>
                 <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+              </div>
             </div>
-        </div>
-        <br>
-        <p *ngIf="_vuelosBusqueda_RoundTrip2.length==0 && itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            Oops !! It seems we don't have a flights for the selected date!
-        </p>
-        <p *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            Return flight
-        </p>
-        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_RoundTrip')?.value==true">
-            <div class="card-body overflow-auto">
+
+            <p
+              *ngIf="_vuelosBusqueda_RoundTrip2.length==0 && itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              Oops !! It seems we don't have a flights for the selected date!
+            </p>
+            <p *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              Return flight
+            </p>
+            <div class="card shadow mb-4"
+              *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
+              <div class="card-body overflow-auto">
                 <table class="table table-striped">
-                    <!--routerlink, used to render another component-->
-                    <thead>
-                        <tr>
-                            <th style="text-align:center" scope="col">Departure</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Arrival</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Discount</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Price</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Buy</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            *ngFor="let item of _vuelosBusqueda_RoundTrip2| paginate: { itemsPerPage: 10, currentPage: p }">
-                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.hora_lleg}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
-                            <td></td>
-                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
-                            <td></td>
-                            <td style="text-align:center">
-                                <i (click)="SeleccionarVuelo2_RoundTrip(item._id)" id="comprar"
-                                    class="fs-5 far fa-credit-card text-success"></i>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr *ngIf="_vuelosBusqueda_RoundTrip2==null || _vuelosBusqueda_RoundTrip2.length==0">
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                  <!--routerlink, used to render another component-->
+                  <thead>
+                    <tr>
+                      <th style="text-align:center" scope="col">Departure</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Arrival</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Discount</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Price</th>
+                      <th scope="col"></th>
+                      <th style="text-align:center" scope="col">Buy</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of _vuelosBusqueda_RoundTrip2| paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{item.hora_lleg}}</td>
+                      <td></td>
+                      <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
+                      <td></td>
+                      <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                      <td></td>
+                      <td style="text-align:center">
+                        <i (click)="SeleccionarVuelo2_RoundTrip(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr *ngIf="_vuelosBusqueda_RoundTrip2==null || _vuelosBusqueda_RoundTrip2.length==0">
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                      <td style="text-align:center">- - -</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
                 </table>
                 <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+              </div>
             </div>
-        </div>
     </div>
 
     <!-- VUELOS ENCONTRADOS ONE WAY-->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
-        <!-- Project Card Example -->
-        <p *ngIf="_vuelosBusqueda_OneWay.length==0 && itemsForm.get('selectSearch_OneWay')?.value==true">
-            Oops !! It seems we don't have a flights for the selected date!
-        </p>
-        <p *ngIf="itemsForm.get('selectSearch_OneWay')?.value==true">
+        <p *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_OneWay')?.value==true">
             Outbound flight
-        </p>
-        <div class="card shadow mb-4" *ngIf="itemsForm.get('selectSearch_OneWay')?.value==true">
+          </p>
+
+
+
+          <p
+            *ngIf="_vuelosBusqueda_OneWay.length==0 && itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_OneWay')?.value==true">
+            Oops !! It seems we don't have a flights for the selected date!
+          </p>
+          <div class="card shadow mb-4"
+            *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_OneWay')?.value==true">
+
             <div class="card-body overflow-auto">
-                <table class="table table-striped">
-                    <!--routerlink, used to render another component-->
-                    <thead>
-                        <tr>
-                            <th style="text-align:center" scope="col">Departure</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Arrival</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Discount</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Price</th>
-                            <th scope="col"></th>
-                            <th style="text-align:center" scope="col">Buy</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of _vuelosBusqueda_OneWay| paginate: { itemsPerPage: 10, currentPage: p }">
-                            <td style="text-align:center">{{item.horario_id.fecha}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.hora_lleg}}</td>
-                            <td></td>
-                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
-                            <td></td>
-                            <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
-                            <td></td>
-                            <td style="text-align:center">
-                                <i (click)="SeleccionarVuelo_OneWay(item._id)" id="comprar"
-                                    class="fs-5 far fa-credit-card text-success"></i>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr *ngIf="_vuelosBusqueda_OneWay==null || _vuelosBusqueda_OneWay.length==0">
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                            <td style="text-align:center">- - -</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
+              <table class="table table-striped">
+                <!--routerlink, used to render another component-->
+                <thead>
+                  <tr>
+                    <th style="text-align:center" scope="col">Departure</th>
+                    <th scope="col"></th>
+                    <th style="text-align:center" scope="col">Arrival</th>
+                    <th scope="col"></th>
+                    <th style="text-align:center" scope="col">Discount</th>
+                    <th scope="col"></th>
+                    <th style="text-align:center" scope="col">Price</th>
+                    <th scope="col"></th>
+                    <th style="text-align:center" scope="col">Buy</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of _vuelosBusqueda_OneWay| paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td style="text-align:center">{{item.horario_id.fecha}}</td>
+                    <td></td>
+                    <td style="text-align:center">{{item.hora_lleg}}</td>
+                    <td></td>
+                    <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
+                    <td></td>
+                    <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                    <td></td>
+                    <td style="text-align:center">
+                      <i (click)="SeleccionarVuelo_OneWay(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr *ngIf="_vuelosBusqueda_OneWay==null || _vuelosBusqueda_OneWay.length==0">
+                    <td style="text-align:center">- - -</td>
+                    <td></td>
+                    <td style="text-align:center">- - -</td>
+                    <td></td>
+                    <td style="text-align:center">- - -</td>
+                    <td></td>
+                    <td style="text-align:center">- - -</td>
+                    <td></td>
+                    <td style="text-align:center">- - -</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
             </div>
-        </div>
+          </div>
     </div>
 
     <!-- PROCESO DE COMPRA DEL VUELO ROUND WAY-->

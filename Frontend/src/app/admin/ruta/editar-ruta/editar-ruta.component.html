@@ -170,10 +170,10 @@
                 <td style="text-align:center">
                   <!-- colocar ngif para evitar borrar relacionados con vuelos -->
                   <a *ngIf="!item.inUse" >  
-                    <i (click)="borrarHorarioCreado(item)" class="fs-5 danger fas fa-trash"></i>
+                    <i (click)="borrarHorarioCreado(item)" class="fs-5 text-danger fas fa-trash"></i>
                   </a>
                   <a *ngIf="item.inUse" >
-                    <i class="fs-5 fas primary fa-shield-alt"></i>
+                    <i class="fs-5 fas text-primary fa-shield-alt"></i>
                   </a>
                 
                 </td>
@@ -194,7 +194,7 @@
   
         <div class="tab-pane fade " id="Crear" role="tabpanel" aria-labelledby="Crear-tab">
           <h1 class="display-6" style="margin-top:25px; text-align:center">
-            Create
+            Update
           </h1>
           <hr class="my-4">
           <br />
