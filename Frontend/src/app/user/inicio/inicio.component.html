@@ -221,7 +221,7 @@
                       <td></td>
                       <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                       <td></td>
-                      <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                      <td style="text-align:center">${{modoColones)?Number(item.ruta_id.precio_trayecto)*compraColon:item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
                         <i (click)="consultar()" class="fs-5 far fa-credit-card text-success"></i>

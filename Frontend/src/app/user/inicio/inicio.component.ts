@@ -7,6 +7,7 @@ import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
 import * as moment from 'moment';
+import { BccrService } from '../../services/bccr.service';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -24,7 +25,15 @@ export class InicioComponent implements OnInit {
     private vueloService: VueloService,
     private avionService: AvionService,
     private usuarioService: UsuarioService,
+    private bccr: BccrService
   ) { }
+    public modoColones=false;
+    compraColon:number=0;
+    cambiarModo=()=>{
+      this.modoColones=!this.modoColones;
+    }
+
+
   tipoBusqueda = "";
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -48,7 +57,10 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     ejecutarAnimacion();
-
+    this.bccr.get().subscribe((data: any) => {
+      this.compraColon = data.compra;
+      console.log(data);
+    });
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
       this._aeropuertoDestino = data;
