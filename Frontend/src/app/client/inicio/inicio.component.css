@@ -7,3 +7,10 @@
   text-decoration: none !important;
 
 }
+
+.currency{
+  cursor: pointer;
+  margin-left: 7px;
+  color: black;
+  font-weight: bold;
+}

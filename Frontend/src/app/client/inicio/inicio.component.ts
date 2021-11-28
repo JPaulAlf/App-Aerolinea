@@ -27,6 +27,25 @@ export class InicioComponent implements OnInit {
     private usuarioService: UsuarioService, 
     private bccr: BccrService 
   ) { }
+  public modoColonesRT2=false;
+    public modoColonesRT1=false;
+    public modoColonesOW=false;
+    compraColon:number=0;
+    cambiarRT1=()=>{
+      this.modoColonesRT1=!this.modoColonesRT1;
+    }
+    cambiarOW=()=>{
+      this.modoColonesOW=!this.modoColonesOW;
+    }
+    cambiarRT2=()=>{
+      this.modoColonesRT2=!this.modoColonesRT2;
+    }
+    calculoMoneda(precio:any){
+      var precioF  = new Intl.NumberFormat('de-DE').format(
+        precio * this.compraColon
+      );
+        return "₡"+precioF
+    }
   tipoBusqueda = "";
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -58,8 +77,8 @@ export class InicioComponent implements OnInit {
       this._aeropuertoDestino = data;
     });
     this.bccr.get().subscribe((data: any) => {
-      this.precioDolar = data.compra;
-      console.log(data);
+      this.compraColon = data.compra;
+     
     });
     this.rutasDescuento();
     this.contar_NumeroRutas();

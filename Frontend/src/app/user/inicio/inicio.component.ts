@@ -27,10 +27,18 @@ export class InicioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private bccr: BccrService
   ) { }
-    public modoColones=false;
+    public modoColonesRT2=false;
+    public modoColonesRT1=false;
+    public modoColonesOW=false;
     compraColon:number=0;
-    cambiarModo=()=>{
-      this.modoColones=!this.modoColones;
+    cambiarRT1=()=>{
+      this.modoColonesRT1=!this.modoColonesRT1;
+    }
+    cambiarOW=()=>{
+      this.modoColonesOW=!this.modoColonesOW;
+    }
+    cambiarRT2=()=>{
+      this.modoColonesRT2=!this.modoColonesRT2;
     }
 
 
@@ -278,7 +286,12 @@ export class InicioComponent implements OnInit {
     });
   }
 
-
+calculoMoneda(precio:any){
+  var precioF  = new Intl.NumberFormat('de-DE').format(
+    precio * this.compraColon
+  );
+    return "₡"+precioF
+}
 
 
 }

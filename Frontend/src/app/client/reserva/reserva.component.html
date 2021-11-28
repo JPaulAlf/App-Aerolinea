@@ -122,6 +122,9 @@
             <div class="card shadow mb-4"
               *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
               <div class="card-body overflow-auto">
+                <a (click)="cambiarRT1()" class="currency">
+                    <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                   <!--routerlink, used to render another component-->
                   <thead>
@@ -146,7 +149,7 @@
                       <td></td>
                       <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                       <td></td>
-                      <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                      <td style="text-align:center">{{(modoColonesRT1)?calculoMoneda(item.ruta_id.precio_trayecto):"$"+item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
                         <i (click)="SeleccionarVuelo1_RoundTrip(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
@@ -181,6 +184,9 @@
             <div class="card shadow mb-4"
               *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_RoundTrip')?.value==true">
               <div class="card-body overflow-auto">
+                <a (click)="cambiarRT2()" class="currency">
+                    <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                   <!--routerlink, used to render another component-->
                   <thead>
@@ -205,7 +211,7 @@
                       <td></td>
                       <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                       <td></td>
-                      <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                      <td style="text-align:center">{{(modoColonesRT2)?calculoMoneda(item.ruta_id.precio_trayecto):"$"+item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
                         <i (click)="SeleccionarVuelo2_RoundTrip(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
@@ -247,6 +253,9 @@
             *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectSearch_OneWay')?.value==true">
 
             <div class="card-body overflow-auto">
+                <a (click)="cambiarOW()" class="currency">
+                    <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
               <table class="table table-striped">
                 <!--routerlink, used to render another component-->
                 <thead>
@@ -271,7 +280,7 @@
                     <td></td>
                     <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                     <td></td>
-                    <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
+                    <td style="text-align:center">{{(modoColonesOW)?calculoMoneda(item.ruta_id.precio_trayecto):"$"+item.ruta_id.precio_trayecto}}</td>
                     <td></td>
                     <td style="text-align:center">
                       <i (click)="SeleccionarVuelo_OneWay(item._id)" id="comprar" class="fs-5 far fa-credit-card text-success"></i>

@@ -15,6 +15,7 @@ import {
 import { } from 'ngx-pagination';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { BccrService } from 'src/app/services/bccr.service';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -37,17 +38,35 @@ export class ReservaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private reservaService: ReservaService,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router, 
+    private bccr: BccrService 
   ) { }
 
-
+  public modoColonesRT2=false;
+  public modoColonesRT1=false;
+  public modoColonesOW=false;
+  compraColon:number=0;
+  cambiarRT1=()=>{
+    this.modoColonesRT1=!this.modoColonesRT1;
+  }
+  cambiarOW=()=>{
+    this.modoColonesOW=!this.modoColonesOW;
+  }
+  cambiarRT2=()=>{
+    this.modoColonesRT2=!this.modoColonesRT2;
+  }
   public payPalConfig?: IPayPalConfig;
 
   private precioVuelo1: any = 0;
   private precioVuelo2: any = 0;
   private detalleVuelo1: any = 0;
   private detalleVuelo2: any = 0;
-
+  calculoMoneda(precio:any){
+    var precioF  = new Intl.NumberFormat('de-DE').format(
+      precio * this.compraColon
+    );
+      return "₡"+precioF
+  }
   public initConfig(): void {
 
     let monto: any, detalle: any, reserva: any;
@@ -150,7 +169,7 @@ export class ReservaComponent implements OnInit {
       },
     };
   }
-
+  
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
   tipoBusqueda: any = null;
@@ -190,7 +209,10 @@ export class ReservaComponent implements OnInit {
   });
 
   ngOnInit(): void {
-
+    this.bccr.get().subscribe((data: any) => {
+      this.compraColon = data.compra;
+     
+    });
     ejecutarAnimacion();
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
@@ -248,6 +270,7 @@ export class ReservaComponent implements OnInit {
                 && vuelo.horario_id.fecha == auxFechaInicio) {
 
                 vuelo.horario_id.fecha = vuelo.horario_id.fecha + " " + vuelo.horario_id.hora_sal
+                vuelo.ruta_id.descuento = vuelo.ruta_id.descuento * 100;
                 this._vuelosBusqueda_OneWay.push(vuelo);
               }
 
