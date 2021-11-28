@@ -7,6 +7,7 @@ import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
 import * as moment from 'moment';
+import { BccrService } from '../../services/bccr.service';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -23,7 +24,8 @@ export class InicioComponent implements OnInit {
     private _rutaService: RutaService,
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService, 
+    private bccr: BccrService 
   ) { }
   tipoBusqueda = "";
   _aeropuertoInicio: any = [];
@@ -37,6 +39,9 @@ export class InicioComponent implements OnInit {
   v_NumClientes: any = '---';
   v_NumVuelos: any = '---';
   p: any = 1;
+
+  precioDolar: any = '0';
+
   itemsForm = new FormGroup({
     inicio: new FormControl('', Validators.required),
     destino: new FormControl('', Validators.required),
@@ -48,10 +53,13 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     ejecutarAnimacion();
-
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
       this._aeropuertoDestino = data;
+    });
+    this.bccr.get().subscribe((data: any) => {
+      this.precioDolar = data.compra;
+      console.log(data);
     });
     this.rutasDescuento();
     this.contar_NumeroRutas();
@@ -204,7 +212,6 @@ export class InicioComponent implements OnInit {
 
 
   }
-
   seleccion_RoundTrip() {
     this.itemsForm.get('selectRoundTrip')?.setValue(true);
     this.itemsForm.get('selectOneWay')?.setValue(true);
@@ -263,4 +270,170 @@ export class InicioComponent implements OnInit {
       this.v_NumVuelos = cantidad;
     });
   }
+
+
+//////////////////////////////////////////////////////
+// CAMBIAR MONEDA DE LAS TABLAS
+
+//   _vuelosBusqueda_OneWay: any = [];
+//   _vuelosBusqueda_RoundTrip1: any = [];
+//   _vuelosBusqueda_RoundTrip2: any = [];
+esColones_OneWay: string = 'false';
+esColones_RoundWay1: string = 'false';
+esColones_RoundWay2: string = 'false';
+
+cambiarMoneda_OneWay() {
+  if (this.esColones_OneWay == 'false') {
+    this.monedaColones_OneWay();
+    this.esColones_OneWay = 'true';
+  } else if (this.esColones_OneWay == 'true') {
+    this.monedaDolares_OneWay();
+    this.esColones_OneWay = 'false';
+  }
+}
+monedaColones_OneWay() {
+  this._vuelosBusqueda_OneWay = []; //se limpia el arreglo que carga la tabla en dolares
+
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        //Se aplica el descuento al precio, si es que tiene uno.
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+
+        //Conversion a COLONES por medio del API del BCCR
+        item.precio_trayecto = new Intl.NumberFormat('de-DE').format(
+          item.precio_trayecto * this.precioDolar
+        );
+
+        //Se le da el icono que se va mostrar en la tabla
+        item.precio_trayecto = '₡' + item.precio_trayecto;
+
+        //Se pasa de decimas a % de 100 el descuento
+        item.descuento = item.descuento * 100;
+
+        this._vuelosBusqueda_OneWay.push(item);
+      }
+    }
+  });
+}
+monedaDolares_OneWay() {
+  this._vuelosBusqueda_OneWay = []; //se limpia el arreglo que carga la tabla en dolares
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        item.duracion = item.precio_trayecto; //utilizo este campo para guardar el precio real
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+        item.precio_trayecto = '$' + item.precio_trayecto;
+        item.descuento = item.descuento * 100;
+        this._vuelosBusqueda_OneWay.push(item);
+      }
+    }
+  });
+}
+
+cambiarMoneda_RoundWay1() {
+  if (this.esColones_RoundWay1 == 'false') {
+    this.monedaColones_RoundWay1();
+    this.esColones_RoundWay1 = 'true';
+  } else if (this.esColones_RoundWay1 == 'true') {
+    this.monedaDolares_RoundWay1();
+    this.esColones_RoundWay1 = 'false';
+  }
+}
+monedaColones_RoundWay1() {
+  this._vuelosBusqueda_RoundTrip1 = []; //se limpia el arreglo que carga la tabla en dolares
+
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        //Se aplica el descuento al precio, si es que tiene uno.
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+
+        //Conversion a COLONES por medio del API del BCCR
+        item.precio_trayecto = new Intl.NumberFormat('de-DE').format(
+          item.precio_trayecto * this.precioDolar
+        );
+
+        //Se le da el icono que se va mostrar en la tabla
+        item.precio_trayecto = '₡' + item.precio_trayecto;
+
+        //Se pasa de decimas a % de 100 el descuento
+        item.descuento = item.descuento * 100;
+
+        this._vuelosBusqueda_RoundTrip1.push(item);
+      }
+    }
+  });
+}
+monedaDolares_RoundWay1() {
+  this._vuelosBusqueda_RoundTrip1 = []; //se limpia el arreglo que carga la tabla en dolares
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        item.duracion = item.precio_trayecto; //utilizo este campo para guardar el precio real
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+        item.precio_trayecto = '$' + item.precio_trayecto;
+        item.descuento = item.descuento * 100;
+        this._vuelosBusqueda_RoundTrip1.push(item);
+      }
+    }
+  });
+}
+
+cambiarMoneda_RoundWay2() {
+  if (this.esColones_RoundWay2 == 'false') {
+    this.monedaColones_RoundWay2();
+    this.esColones_RoundWay2 = 'true';
+  } else if (this.esColones_RoundWay2 == 'true') {
+    this.monedaDolares_RoundWay2();
+    this.esColones_RoundWay2 = 'false';
+  }
+}
+monedaColones_RoundWay2() {
+  this._vuelosBusqueda_RoundTrip2 = []; //se limpia el arreglo que carga la tabla en dolares
+
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        //Se aplica el descuento al precio, si es que tiene uno.
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+
+        //Conversion a COLONES por medio del API del BCCR
+        item.precio_trayecto = new Intl.NumberFormat('de-DE').format(
+          item.precio_trayecto * this.precioDolar
+        );
+
+        //Se le da el icono que se va mostrar en la tabla
+        item.precio_trayecto = '₡' + item.precio_trayecto;
+
+        //Se pasa de decimas a % de 100 el descuento
+        item.descuento = item.descuento * 100;
+
+        this._vuelosBusqueda_RoundTrip2.push(item);
+      }
+    }
+  });
+}
+monedaDolares_RoundWay2() {
+  this._vuelosBusqueda_RoundTrip2 = []; //se limpia el arreglo que carga la tabla en dolares
+  this._rutaService.get().subscribe((data) => {
+    for (const item of data) {
+      if (item.descuento != 0) {
+        item.duracion = item.precio_trayecto; //utilizo este campo para guardar el precio real
+        item.precio_trayecto =
+          item.precio_trayecto - item.precio_trayecto * item.descuento;
+        item.precio_trayecto = '$' + item.precio_trayecto;
+        item.descuento = item.descuento * 100;
+        this._vuelosBusqueda_RoundTrip2.push(item);
+      }
+    }
+  });
+}
+
+
 }

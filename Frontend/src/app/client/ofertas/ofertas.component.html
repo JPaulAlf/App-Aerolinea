@@ -26,6 +26,9 @@
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
             <div class="card-body overflow-auto">
+                <a (click)="cambiarMoneda()" class="currency">
+                    <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                     <!--routerlink, used to render another component-->
                     <thead>
@@ -50,10 +53,10 @@
                             <td></td>
                             <td style="text-align:center">{{item.descuento}}%</td>
                             <td></td>
-                            <td style="text-align:center">${{item.precio_trayecto}}</td>
+                            <td style="text-align:center">{{item.precio_trayecto}}</td>
                             <td></td>
                             <td style="text-align:center">
-                                <i id="comprar" class="fs-5 far fa-credit-card text-success"></i>
+                                <i routerLink="/client/purchase-flight" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
                             </td>
                             <td></td>
                         </tr>

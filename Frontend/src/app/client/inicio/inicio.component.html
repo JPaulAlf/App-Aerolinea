@@ -134,6 +134,9 @@
             <div class="card shadow mb-4"
               *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectRoundTrip')?.value==true">
               <div class="card-body overflow-auto">
+                <a (click)="cambiarMoneda_OneWay()" class="currency">
+                  <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                   <!--routerlink, used to render another component-->
                   <thead>
@@ -161,7 +164,7 @@
                       <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
-                        <i (click)="consultar()" class="fs-5 far fa-credit-card text-success"></i>
+                        <i routerLink="/client/purchase-flight" class="fs-5 far fa-credit-card text-success"></i>
                       </td>
                       <td></td>
                     </tr>
@@ -193,6 +196,9 @@
             <div class="card shadow mb-4"
               *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectRoundTrip')?.value==true">
               <div class="card-body overflow-auto">
+                <a (click)="cambiarMoneda_RoundWay1()" class="currency">
+                  <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                   <!--routerlink, used to render another component-->
                   <thead>
@@ -220,7 +226,7 @@
                       <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
-                        <i (click)="consultar()" class="fs-5 far fa-credit-card text-success"></i>
+                        <i routerLink="/client/purchase-flight" class="fs-5 far fa-credit-card text-success"></i>
                       </td>
                       <td></td>
                     </tr>
@@ -241,19 +247,10 @@
                 <pagination-controls class="col-auto text-center" (pageChange)="p = $event"></pagination-controls>
               </div>
             </div>
-
-
-
-
-
-
-
+            
             <p *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectRoundTrip')?.value==false">
               Outbound flight
             </p>
-
-
-
             <p
               *ngIf="_vuelosBusqueda_OneWay.length==0 && itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectRoundTrip')?.value==false">
               Oops !! It seems we don't have a flights for the selected date!
@@ -262,6 +259,9 @@
               *ngIf="itemsForm.get('selectOneWay')?.value==true && itemsForm.get('selectRoundTrip')?.value==false">
 
               <div class="card-body overflow-auto">
+                <a (click)="cambiarMoneda_RoundWay2()" class="currency">
+                  <i class="fs-5 fas fa-coins text-warning"></i> Change currency
+                </a>
                 <table class="table table-striped">
                   <!--routerlink, used to render another component-->
                   <thead>
@@ -289,7 +289,7 @@
                       <td style="text-align:center">${{item.ruta_id.precio_trayecto}}</td>
                       <td></td>
                       <td style="text-align:center">
-                        <i (click)="consultar()" class="fs-5 far fa-credit-card text-success"></i>
+                        <i routerLink="/client/purchase-flight" class="fs-5 far fa-credit-card text-success"></i>
                       </td>
                       <td></td>
                     </tr>
