@@ -47,13 +47,13 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of _rutasDescuento| paginate: { itemsPerPage: 10, currentPage: p }">
-                            <td style="text-align:center">{{item.inicio.nombre}}</td>
+                            <td style="text-align:center">{{item.ruta_id.inicio.nombre}}</td>
                             <td></td>
-                            <td style="text-align:center">{{item.destino.nombre}}</td>
+                            <td style="text-align:center">{{item.ruta_id.destino.nombre}}</td>
                             <td></td>
-                            <td style="text-align:center">{{item.descuento}}%</td>
+                            <td style="text-align:center">{{item.ruta_id.descuento}}%</td>
                             <td></td>
-                            <td style="text-align:center">{{item.precio_trayecto}}</td>
+                            <td style="text-align:center">{{item.ruta_id.precio_trayecto}}</td>
                             <td></td>
                             <td style="text-align:center">
                                 <i routerLink="/client/purchase-flight" id="comprar" class="fs-5 far fa-credit-card text-success"></i>
