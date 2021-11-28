@@ -14,7 +14,6 @@
         </div>
     </div>
 </header>
-<ngx-paypal [config]="payPalConfig"></ngx-paypal>
 <div class="gtco-section container">
 
     <div class="col-md-12 col-md-offset-2 text-center gtco-heading animate-box">
@@ -302,8 +301,8 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
         <div
             *ngIf="itemsForm.get('selectFlight1_RoundTrip')?.value==true && itemsForm.get('selectFlight2_RoundTrip')?.value==true">
-            <p>Let start with the pay</p>
-            <form action="#" (ngSubmit)="formalizarReserva()" enctype="multipart/form-data">
+            <p>Flight details</p>
+            <form action="#" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
@@ -345,14 +344,15 @@
                     </div>
                 </div>
             </form>
+            <input type="button" value="Process" class="btn btn-primary center" (click)="initConfig()">
         </div>
     </div>
 
     <!-- PROCESO DE COMPRA DEL VUELO ONE WAY-->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-5 gtco-heading animate-box">
         <div *ngIf="itemsForm.get('selectFlight_OneWay')?.value==true">
-            <p>Let start with the pay</p>
-            <form action="#" (ngSubmit)="formalizarReserva()" enctype="multipart/form-data">
+            <p>Flight details</p>
+            <form action="#" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <div class="form-group">
@@ -374,9 +374,10 @@
                     </div>
                 </div>
             </form>
+            <input type="button" value="Process" class="btn btn-primary center" (click)="initConfig()">
         </div>
     </div>
-
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
 
 
 

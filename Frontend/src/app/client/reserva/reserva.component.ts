@@ -6,6 +6,8 @@ import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { RutaService } from 'src/app/services/ruta.service';
+import { ReservaService } from 'src/app/services/reserva.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {
   IPayPalConfig,
   ICreateOrderRequest 
@@ -31,15 +33,50 @@ export class ReservaComponent implements OnInit {
     private _rutaService: RutaService,
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService, 
+    private reservaService:ReservaService,
+    private tokenStorageService: TokenStorageService
   ) {}
 
 
   public payPalConfig ? : IPayPalConfig;
 
-  public precioVuelo: number = 0;
+  private precioVuelo1: any = 0;
+  private precioVuelo2: any = 0;
+  private detalleVuelo1: any = 0;
+  private detalleVuelo2: any = 0;
 
-  private initConfig(): void {
+  public initConfig(): void {
+    let monto:any, detalle:any, reserva:any;
+    if(this.itemsForm.get("selectOneWay")?.value && !this.itemsForm.get("selectRoundTrip")?.value){
+      monto=this.precioVuelo1;
+      detalle=this.detalleVuelo1;
+      var today = new Date();
+var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+      reserva={
+        vuelo_id_1:this.idVueloSeleccionado_OneWay,
+        usuario_id:this.tokenStorageService.getUser()._id,
+        proceso:0,
+        precio_t:monto,
+        detalle:detalle,
+        num_asiento:'',
+      }
+    }
+    else{
+      monto=Number(this.precioVuelo1)+Number(this.precioVuelo2);
+      detalle=this.detalleVuelo1+this.detalleVuelo2;
+      var today = new Date();
+var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+      reserva={
+        vuelo_id_1:this.idVueloSeleccionado1_RoundTrip,
+        vuelo_id_2:this.idVueloSeleccionado2_RoundTrip,
+        usuario_id:this.tokenStorageService.getUser()._id,
+        proceso:0,
+        precio_t:monto,
+        detalle:detalle,
+        num_asiento:'',
+      }
+    }
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'AZDqbElOkBrfsd2QEdl46_NdvVakAiyN4AJwCWsdbX6bbos-f5ZfTCso-857ulBqaAq0CN-AyHHivwxD',
@@ -48,21 +85,21 @@ export class ReservaComponent implements OnInit {
             purchase_units: [{
                 amount: {
                     currency_code: 'USD',
-                    value: '9.99',
+                    value: monto+'',
                     breakdown: {
                         item_total: {
                             currency_code: 'USD',
-                            value: '9.99'
+                            value: monto+''
                         }
                     }
                 },
                 items: [{
-                    name: 'Enterprise Subscription',
+                    name: detalle,
                     quantity: '1',
                     category: 'DIGITAL_GOODS',
                     unit_amount: {
                         currency_code: 'USD',
-                        value: '9.99',
+                        value: monto+'',
                     },
                 }]
             }]
@@ -78,14 +115,24 @@ export class ReservaComponent implements OnInit {
             console.log('onApprove - transaction was approved, but not authorized', data, actions);
             actions.order.get().then((details: any) => {
                 console.log('onApprove - you can get full order details inside onApprove: ', details);
+                
+                this.reservaService.create(reserva).subscribe((data)=>{
+                  this.toastr.success('Su orden a sido procesada')
+                  console.log(data);
+                });
+                
+                
+
             });
 
         },
         onClientAuthorization: (data) => {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+            
+
         },
         onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
+           this.toastr.info('Transacción cancelada')
 
         },
         onError: err => {
@@ -137,7 +184,6 @@ export class ReservaComponent implements OnInit {
 
   ngOnInit(): void {
     ejecutarAnimacion();
-    this.initConfig();
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
       this._aeropuertoDestino = data;
@@ -185,7 +231,7 @@ export class ReservaComponent implements OnInit {
 
               var fechaForm = new Date(busqueda.fechaInicio).toLocaleDateString();
               var auxFechaInicio = moment(fechaForm, 'D/M/YYYY')
-                .add(1, 'days') //fecha incio Búsqueda
+                .add(1, 'days') //fecha inicio Búsqueda
                 .format('D/M/YYYY');
 
 
@@ -242,13 +288,13 @@ export class ReservaComponent implements OnInit {
 
                 var fechaInicio = new Date(busqueda.fechaInicio).toLocaleDateString();
                 var auxFechaInicio = moment(fechaInicio, 'D/M/YYYY')
-                  .add(1, 'days')               //fecha incio Búsqueda
+                  .add(1, 'days')               //fecha inicio Búsqueda
                   .format('D/M/YYYY');
 
 
                 var fechaDestino = new Date(busqueda.fechaFinal).toLocaleDateString();
                 var auxFechaDestino = moment(fechaDestino, 'D/M/YYYY')
-                  .add(1, 'days') //fecha incio Búsqueda
+                  .add(1, 'days') //fecha inicio Búsqueda
                   .format('D/M/YYYY');
 
 
@@ -372,7 +418,7 @@ export class ReservaComponent implements OnInit {
         data.horario_id.fecha = date.toLocaleDateString();
         
        data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
-          .add(1, 'days') //fecha incio Búsqueda
+          .add(1, 'days') //fecha inicio Búsqueda
           .format('D/M/YYYY');
         this.horarioSeleccionado_OneWay =
           data.horario_id.fecha +
@@ -380,6 +426,11 @@ export class ReservaComponent implements OnInit {
           data.horario_id.hora_sal +
           ' >>> ' +
           data.hora_lleg;
+
+          //Paypal
+          this.precioVuelo1=data.ruta_id.precio_trayecto;
+          this.detalleVuelo1=' Vuelo: '+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
+          
       });
 
     // this.listarAsientos_Vuelo();
@@ -426,7 +477,7 @@ export class ReservaComponent implements OnInit {
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
         data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
-        .add(1, 'days') //fecha incio Búsqueda
+        .add(1, 'days') //fecha inicio Búsqueda
         .format('D/M/YYYY');
         this.horarioSeleccionado1_RoundTrip =
           data.horario_id.fecha +
@@ -434,6 +485,9 @@ export class ReservaComponent implements OnInit {
           data.horario_id.hora_sal +
           ' >>> ' +
           data.hora_lleg;
+          this.precioVuelo1=data.ruta_id.precio_trayecto;
+          this.detalleVuelo1=' Vuelo 1: '+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
+          
       });
 
     // this.listarAsientos_Vuelo();
@@ -480,7 +534,7 @@ export class ReservaComponent implements OnInit {
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
         data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
-        .add(1, 'days') //fecha incio Búsqueda
+        .add(1, 'days') //fecha inicio Búsqueda
         .format('D/M/YYYY');
         this.horarioSeleccionado2_RoundTrip =
           data.horario_id.fecha +
@@ -488,6 +542,9 @@ export class ReservaComponent implements OnInit {
           data.horario_id.hora_sal +
           ' >>> ' +
           data.hora_lleg;
+          this.precioVuelo2=data.ruta_id.precio_trayecto;
+          this.detalleVuelo2=' Vuelo: 2'+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
+          
       });
 
     // this.listarAsientos_Vuelo();

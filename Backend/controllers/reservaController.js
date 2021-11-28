@@ -18,7 +18,8 @@ module.exports.getById = async (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   const {
-    vuelo_id,
+    vuelo_id_1,
+    vuelo_id_2,
     usuario_id,
     proceso,
     precio_t,
@@ -27,7 +28,8 @@ module.exports.create = (req, res, next) => {
     num_asiento,
   } = req.body;
   const reserva = new ReservaModel({
-    vuelo_id,
+    vuelo_id_1,
+    vuelo_id_2,
     usuario_id,
     proceso,
     precio_t,
