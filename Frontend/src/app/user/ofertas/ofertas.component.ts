@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 declare function ejecutarAnimacion(): any;
 import { ToastrService } from 'ngx-toastr';
 //import { indicadoresEconomicosBCCR } from 'indicadores-economicos-bccr';
-
+import { BccrService } from '../../services/bccr.service';
 import { AeropuertoService } from 'src/app/services/aeropuerto.service';
 import { AvionService } from 'src/app/services/avion.service';
 import { VueloService } from 'src/app/services/vuelo.service';
@@ -21,7 +21,9 @@ export class OfertasComponent implements OnInit {
     private _rutaService: RutaService,
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService, 
+    private bccr: BccrService
+
   ) //private indicadoresEconomicosBCCR: indicadoresEconomicosBCCR
   {}
 
@@ -32,6 +34,15 @@ export class OfertasComponent implements OnInit {
   ngOnInit(): void {
     ejecutarAnimacion();
     this.rutasDescuento();
+
+this.bccr.get().subscribe((data: any) => {
+
+  console.log(data);
+});
+
+
+
+
   }
 
   rutasDescuento() {
@@ -50,13 +61,15 @@ export class OfertasComponent implements OnInit {
   }
 
   monedaColones() {
-    //Consumo servicio del BCCR
-    // indicadoresEconomicosBCCR
-    //   .get('johnpaul899@hotmail.com', 'U2ANL22FHU')
-    //   .subscribe((tipoDeCambio) => {
-    //     // { compra: 500.00, venta: 500.00 }
-    //     this.precioDolar = tipoDeCambio.compra;
-    //   });
+    this.bccr.get().subscribe((data: any) => {
+      this.precioDolar = data.compra;
+      console.log(data);
+    
+    });
+    
+        // { compra: 500.00, venta: 500.00 }
+        
+     
 
     this._rutasDescuento = []; //se limpia el arreglo que carga la tabla en dolares
 

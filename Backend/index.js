@@ -19,6 +19,7 @@ app.use('/api/ruta', require('./routes/ruta'));
 app.use('/api/usuario', require('./routes/usuario'));
 app.use('/api/vuelo', require('./routes/vuelo'));
 app.use('/api/reserva', require('./routes/reserva'));
+app.use('/api/bccr', require('./routes/bccr'));
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
