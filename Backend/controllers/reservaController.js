@@ -16,7 +16,7 @@ module.exports.getById = async (req, res, next) => {
   res.json(reserva);
 };
 
-module.exports.create = (req, res, next) => {
+module.exports.create = async (req, res, next) => {
   const {
     vuelo_id_1,
     vuelo_id_2,
@@ -27,7 +27,7 @@ module.exports.create = (req, res, next) => {
     detalle,
     num_asiento,
   } = req.body;
-  const reserva = new ReservaModel({
+  const reserva = await new ReservaModel({
     vuelo_id_1,
     vuelo_id_2,
     usuario_id,
@@ -37,6 +37,10 @@ module.exports.create = (req, res, next) => {
     detalle,
     num_asiento,
   });
+
+
+
+
   reserva.save();
   res.json(reserva);
 };

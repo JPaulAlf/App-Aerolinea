@@ -10,10 +10,11 @@ import { ReservaService } from 'src/app/services/reserva.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {
   IPayPalConfig,
-  ICreateOrderRequest 
+  ICreateOrderRequest
 } from 'ngx-paypal';
-import {  } from 'ngx-pagination';
+import { } from 'ngx-pagination';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 declare function ejecutarAnimacion(): any;
 declare function counterActivate(): any;
@@ -33,13 +34,14 @@ export class ReservaComponent implements OnInit {
     private _rutaService: RutaService,
     private vueloService: VueloService,
     private avionService: AvionService,
-    private usuarioService: UsuarioService, 
-    private reservaService:ReservaService,
-    private tokenStorageService: TokenStorageService
-  ) {}
+    private usuarioService: UsuarioService,
+    private reservaService: ReservaService,
+    private tokenStorageService: TokenStorageService,
+    private router: Router
+  ) { }
 
 
-  public payPalConfig ? : IPayPalConfig;
+  public payPalConfig?: IPayPalConfig;
 
   private precioVuelo1: any = 0;
   private precioVuelo2: any = 0;
@@ -47,112 +49,117 @@ export class ReservaComponent implements OnInit {
   private detalleVuelo2: any = 0;
 
   public initConfig(): void {
-    let monto:any, detalle:any, reserva:any;
-    if(this.itemsForm.get("selectOneWay")?.value && !this.itemsForm.get("selectRoundTrip")?.value){
-      monto=this.precioVuelo1;
-      detalle=this.detalleVuelo1;
-      var today = new Date();
-var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-      reserva={
-        vuelo_id_1:this.idVueloSeleccionado_OneWay,
-        usuario_id:this.tokenStorageService.getUser()._id,
-        proceso:0,
-        precio_t:monto,
-        detalle:detalle,
-        num_asiento:'',
+
+    let monto: any, detalle: any, reserva: any;
+    if (this.itemsForm.get("selectOneWay")?.value && !this.itemsForm.get("selectRoundTrip")?.value) {
+      monto = this.precioVuelo1;
+      detalle = this.detalleVuelo1 + "-OW";
+
+      reserva = {
+        vuelo_id_1: this.idVueloSeleccionado_OneWay,
+        usuario_id: this.tokenStorageService.getUser().user._id,
+        proceso: 0,
+        precio_t: monto,
+        detalle: detalle,
+        num_asiento: '',
       }
     }
-    else{
-      monto=Number(this.precioVuelo1)+Number(this.precioVuelo2);
-      detalle=this.detalleVuelo1+this.detalleVuelo2;
-      var today = new Date();
-var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-      reserva={
-        vuelo_id_1:this.idVueloSeleccionado1_RoundTrip,
-        vuelo_id_2:this.idVueloSeleccionado2_RoundTrip,
-        usuario_id:this.tokenStorageService.getUser()._id,
-        proceso:0,
-        precio_t:monto,
-        detalle:detalle,
-        num_asiento:'',
+    else {
+      monto = Number(this.precioVuelo1) + Number(this.precioVuelo2);
+      monto = monto.toString();
+      detalle = this.detalleVuelo1 + "-RT";
+
+
+      reserva = {
+        vuelo_id_1: this.idVueloSeleccionado1_RoundTrip,
+        vuelo_id_2: this.idVueloSeleccionado2_RoundTrip,
+        usuario_id: this.tokenStorageService.getUser().user._id,
+        proceso: 0,
+        precio_t: monto,
+        detalle: detalle,
+        num_asiento: '',
       }
+      console.log(monto, detalle, reserva);
     }
     this.payPalConfig = {
-        currency: 'USD',
-        clientId: 'AZDqbElOkBrfsd2QEdl46_NdvVakAiyN4AJwCWsdbX6bbos-f5ZfTCso-857ulBqaAq0CN-AyHHivwxD',
-        createOrderOnClient: (data) => < ICreateOrderRequest > {
-            intent: 'CAPTURE',
-            purchase_units: [{
-                amount: {
-                    currency_code: 'USD',
-                    value: monto+'',
-                    breakdown: {
-                        item_total: {
-                            currency_code: 'USD',
-                            value: monto+''
-                        }
-                    }
-                },
-                items: [{
-                    name: detalle,
-                    quantity: '1',
-                    category: 'DIGITAL_GOODS',
-                    unit_amount: {
-                        currency_code: 'USD',
-                        value: monto+'',
-                    },
-                }]
-            }]
-        },
-        advanced: {
-            commit: 'true'
-        },
-        style: {
-            label: 'paypal',
-            layout: 'vertical'
-        },
-        onApprove: (data, actions) => {
-            console.log('onApprove - transaction was approved, but not authorized', data, actions);
-            actions.order.get().then((details: any) => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
-                
-                this.reservaService.create(reserva).subscribe((data)=>{
-                  this.toastr.success('Su orden a sido procesada')
-                  console.log(data);
-                });
-                
-                
+      currency: 'USD',
+      clientId: 'AZDqbElOkBrfsd2QEdl46_NdvVakAiyN4AJwCWsdbX6bbos-f5ZfTCso-857ulBqaAq0CN-AyHHivwxD',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'USD',
+            value: monto + '',
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: monto + ''
+              }
+            }
+          },
+          items: [{
+            name: detalle,
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'USD',
+              value: monto + '',
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
 
+        actions.order.get().then((details: any) => {
+
+          console.log(reserva)
+          this.reservaService.create(reserva).subscribe((data) => {
+            this.toastr.success('Su orden a sido procesada')
+            const currentUrl = this.router.url;
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([currentUrl]);
             });
+          });
 
-        },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            
 
-        },
-        onCancel: (data, actions) => {
-           this.toastr.info('Transacción cancelada')
 
-        },
-        onError: err => {
-            console.log('OnError', err);
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-        },
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+
+
+      },
+      onCancel: (data, actions) => {
+        this.toastr.info('Transacción cancelada')
+
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      },
     };
-}
+  }
 
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
-  tipoBusqueda:any = null;
+  tipoBusqueda: any = null;
   //estos son los arrays que se tienen que llenar para el filtro en el
   //Logica del frontEnd echa
   _vuelosBusqueda_OneWay: any = [];
   _vuelosBusqueda_RoundTrip1: any = [];
   _vuelosBusqueda_RoundTrip2: any = [];
-  
+
   p: any = 1;
 
   rutaSeleccionado_OneWay: string = 'Route not selected!';
@@ -183,14 +190,15 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
   });
 
   ngOnInit(): void {
+
     ejecutarAnimacion();
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
       this._aeropuertoDestino = data;
     });
   }
- 
-  buscarVuelo() { 
+
+  buscarVuelo() {
     this._vuelosBusqueda_OneWay = [];
     this._vuelosBusqueda_RoundTrip1 = [];
     this._vuelosBusqueda_RoundTrip2 = [];
@@ -202,11 +210,11 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
     this.rutaSeleccionado_OneWay = 'Route not selected!';
     this.horarioSeleccionado_OneWay = 'Schedule not selected!';
     this.idVueloSeleccionado_OneWay = 'Flight not selected!';
-  
+
     this.rutaSeleccionado1_RoundTrip = 'Route not selected!';
     this.horarioSeleccionado1_RoundTrip = 'Schedule not selected!';
     this.idVueloSeleccionado1_RoundTrip = 'Flight not selected!';
-  
+
     this.rutaSeleccionado2_RoundTrip = 'Route not selected!';
     this.horarioSeleccionado2_RoundTrip = 'Schedule not selected!';
     this.idVueloSeleccionado2_RoundTrip = 'Flight not selected!';
@@ -247,16 +255,16 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
             }
           }
           this.itemsForm.get('selectSearch_OneWay')?.setValue(true);
-          
+
         })
 
 
 
 
 
-       
+
         //Abre modal
-       
+
 
       } else {
         //rechazar y mostrar mensaje en modal 
@@ -325,10 +333,10 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
 
 
 
-         
+
 
           //Abre modal
-        
+
 
         } else {
           //rechazar y mostrar mensaje en modal
@@ -344,7 +352,7 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
   }
 
   //Esto debe de guardar la reserva en la Base de datos
-  formalizarReserva() {}
+  formalizarReserva() { }
 
   seleccion_RoundTrip() {
     this.itemsForm.get('selectRoundTrip')?.setValue(true);
@@ -416,8 +424,8 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         //Horario de la ruta seleccionada
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
-        
-       data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
+
+        data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
           .add(1, 'days') //fecha inicio Búsqueda
           .format('D/M/YYYY');
         this.horarioSeleccionado_OneWay =
@@ -427,10 +435,10 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
           ' >>> ' +
           data.hora_lleg;
 
-          //Paypal
-          this.precioVuelo1=data.ruta_id.precio_trayecto;
-          this.detalleVuelo1=' Vuelo: '+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
-          
+        //Paypal
+        this.precioVuelo1 = data.ruta_id.precio_trayecto;
+        this.detalleVuelo1 = ' Vuelo: ' + data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+
       });
 
     // this.listarAsientos_Vuelo();
@@ -477,17 +485,17 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
         data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
-        .add(1, 'days') //fecha inicio Búsqueda
-        .format('D/M/YYYY');
+          .add(1, 'days') //fecha inicio Búsqueda
+          .format('D/M/YYYY');
         this.horarioSeleccionado1_RoundTrip =
           data.horario_id.fecha +
           ' ' +
           data.horario_id.hora_sal +
           ' >>> ' +
           data.hora_lleg;
-          this.precioVuelo1=data.ruta_id.precio_trayecto;
-          this.detalleVuelo1=' Vuelo 1: '+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
-          
+        this.precioVuelo1 = data.ruta_id.precio_trayecto;
+        this.detalleVuelo1 = data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+
       });
 
     // this.listarAsientos_Vuelo();
@@ -534,17 +542,17 @@ var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         var date = new Date(data.horario_id.fecha);
         data.horario_id.fecha = date.toLocaleDateString();
         data.horario_id.fecha = moment(data.horario_id.fecha, 'D/M/YYYY')
-        .add(1, 'days') //fecha inicio Búsqueda
-        .format('D/M/YYYY');
+          .add(1, 'days') //fecha inicio Búsqueda
+          .format('D/M/YYYY');
         this.horarioSeleccionado2_RoundTrip =
           data.horario_id.fecha +
           ' ' +
           data.horario_id.hora_sal +
           ' >>> ' +
           data.hora_lleg;
-          this.precioVuelo2=data.ruta_id.precio_trayecto;
-          this.detalleVuelo2=' Vuelo: 2'+data.ruta_id.inicio.nombre+'-'+data.ruta_id.destino.nombre;
-          
+        this.precioVuelo2 = data.ruta_id.precio_trayecto;
+        this.detalleVuelo2 = ' Vuelo: 2' + data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+
       });
 
     // this.listarAsientos_Vuelo();
