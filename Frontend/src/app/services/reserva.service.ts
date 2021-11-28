@@ -16,11 +16,11 @@ export class ReservaService {
   constructor(private http: HttpClient) {}
 
   get(): Observable<any> {
-    return this.http.get(`${BLOG_API_ENDPOINT}/`, httpOptions);
+    return this.http.get(`${BLOG_API_ENDPOINT}/get`, httpOptions);
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get(`${BLOG_API_ENDPOINT}/${id}`);
+    return this.http.get(`${BLOG_API_ENDPOINT}/get/${id}`);
   }
 
   create(reserva: any): Observable<any> {
