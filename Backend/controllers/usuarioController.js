@@ -32,8 +32,14 @@ module.exports.signin = async (req, res, next) => {
   if (!user) {
       
       res.json({ success: false, msg: 'Authentication failed. User not found.' });
-  } else {
+  } 
+  
+  if (user.estado == 0) {
+    res.json({ success: false, msg: 'Authentication failed. User is inactive.' });
+  }else{
+      
       //Si el usuario existe verifica si las contraseñas
+      
       user.comparePassword(pwd, user.pwd, function (err, isMatch) {
           if (isMatch && !err) {
             // Si el usuario es correcto y la contraseña coindice se procede a crear el token

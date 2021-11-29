@@ -3,7 +3,7 @@ const VueloModel = require("../models/Vuelo");
 
 module.exports.get = async (req, res, next) => {
   const reservas = await ReservaModel.find()
-    .populate("vuelo_id usuario_id")
+    .populate("vuelo_id_1 vuelo_id_2 usuario_id")
     .exec();
   res.json(reservas);
 };

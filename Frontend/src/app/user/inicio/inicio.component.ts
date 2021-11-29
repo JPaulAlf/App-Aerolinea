@@ -119,6 +119,7 @@ export class InicioComponent implements OnInit {
                 && vuelo.horario_id.fecha == auxFechaInicio) {
 
                 vuelo.horario_id.fecha = vuelo.horario_id.fecha + " " + vuelo.horario_id.hora_sal
+                vuelo.ruta_id.descuento = vuelo.ruta_id.descuento *100;
                 this._vuelosBusqueda_OneWay.push(vuelo);
               }
 
