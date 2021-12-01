@@ -118,7 +118,7 @@ export class InicioComponent implements OnInit {
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-3]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-4]);
       vuelosTop5.push(vuelosConCantidad[vuelosConCantidad.length-5]);
-
+     // this.v_ListaTopVuelos= vuelosTop5
     });
   }
 
