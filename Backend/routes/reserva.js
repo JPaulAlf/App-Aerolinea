@@ -10,6 +10,8 @@ router.get("/get", reservaController.get);
 
 router.get("/get/:id", reservaController.getById);
 
+router.get("/getCheck/:id", reservaController.getCheckIn);
+
 router.post("/create/", reservaController.create);
 
 router.delete("/delete/:id", reservaController.delete);

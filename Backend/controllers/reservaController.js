@@ -8,6 +8,52 @@ module.exports.get = async (req, res, next) => {
   res.json(reservas);
 };
 
+module.exports.getCheckIn = async (req, res, next) => {
+  const id = req.params.id;
+  const reservas = await ReservaModel.find({usuario_id: id})
+    .populate("usuario_id")
+    .populate({
+      path: 'vuelo_id_1',
+      model: 'Vuelo',
+      populate: [{
+          path: 'ruta_id',
+          model: 'Ruta',
+          populate: [{
+            path: 'inicio',
+            model:'Aeropuerto'
+          },{
+            path: 'destino',
+            model:'Aeropuerto'
+          }]
+      },
+      {
+          path: 'horario_id',
+          model: 'Horario'
+      }]
+  })
+  .populate({
+    path: 'vuelo_id_2',
+    model: 'Vuelo',
+    populate: [{
+        path: 'ruta_id',
+        model: 'Ruta',
+        populate: [{
+          path: 'inicio',
+          model:'Aeropuerto'
+        },{
+          path: 'destino',
+          model:'Aeropuerto'
+        }]
+    },
+    {
+        path: 'horario_id',
+        model: 'Horario'
+    }]
+})
+    .exec();
+  res.json(reservas);
+};
+
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
   const reserva = await ReservaModel.findOne({ _id: id })
@@ -56,15 +102,15 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.checkIn = async (req, res, next) => {
-  const { vuelo_id, detalle, asiento } = req.body; //  Fila-Asiento ej: 1-6
+  const { vuelo_id_1, detalle, num_asiento } = req.body; //  Fila-Asiento ej: 1-6
   const reserva = await ReservaModel.findOneAndUpdate(
     { _id: req.params.id },
-    { proceso: 2, detalle: detalle, num_asiento: asiento },
+    { proceso: 2, detalle: detalle, num_asiento: num_asiento },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   var fila, asien;
 
-  const array = asiento.split("-");
+  const array = num_asiento.split("-");
   fila = array[0];
   asien = array[1];
 

@@ -23,6 +23,10 @@ export class ReservaService {
     return this.http.get(`${BLOG_API_ENDPOINT}/get/${id}`);
   }
 
+  getCheckIn(id: string): Observable<any> {
+    return this.http.get(`${BLOG_API_ENDPOINT}/getCheck/${id}`);
+  }
+
   create(reserva: any): Observable<any> {
     return this.http.post(`${BLOG_API_ENDPOINT}/create/`, reserva);
   }
