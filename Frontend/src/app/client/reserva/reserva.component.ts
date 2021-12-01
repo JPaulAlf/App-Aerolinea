@@ -140,7 +140,7 @@ export class ReservaComponent implements OnInit {
 
           console.log(reserva)
           this.reservaService.create(reserva).subscribe((data) => {
-            this.toastr.success('Su orden a sido procesada')
+            this.toastr.success('Your order has been process')
             const currentUrl = this.router.url;
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
               this.router.navigate([currentUrl]);
@@ -460,7 +460,11 @@ export class ReservaComponent implements OnInit {
 
         //Paypal
         this.precioVuelo1 = data.ruta_id.precio_trayecto;
-        this.detalleVuelo1 = ' Vuelo: ' + data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+        this.detalleVuelo1 = ' Flight: ' + data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+        if(!isNaN(data.ruta_id.descuento)){
+          this.precioVuelo1-= data.ruta_id.precio_trayecto*data.ruta_id.descuento;
+          this.detalleVuelo1+=" Discount: "+data.ruta_id.descuento* 100+"%";
+        }
 
       });
 
@@ -518,6 +522,10 @@ export class ReservaComponent implements OnInit {
           data.hora_lleg;
         this.precioVuelo1 = data.ruta_id.precio_trayecto;
         this.detalleVuelo1 = data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+        if(!isNaN(data.ruta_id.descuento)){
+          this.precioVuelo1-= data.ruta_id.precio_trayecto*data.ruta_id.descuento;
+          this.detalleVuelo1+=" Discount: "+data.ruta_id.descuento* 100+"%";
+        }
 
       });
 
@@ -575,6 +583,10 @@ export class ReservaComponent implements OnInit {
           data.hora_lleg;
         this.precioVuelo2 = data.ruta_id.precio_trayecto;
         this.detalleVuelo2 = ' Vuelo: 2' + data.ruta_id.inicio.nombre + '-' + data.ruta_id.destino.nombre;
+        if(!isNaN(data.ruta_id.descuento)){
+          this.precioVuelo2-= data.ruta_id.precio_trayecto*data.ruta_id.descuento;
+          this.detalleVuelo2+=" Discount: "+data.ruta_id.descuento* 100+"%";
+        }
 
       });
 
