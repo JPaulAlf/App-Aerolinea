@@ -19,7 +19,8 @@ export class CheckInComponent implements OnInit {
 
 
     vuelos: any;
-
+    p: any = 1;
+    
   ngOnInit(): void {
     ejecutarAnimacion();
     const idUser = this.tokenStorageService.getUser().user._id;
