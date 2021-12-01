@@ -37,12 +37,13 @@
                         <td></td>
 
                         <td style="text-align:center">
-
+                            <i [routerLink]="['../../customer/edit',usuario._id]"
+                            class="fs-5 fas fa-edit text-primary"></i>
+                            
                             <i [routerLink]="['../../customer/see-customer',usuario._id]"
                                 class="fs-5 fas fa-eye text-primary"></i>
 
-                            <i [routerLink]="['../../customer/edit',usuario._id]"
-                                class="fs-5 fas fa-edit text-primary"></i>
+                         
 
                             <i *ngIf='usuario.estado==0' (click)="eliminarUsuario(usuario._id, usuario)"
                                 class="fs-5 fas fa-arrow-circle-up text-success"></i>

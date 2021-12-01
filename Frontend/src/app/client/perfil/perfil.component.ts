@@ -175,11 +175,13 @@ export class PerfilComponent implements OnInit {
      
       
       if (exist) {
-        console.log("entra")
+        
         this.toastr.error('Username not available','Error');
         return;
       }
-        this._usuarioService.editClient(this.id, usuario).subscribe((data) => {
+      console.log("Sí")
+      console.log(this.id)
+        this._usuarioService.editProfile(this.id, usuario).subscribe((data) => {
           this.toastr.success('User updated', 'Success');
           this.usuarioForm.reset();
           this.router.navigate(['/admin/customer/overview-customer']);
@@ -252,8 +254,9 @@ export class PerfilComponent implements OnInit {
       } catch (error) {}
     });
   obtenerUsuario() {
-    if (this.id !== null) {
-      this._usuarioService.getById(this.token.getUser().user._id).subscribe((data) => {
+   this.id= this.token.getUser().user._id
+    if (this.id != null) {
+      this._usuarioService.getById(this.id).subscribe((data) => {
         this.lat = data.direccion.latitud;
         this.lng = data.direccion.longitud;
         this.previsualizacion = data.imagen;
@@ -272,7 +275,7 @@ export class PerfilComponent implements OnInit {
           this.usuarioOriginal = data;
         this.usuarioForm.setValue({
           nombre: data.nombre,
-
+         
           apellidos: data.apellidos,
           correo: data.correo,
           fech_nacimiento: formatDate,
@@ -288,6 +291,8 @@ export class PerfilComponent implements OnInit {
 
         this.mapa();
       });
+    }else{
+      this.toastr.error("User not found in the database")
     }
   }
 }

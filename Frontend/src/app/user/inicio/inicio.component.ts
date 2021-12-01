@@ -239,7 +239,7 @@ export class InicioComponent implements OnInit {
   rutasDescuento() {
     this._rutaService.get().subscribe((data) => {
       for (const item of data) {
-        if (item.descuento != 0) {
+        if (item.descuento != 0 && item.estado != 0) {
           item.descuento = item.descuento * 100;
           if (this._rutasDescuento.length < 7) {
             this._rutasDescuento.push(item);

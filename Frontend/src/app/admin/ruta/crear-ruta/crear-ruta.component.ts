@@ -131,9 +131,16 @@ export class CrearRutaComponent implements OnInit {
   ngOnInit(): void {
 
     this._aeropuertoService.get().subscribe( data => {
-     this._aeropuertoInicio= data;
-     this._aeropuertoDestino = data;
-     console.log(data)
+      for (const aero of data) {
+        if (aero.estado == 1) {
+          this._aeropuertoInicio.push(aero)
+          this._aeropuertoDestino.push(aero)
+        }
+        
+    
+      }
+     
+
     });
 
   }
