@@ -18,5 +18,6 @@ router.delete("/delete/:id", reservaController.delete);
 
 router.put("/update/:id", reservaController.update);
 
+router.put("/checkIn/:id", reservaController.checkIn);
 
 module.exports = router;

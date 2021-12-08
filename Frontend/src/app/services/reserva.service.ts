@@ -41,7 +41,7 @@ export class ReservaService {
   }
 
   checkIn(id: string, reserva: any): Observable<any> {
-    return this.http.put(`${BLOG_API_ENDPOINT}/update/${id}`,reserva);
+    return this.http.put(`${BLOG_API_ENDPOINT}/checkIn/${id}`,reserva);
   }
   
   finalizar(id: string, reserva: any): Observable<any> {

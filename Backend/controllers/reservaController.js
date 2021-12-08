@@ -57,7 +57,7 @@ module.exports.getCheckIn = async (req, res, next) => {
 module.exports.getById = async (req, res, next) => {
   const id = req.params.id;
   const reserva = await ReservaModel.findOne({ _id: id })
-    .populate("vuelo_id usuario_id")
+    .populate("vuelo_id_1 usuario_id")
     .exec();
   res.json(reserva);
 };
@@ -105,7 +105,7 @@ module.exports.checkIn = async (req, res, next) => {
   const { vuelo_id_1, detalle, num_asiento } = req.body; //  Fila-Asiento ej: 1-6
   const reserva = await ReservaModel.findOneAndUpdate(
     { _id: req.params.id },
-    { proceso: 2, detalle: detalle, num_asiento: num_asiento },
+    { proceso: 1, num_asiento: num_asiento },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   var fila, asien;
@@ -114,7 +114,7 @@ module.exports.checkIn = async (req, res, next) => {
   fila = array[0];
   asien = array[1];
 
-  const vuelo_Original = await VueloModel.findById(vuelo_id).exec();
+  const vuelo_Original = await VueloModel.findById(vuelo_id_1).exec();
   const asientos = vuelo_Original.asientos;
   for (let i = 0; i < asientos.length; i++) {
     if (asientos[i].fil === fila && asientos[i].num === asien) {
@@ -123,14 +123,14 @@ module.exports.checkIn = async (req, res, next) => {
   }
 
   const vuelo = await VueloModel.findOneAndUpdate(
-    { _id: vuelo_id },
+    { _id: vuelo_id_1},
     {
       asientos: asientos,
     },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
 
-  res.json(vuelo);
+
 
   res.json(reserva);
 };

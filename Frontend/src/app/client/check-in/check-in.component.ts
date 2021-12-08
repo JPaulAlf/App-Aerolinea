@@ -18,23 +18,35 @@ export class CheckInComponent implements OnInit {
     private router: Router, ) { }
 
 
-    vuelos: any;
+    vuelos: any[]=[];
     p: any = 1;
     
   ngOnInit(): void {
     ejecutarAnimacion();
     const idUser = this.tokenStorageService.getUser().user._id;
     this.reservaService.getCheckIn(idUser).subscribe((data=>{
+      console.log(data);
       data.forEach((reserva: any)=>{
       let llegada=reserva.vuelo_id_1.horario_id.hora_sal
-      let fecha=reserva.vuelo_id_1.horario_id.fecha.substring(0, 9);
+      let fecha=reserva.vuelo_id_1.horario_id.fecha.substring(0, 10);
       fecha+=' '+llegada;
-      const horaV1= moment(fecha, 'YYYY-MM-DD h:mm').format('LLL')
-      const ahora = moment().add(1, 'days');
-        if(moment(ahora).isAfter(horaV1)){
+      //console.log(fecha);
+      
+      let horaV1= moment(fecha, 'YYYY-MM-DD h:mm').add(1, 'days');
+      
+      console.log(horaV1)
+      let ahora = moment();
+      console.log(ahora);
+      let date1 = new Date(horaV1.format('LLL'));
+      let date2 = new Date(ahora.format('LLL'));
+      let difference = Math.abs(date1.getTime() - date2.getTime());
+      let hourDifference = difference  / 1000 / 3600;
+      hourDifference-=24;
+      console.log(hourDifference);//moment.duration(horaV1.diff(ahora)).asHours()
+        if(hourDifference>=0&&hourDifference<=24&&(reserva.proceso==0)){
           let vuelo1 = reserva.vuelo_id_1;
           vuelo1.reserva=reserva._id;
-          vuelo1.takeoff=horaV1.toString();
+          vuelo1.takeoff=horaV1.format('DD-MM-YYYY h:mm');
           this.vuelos.push(vuelo1);
         }
       //   let llegada2=reserva.vuelo_id_2.horario_id.hora_sal

@@ -53,10 +53,13 @@ asientoEscogido:any='';
  asientos: any = [];
 
 obtenerDatos(){
-  this.reserva=this.reservaS.getById(this.aRouter.snapshot.paramMap.get('id') + '').subscribe((data)=>{
+  let id=this.aRouter.snapshot.paramMap.get('id')+'';
+  console.log(id);
+  this.reservaS.getById(id).subscribe((data)=>{
+    this.reserva=data;
     console.log(data);
-  });
-  this.vuelo=this.vueloS.getById(this.reserva.vuelo_id_1).subscribe((data) => {
+    this.vueloS.getById(data.vuelo_id_1._id).subscribe((data) => {
+      this.vuelo=data;
       for (let index = 0; index < data.avion_id.cant_af; index++) {
         this.asientosVuelo.push({ numFil: index + 1 });
       }
@@ -96,6 +99,8 @@ obtenerDatos(){
       console.log(this.asientos);
       this.encabezado = Array(this.numAF).fill(1).map((x, i) => i + 1);  
     });
+  });
+  
   
   //this.reserva.vuelo_id;
 }
@@ -107,10 +112,13 @@ escogerAsiento(){
   }
   
   this.reserva.num_asiento=this.asientoEscogido.value
-
-  this.reservaS.checkIn(this.reserva._id,this.reserva)
+  console.log(this.reserva);
+  this.reservaS.checkIn(this.reserva._id,this.    reserva).subscribe((data)=>{
+    console.log(data);
+     this.router.navigate(['/client/check-in']);
+  });
   
-  this.router.navigate(['/client/check-in']);
+ 
 }
 
   ngOnInit(): void {

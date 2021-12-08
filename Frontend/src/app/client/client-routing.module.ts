@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'purchase-flight', component: ReservaComponent },
   { path: 'check-in', component: CheckInComponent },
   { path: 'purchases', component: HistoricoComponent },
-  { path: 'flight-seats', component: EscogerAsientoComponent },
+  { path: 'flight-seats/:id', component: EscogerAsientoComponent },
 ];
 
 @NgModule({
