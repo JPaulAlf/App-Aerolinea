@@ -46,7 +46,7 @@ export class CheckInComponent implements OnInit {
         if(hourDifference>=0&&hourDifference<=24&&(reserva.proceso==0)){
           let vuelo1 = reserva.vuelo_id_1;
           vuelo1.reserva=reserva._id;
-          vuelo1.takeoff=horaV1.format('DD-MM-YYYY h:mm');
+          vuelo1.takeoff=horaV1.subtract(1, 'days').format('DD/MM/YYYY HH:mm');
           this.vuelos.push(vuelo1);
         }
       //   let llegada2=reserva.vuelo_id_2.horario_id.hora_sal
