@@ -29,6 +29,7 @@ declare function counterActivate(): any;
   styleUrls: ['./reserva.component.css'],
 })
 export class ReservaComponent implements OnInit {
+  fecha: any = "";
   constructor(
     private toastr: ToastrService,
     private _aeropuertoService: AeropuertoService,
@@ -209,6 +210,8 @@ export class ReservaComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.fecha = new Date();
+    this.fecha = moment(this.fecha, 'D/M/YYYY').format('YYYY-MM-DD');
     this.bccr.get().subscribe((data: any) => {
       this.compraColon = data.compra;
      

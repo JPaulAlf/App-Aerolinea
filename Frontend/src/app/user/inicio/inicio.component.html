@@ -62,20 +62,20 @@
 
                       <div class="input-group mt-3"
                         *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==false">
-                        <input type="date" id="fecha1" class="form-control" disabled>
-                        <input type="date" id="fecha2" class="form-control" disabled>
+                        <input type="date" id="fecha1" min={{fecha}} class="form-control" disabled>
+                        <input type="date" id="fecha2" min={{fecha}} class="form-control" disabled>
                       </div>
 
                       <div class="input-group mt-3"
                         *ngIf="itemsForm.get('selectRoundTrip')?.value==false && itemsForm.get('selectOneWay')?.value==true">
-                        <input formControlName="fechaInicio" type="date" id="fecha1" class="form-control">
-                        <input type="date" id="fecha2" class="form-control" disabled>
+                        <input formControlName="fechaInicio" min={{fecha}} type="date" id="fecha1" class="form-control">
+                        <input type="date" id="fecha2" min={{fecha}} class="form-control" disabled>
                       </div>
 
                       <div class="input-group mt-3"
                         *ngIf="itemsForm.get('selectRoundTrip')?.value==true && itemsForm.get('selectOneWay')?.value==true">
-                        <input formControlName="fechaInicio" type="date" id="fecha1" class="form-control">
-                        <input formControlName="fechaFinal" type="date" id="fecha2" class="form-control">
+                        <input formControlName="fechaInicio" min={{fecha}} type="date" id="fecha1" class="form-control">
+                        <input formControlName="fechaFinal" min={{fecha}} type="date" id="fecha2" class="form-control">
                       </div>
 
                       <div class="mb-3 mt-3 d-flex justify-content-center">

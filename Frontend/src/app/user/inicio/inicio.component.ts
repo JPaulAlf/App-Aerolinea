@@ -18,6 +18,7 @@ declare function counterActivate(): any;
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
+  fecha: any = "";
   constructor(
     private toastr: ToastrService,
     private _aeropuertoService: AeropuertoService,
@@ -64,6 +65,8 @@ export class InicioComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.fecha = new Date();
+    this.fecha = moment(this.fecha, 'D/M/YYYY').format('YYYY-MM-DD');
     ejecutarAnimacion();
     this.bccr.get().subscribe((data: any) => {
       this.compraColon = data.compra;

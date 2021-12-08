@@ -46,6 +46,7 @@ export class InicioComponent implements OnInit {
       );
         return "₡"+precioF
     }
+    fecha: any = Date.now();
   tipoBusqueda = "";
   _aeropuertoInicio: any = [];
   _aeropuertoDestino: any = [];
@@ -71,6 +72,9 @@ export class InicioComponent implements OnInit {
   });
 
   ngOnInit(): void {
+   this.fecha = new Date();
+    this.fecha = moment(this.fecha, 'D/M/YYYY').format('YYYY-MM-DD');
+   
     ejecutarAnimacion();
     this._aeropuertoService.get().subscribe((data) => {
       this._aeropuertoInicio = data;
