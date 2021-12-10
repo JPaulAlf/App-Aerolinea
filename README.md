@@ -19,3 +19,6 @@ Objetivos específicos:
     Implementar métodos para el pago de las reservas en línea
     
     Consumir servicios web existentes
+
+SOLUCION INCOMPLETA:
+Falto el desarrollo de los reportes 
